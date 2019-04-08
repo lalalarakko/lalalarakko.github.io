@@ -1,0 +1,859 @@
+#stacks_in_37_page0>.s3_row {
+	margin: 0 -10px;
+}
+
+#stacks_in_37_page0>.s3_row>.s3_column_left {
+	width: 50.00%;
+}
+
+#stacks_in_37_page0>.s3_row>.s3_column_right {
+	width: 50.000000%;
+}
+
+
+
+
+#stacks_in_37_page0>.s3_row>.s3_column {
+	padding: 0 10px;
+}
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 770px) {
+
+
+
+}
+
+
+
+@media only screen and (max-width: 400px) {
+
+
+	#stacks_in_37_page0>.s3_row  {
+		margin: -10px 0;
+	}
+	#stacks_in_37_page0>.s3_row>.s3_column {
+		padding: 10px 0;
+		width:100%;
+	}
+
+
+}
+
+
+
+
+
+
+#stacks_in_37_page0 {
+	padding:  10px;
+}
+
+#stacks_in_40_page0 {
+	margin: 0px 0px 15px 5px;
+}
+
+#stacks_in_44_page0 {
+	margin: 0px 0px 10px 5px;
+}
+
+#stacks_in_176_page0 {
+	margin: 0px 0px 20px 5px;
+}
+
+#stacks_in_63_page0 {
+	margin: 0px 20px 20px 20px;
+	padding: 0px 20px 20px 20px;
+}
+
+#stacks_in_73_page0 {
+	margin: 0px 0px 0px 20px;
+}
+#stacks_in_201_page0>.s3_row {
+	margin: 0 -10px;
+}
+
+#stacks_in_201_page0>.s3_row>.s3_column_left {
+	width: 50.00%;
+}
+
+#stacks_in_201_page0>.s3_row>.s3_column_right {
+	width: 50.000000%;
+}
+
+
+
+
+#stacks_in_201_page0>.s3_row>.s3_column {
+	padding: 0 10px;
+}
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 770px) {
+
+
+
+}
+
+
+
+@media only screen and (max-width: 400px) {
+
+
+	#stacks_in_201_page0>.s3_row  {
+		margin: -10px 0;
+	}
+	#stacks_in_201_page0>.s3_row>.s3_column {
+		padding: 10px 0;
+		width:100%;
+	}
+
+
+}
+
+
+
+
+
+
+#stacks_in_71_page0 {
+	padding: 20px 20px 20px 0px;
+}
+
+#stacks_in_85_page0 {
+	margin: 0px 0px 5px 15px;
+}
+/* @group Basics */
+
+#switcherstacks_in_182_page0,
+#switcherstacks_in_182_page0 * {
+    -webkit-box-sizing: border-box; 
+    -moz-box-sizing: border-box; 
+    box-sizing: border-box;
+}
+
+#switcherstacks_in_182_page0 {
+	display: none;
+}
+
+/* Reset for lists within Switcher */
+
+#switcherstacks_in_182_page0 ul ul {
+	list-style-type: disc;
+}
+
+/* @end */
+
+/* @group Accordion */
+
+ul#accordionInterfacestacks_in_182_page0 {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+ul#accordionInterfacestacks_in_182_page0>li {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+/* Static accordion */
+
+#accordionInterfacestacks_in_182_page0 .accordion-toggle,
+#mydiv .accordion-toggle {
+	margin-top: 5px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	cursor: pointer;
+	background: rgba(204, 204, 204, 1.00);
+	line-height: 45px;
+	display: block;
+	font-size: 20px;
+	text-decoration: none;
+	border-radius: 0px 0px 0px 0px;
+	text-align: left;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-top: 0px solid rgba(255, 255, 255, 1.00);
+	border-bottom: 0px solid rgba(255, 255, 255, 1.00);
+	border-left: 0px solid rgba(255, 255, 255, 1.00);
+	border-right: 0px solid rgba(255, 255, 255, 1.00);
+	transition: all 500ms ease-in-out;
+	-webkit-transition: all 500ms ease-in-out;
+	-moz-transition: all 500ms ease-in-out;
+	color: rgba(255, 255, 255, 1.00);
+	position: relative;
+	z-index: 10;
+	outline: none;
+}
+
+#accordionInterfacestacks_in_182_page0 .accordion-toggle [class^="fa fa-"],
+#mydiv .accordion-toggle [class^="fa fa-"] {
+	font-size: 18px;
+	color: rgba(255, 255, 255, 1.00);
+	width: 25px;
+	display: inline-block;
+	text-align: center;
+	overflow: hidden;
+	line-height: 1;
+	vertical-align: middle;
+}
+
+/* Hovered accordion */
+
+#accordionInterfacestacks_in_182_page0 .accordion-toggle:hover,
+#mydiv .accordion-toggle:hover {
+	background: rgba(204, 204, 204, 1.00);
+	color: rgba(51, 51, 51, 1.00);
+	border-top: 0px solid rgba(255, 255, 255, 1.00);
+	border-bottom: 0px solid rgba(255, 255, 255, 1.00);
+	border-left: 0px solid rgba(255, 255, 255, 1.00);
+	border-right: 0px solid rgba(255, 255, 255, 1.00);
+	border-radius: 0px 0px 0px 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+	
+	margin-top: 5px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#accordionInterfacestacks_in_182_page0 .accordion-toggle:hover [class^="fa fa-"],
+#mydiv .accordion-toggle:hover [class^="fa fa-"] {
+	color: rgba(255, 255, 255, 1.00);
+}
+
+/* Clicked accordion */
+
+#accordionInterfacestacks_in_182_page0 .accordion-toggle:active,
+#mydiv .accordion-toggle:active {
+	color: rgba(51, 51, 51, 1.00);
+	background: rgba(204, 204, 204, 1.00);
+}
+
+#accordionInterfacestacks_in_182_page0 .accordion-toggle:active [class^="fa fa-"],
+#mydiv .accordion-toggle:active [class^="fa fa-"] {
+	color: rgba(255, 255, 255, 1.00);
+}
+
+/* Active accordion */
+
+#accordionInterfacestacks_in_182_page0 .accordion-toggle.ui-state-active,
+#mydiv .accordion-toggle.ui-state-active {
+	color: rgba(255, 255, 255, 1.00);
+	background: rgba(0, 102, 153, 1.00);
+	border-top: 0px solid rgba(255, 255, 255, 1.00);
+	border-bottom: 0px solid rgba(255, 255, 255, 1.00);
+	border-left: 0px solid rgba(255, 255, 255, 1.00);
+	border-right: 0px solid rgba(255, 255, 255, 1.00);
+	border-radius: 0px 0px 0px 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+	
+	margin-top: 5px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#accordionInterfacestacks_in_182_page0 .accordion-toggle.ui-state-active [class^="fa fa-"],
+#mydiv .accordion-toggle.ui-state-active [class^="fa fa-"] {
+	color: rgba(255, 255, 255, 1.00);
+}
+
+/* @group Open and closed floating icons */
+
+#accordionInterfacestacks_in_182_page0 .accordion-toggle .closedIcon,
+#mydiv .accordion-toggle .closedIcon {
+	float: right;
+	display: inline;
+}
+
+#accordionInterfacestacks_in_182_page0 .accordion-toggle .openedIcon,
+#mydiv .accordion-toggle .openedIcon {
+	float: right;
+	display: none;
+}
+
+#accordionInterfacestacks_in_182_page0 .accordion-toggle.ui-state-active .closedIcon,
+#mydiv .accordion-toggle.ui-state-active .closedIcon {
+	display: none;
+}
+
+#accordionInterfacestacks_in_182_page0 .accordion-toggle.ui-state-active .openedIcon,
+#mydiv .accordion-toggle.ui-state-active .openedIcon {
+	display: inline;
+}
+
+/* @end */
+
+/* @end */
+
+/* @group Tabs */
+
+ul#tabbedInterfacestacks_in_182_page0 {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+ul#tabbedInterfacestacks_in_182_page0>li {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+ul#switcherTabsstacks_in_182_page0 {
+	display: block;
+	text-align: left;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+ul#switcherTabsstacks_in_182_page0 li.switcherTab {
+	display: inline-block;
+	list-style: none;
+	width: 20.00%;
+}
+
+
+
+/* Static tabs */
+
+ul#switcherTabsstacks_in_182_page0 li.switcherTab.ui-state-default a {
+	display: block;
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+	margin-left: 0px !important;
+	margin-right: 1px !important;
+	cursor: pointer;
+	background: rgba(148, 29, 230, 1.00);
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 18px;
+	line-height: 1.25em;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 0px 0px 0px 0px;
+	color: rgba(255, 255, 255, 1.00);
+	border-top: 0px solid rgba(255, 255, 255, 1.00);
+	border-bottom: 0px solid rgba(255, 255, 255, 1.00);
+	border-left: 0px solid rgba(255, 255, 255, 1.00);
+	border-right: 0px solid rgba(255, 255, 255, 1.00);
+	position: relative;
+	z-index: 10;
+	outline: none;
+	
+	/* Animate selected elements */
+	transition: background 500ms, 
+				color 500ms, 
+				border 500ms, 
+				border-radius 500ms;
+	-webkit-transition: background 500ms, 
+				color 500ms,
+				border 500ms,
+				border-radius 500ms;
+	-moz-transition: background 500ms, 
+				color 500ms,
+				border 500ms,
+				border-radius 500ms;
+}
+
+ul#switcherTabsstacks_in_182_page0 li.switcherTab.ui-state-default a [class^="fa fa-"] {
+	display: block;
+	font-size: 48px;
+	text-align: center;
+	color: rgba(255, 255, 255, 1.00);
+	line-height: 1;
+	vertical-align: middle;
+	margin-top: 0px !important;
+	margin-bottom: 10px !important;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
+	
+	/* Animate selected elements */
+	transition: background 500ms, 
+				color 500ms, 
+				border 500ms, 
+				border-radius 500ms;
+	-webkit-transition: background 500ms, 
+				color 500ms,
+				border 500ms,
+				border-radius 500ms;
+	-moz-transition: background 500ms, 
+				color 500ms,
+				border 500ms,
+				border-radius 500ms;
+}
+
+/* Hovered Tabs */
+
+ul#switcherTabsstacks_in_182_page0 li.switcherTab.ui-state-default a:hover {
+	background: rgba(89, 17, 145, 1.00);
+	color: rgba(255, 255, 255, 1.00);
+	border-top: 0px solid rgba(255, 255, 255, 1.00);
+	border-bottom: 0px solid rgba(255, 255, 255, 1.00);
+	border-left: 0px solid rgba(255, 255, 255, 1.00);
+	border-right: 0px solid rgba(255, 255, 255, 1.00);
+	border-radius: 0px 0px 0px 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+	margin-left: 0px !important;
+	margin-right: 1px !important;
+}
+
+ul#switcherTabsstacks_in_182_page0 li.switcherTab.ui-state-default a:hover [class^="fa fa-"] {
+	color: rgba(255, 255, 255, 1.00);
+}
+
+/* Clicked tabs */
+
+ul#switcherTabsstacks_in_182_page0 li.switcherTab.ui-state-default a:active {
+	color: rgba(255, 255, 255, 1.00);
+	background: rgba(89, 17, 145, 1.00);
+}
+
+ul#switcherTabsstacks_in_182_page0 li.switcherTab.ui-state-default [class^="fa fa-"] {
+	color: rgba(255, 255, 255, 1.00);
+}
+
+/* Active Tabs */
+
+ul#switcherTabsstacks_in_182_page0 li.switcherTab.ui-tabs-active.ui-state-active a {
+	background: rgba(89, 17, 145, 1.00);
+	color: rgba(255, 255, 255, 1.00);
+	border-top: 0px solid rgba(255, 255, 255, 1.00);
+	border-bottom: 0px solid rgba(255, 255, 255, 1.00);
+	border-left: 0px solid rgba(255, 255, 255, 1.00);
+	border-right: 0px solid rgba(255, 255, 255, 1.00);
+	border-radius: 0px 0px 0px 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+	margin-left: 0px !important;
+	margin-right: 1px !important;
+}
+
+ul#switcherTabsstacks_in_182_page0 li.switcherTab.ui-tabs-active.ui-state-active a [class^="fa fa-"] {
+	color: rgba(255, 255, 255, 1.00);
+}
+
+/* Hide accordion toggle headings */
+
+#tabPanesstacks_in_182_page0 a.accordion-toggle {
+	display: none;
+}
+
+/* Hide accordion, when in tabbed mode */
+
+#switcherstacks_in_182_page0.tabbed-layout #accordionInterfacestacks_in_182_page0 {
+	display: none;
+}
+
+/* Display tabbed interface, when in tabs mode */
+
+#switcherstacks_in_182_page0.tabbed-layout #tabbedInterfacestacks_in_182_page0 {
+	display: block;
+}
+
+/* Hide tabbed interface, when in accordion mode */
+
+#switcherstacks_in_182_page0.accordion-layout #tabbedInterfacestacks_in_182_page0 {
+	display: none;
+}
+
+
+/* Hide open / close accordion heading icons */
+
+ul#switcherTabsstacks_in_182_page0 .closedIcon,
+ul#switcherTabsstacks_in_182_page0 .openedIcon {
+	display: none;
+}
+
+/* @end */
+
+/* @group Content Panels */
+
+#tabbedInterfacestacks_in_182_page0 .accordion-content,
+#accordionInterfacestacks_in_182_page0 .accordion-content {
+	display: none;
+	list-style: none;
+	padding: 0;
+	text-align: left;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#tabbedInterfacestacks_in_182_page0 .accordion-content .contentInner,
+#accordionInterfacestacks_in_182_page0 .accordion-content .contentInner {
+	color: rgba(51, 51, 51, 1.00);
+	background: rgba(255, 255, 255, 1.00);
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
+	border-radius: 0px 0px 0px 0px;
+	border-top: 0px solid rgba(255, 255, 255, 1.00);
+	border-bottom: 0px solid rgba(255, 255, 255, 1.00);
+	border-left: 0px solid rgba(255, 255, 255, 1.00);
+	border-right: 0px solid rgba(255, 255, 255, 1.00);
+}
+
+/* @end */
+
+/* @group Left / Right Tab Positioning */
+
+
+
+
+
+/* @end */
+
+/* @group Responsive Behavior */
+
+/* On screens less than our breakpoint, make tabs an accordion */
+@media screen and (max-width: 568px) {
+	#switcherstacks_in_182_page0 #accordionInterfacestacks_in_182_page0 {
+		display: block !important;
+	}
+	
+	#switcherstacks_in_182_page0 #tabbedInterfacestacks_in_182_page0 {
+		display: none !important;
+	}
+}
+
+/* @end */
+
+/* @group Print style settings */
+
+@media print {
+	#switcherTabsstacks_in_182_page0 {
+		display: none !important;
+	}
+	
+	#switcherWrapperstacks_in_182_page0,
+	#switcherstacks_in_182_page0.tabbed-layout .accordion-toggle {
+		display: block !important;
+	}
+	
+	#switcherstacks_in_182_page0 .accordion-content {
+		display: block !important;
+		height: auto !important;
+	}
+	
+	#switcherstacks_in_182_page0 .accordion-content .contentInner {
+		border: none !important;
+	}
+}
+
+/* @end */
+
+/* @group Advanced Settings */
+
+/**/
+
+/**/
+
+/**/
+
+/* @end */
+
+/* @group Edit Mode Styling */
+
+/*  */
+
+/* @end */
+#stacks_in_182_page0 {
+	background-color: rgba(255, 255, 255, 1.00);
+	margin: 0px 0px 0px 10px;
+}
+/* @group Accordion */
+
+/*  */
+
+/* @end */
+
+/* @group Tabs */
+
+/*  */
+
+/* @end */
+
+/* @group Content Panel */
+
+/*  */
+
+/* @end */
+#stacks_in_551_page0 {
+	margin: 0px 10px 10px 10px;
+}
+
+#stacks_in_559_page0 {
+	margin: 0px 10px 10px 10px;
+}
+
+#stacks_in_545_page0 {
+	margin: 0px 10px 10px 10px;
+}
+
+#stacks_in_549_page0 {
+	margin: 0px 10px 9px 10px;
+}
+
+#stacks_in_547_page0 {
+	margin: 0px 10px 8px 10px;
+}
+
+#stacks_in_402_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_543_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_338_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_342_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_340_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_541_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_344_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_346_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_539_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_348_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_350_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_352_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_354_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_356_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_358_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_360_page0 {
+	margin: 0px 10px 0px 10px;
+}
+/* @group Accordion */
+
+/*  */
+
+/* @end */
+
+/* @group Tabs */
+
+/*  */
+
+/* @end */
+
+/* @group Content Panel */
+
+/*  */
+
+/* @end */
+#stacks_in_503_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_505_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_507_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_509_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_511_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_513_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_515_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_517_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_519_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_521_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_523_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_525_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_527_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_529_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_531_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_533_page0 {
+	margin: 0px 10px 0px 10px;
+}
+
+#stacks_in_535_page0 {
+	margin: 0px 10px 0px 10px;
+}
+/* @group Accordion */
+
+/*  */
+
+/* @end */
+
+/* @group Tabs */
+
+/*  */
+
+/* @end */
+
+/* @group Content Panel */
+
+/*  */
+
+/* @end */
+#stacks_in_152_page0 {
+	margin:  10px;
+}
+
+#stacks_in_158_page0 {
+	margin:  10px;
+}
+
+#stacks_in_166_page0 {
+	margin:  10px;
+}
+
+#stacks_in_162_page0 {
+	margin:  10px;
+}
+
+#stacks_in_168_page0 {
+	margin:  10px;
+}
+
+#stacks_in_164_page0 {
+	margin:  10px;
+}
+
+#stacks_in_172_page0 {
+	margin:  10px;
+}
+
+#stacks_in_170_page0 {
+	margin:  10px;
+}
+
+#stacks_in_174_page0 {
+	margin:  10px;
+}
+/* @group Accordion */
+
+/*  */
+
+/* @end */
+
+/* @group Tabs */
+
+/*  */
+
+/* @end */
+
+/* @group Content Panel */
+
+/*  */
+
+/* @end */
