@@ -2,17 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://lalalarakko.github.io/index.html</loc>
+		<lastmod>2019-04-08</lastmod>
 	</url>
 	<url>
 		<loc>https://lalalarakko.github.io/contact.html</loc>
+		<lastmod>2019-04-08</lastmod>
 	</url>
 	<url>
 		<loc>https://lalalarakko.github.io/page/index.html</loc>
+		<lastmod>2019-04-08</lastmod>
 	</url>
 	<url>
 		<loc>https://lalalarakko.github.io/publications.html</loc>
+		<lastmod>2019-04-08</lastmod>
 	</url>
 	<url>
 		<loc>https://lalalarakko.github.io/laboratory.html</loc>
+		<lastmod>2019-04-08</lastmod>
 	</url>
 </urlset>
