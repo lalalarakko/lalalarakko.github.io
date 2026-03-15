@@ -17,7 +17,7 @@ const { title, activePage = '' } = Astro.props;
   <Nav activePage={activePage} />
   <slot />
   <Footer />
-  <script>
+  <script is:inline>
     document.getElementById('nav-hamburger')?.addEventListener('click', () => {
       document.querySelector('.nav-links')?.classList.toggle('open');
       document.getElementById('nav-hamburger')?.classList.toggle('open');

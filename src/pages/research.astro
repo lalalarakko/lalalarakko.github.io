@@ -165,7 +165,7 @@ const themes = themesData.themes || [];
   </div>
 </section>
 
-<script>
+<script is:inline>
 function setLang(lang, btn) {
   document.querySelectorAll('.page-lang-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
