@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { load } from 'js-yaml';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+function parseFrontmatter(raw: string) {
+  const match = raw.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return {};
+  return load(match[1]) as Record<string, any>;
+}
+const contact = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/contact.md'), 'utf-8'));
+---
+<BaseLayout title="Contact — Masanori Takezawa" activePage="contact">
+<style>
+.contact-inner{max-width:1200px;margin:0 auto;padding:72px 48px;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 80px;margin-bottom:72px;}
+.contact-block{margin-bottom:48px;}
+.contact-block-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:16px;}
+.contact-email{font-family:var(--serif);font-size:22px;color:var(--black);font-style:italic;}
+.contact-address{font-size:14px;color:var(--gray-dark);line-height:1.9;}
+.contact-address-jp{font-family:var(--jp);font-size:13px;color:var(--gray-dark);line-height:2.0;margin-top:16px;padding-top:16px;border-top:1px solid var(--gray-light);}
+.profiles-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:20px;}
+.profiles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--gray-light);border:1px solid var(--gray-light);}
+.profile-card{background:var(--white);padding:28px 32px;display:flex;flex-direction:column;justify-content:space-between;}
+.profile-service{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-mid);margin-bottom:8px;}
+.profile-card-title{font-size:16px;font-weight:500;margin-bottom:8px;}
+.profile-card-desc{font-size:13px;color:var(--gray-dark);line-height:1.7;margin-bottom:16px;}
+.profile-card-link{font-size:12px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--accent);}
+.profile-card-link:hover{text-decoration:underline;}
+@media(max-width:900px){
+  .contact-inner{padding:48px 20px;}
+  .contact-grid{grid-template-columns:1fr;}
+  .profiles-grid{grid-template-columns:1fr;}
+}
+</style>
+<div class="page-top">
+  <p class="page-header-label">Get in Touch</p>
+  <h1 class="page-header-title">Contact</h1>
+</div>
+<div class="contact-inner">
+  <div class="contact-grid">
+    <div>
+      <div class="contact-block">
+        <p class="contact-block-label">Email</p>
+        <p class="contact-email">{contact.email}</p>
+      </div>
+      <div class="contact-block">
+        <p class="contact-block-label">Postal Address</p>
+        <div class="contact-address">
+          {contact.address_en.trim().split('\n').map((line: string) => <>{line}<br /></>)}
+        </div>
+        <div class="contact-address-jp">
+          {contact.address_jp.trim().split('\n').map((line: string) => <>{line}<br /></>)}
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="profiles-label">Academic Profiles</p>
+      <div class="profiles-grid">
+        {contact.profiles.map((p: any) => (
+          <div class="profile-card">
+            <div>
+              <p class="profile-service">{p.service}</p>
+              <p class="profile-card-title">{p.service}</p>
+              <p class="profile-card-desc">{p.description}</p>
+            </div>
+            <a class="profile-card-link" href={p.url} target="_blank">
+              {p.id || 'View Profile'}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+</BaseLayout>

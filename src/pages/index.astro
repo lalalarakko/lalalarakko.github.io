@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { load } from 'js-yaml';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+// Load content
+const siteRaw = readFileSync(join(process.cwd(), 'src/content/site.md'), 'utf-8');
+const updatesRaw = readFileSync(join(process.cwd(), 'src/content/updates.md'), 'utf-8');
+const themesRaw = readFileSync(join(process.cwd(), 'src/content/research/themes.md'), 'utf-8');
+
+function parseFrontmatter(raw: string) {
+  const match = raw.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return {};
+  return load(match[1]) as Record<string, any>;
+}
+
+const site = parseFrontmatter(siteRaw);
+const updates = parseFrontmatter(updatesRaw);
+const themesData = parseFrontmatter(themesRaw);
+const themes = themesData.themes || [];
+---
+<BaseLayout title={`${site.name_en} — ${site.tagline}`}>
+<style>
+.hero{margin-top:var(--nav-h);display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - var(--nav-h));border-bottom:1px solid var(--black);}
+.hero-left{padding:80px 48px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--black);}
+.hero-tag{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:28px;}
+.hero-name{font-family:var(--serif);font-size:clamp(52px,6vw,88px);line-height:1.0;font-weight:400;letter-spacing:-.01em;margin-bottom:8px;}
+.hero-name em{font-style:italic;color:var(--accent);}
+.hero-name-jp{font-family:var(--jp);font-size:18px;font-weight:400;color:var(--gray-dark);margin-bottom:40px;letter-spacing:.12em;}
+.hero-affil{font-size:14px;color:var(--gray-dark);line-height:1.85;font-weight:400;border-left:2px solid var(--accent);padding-left:16px;}
+.hero-affil strong{font-weight:500;color:var(--black);display:block;}
+.hero-centers{display:block;margin-top:10px;font-size:12px;color:var(--gray-mid);line-height:1.7;}
+.hero-bottom{display:flex;gap:16px;flex-wrap:wrap;margin-top:48px;}
+.hero-link{font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--black);border:1px solid var(--black);padding:10px 18px;transition:all .2s;}
+.hero-link:hover{background:var(--black);color:var(--white);}
+.hero-link-rm{border-color:var(--accent);color:var(--accent);display:flex;flex-direction:column;gap:2px;padding:8px 18px;}
+.hero-link-rm:hover{background:var(--accent);color:var(--white);}
+.rm-label{font-size:9px;letter-spacing:.1em;text-transform:uppercase;opacity:.75;}
+.rm-main{font-size:12px;letter-spacing:.1em;text-transform:uppercase;}
+.hero-right{position:relative;background:var(--black);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:48px;}
+.hero-bg-text{position:absolute;top:20px;right:-20px;font-family:var(--serif);font-size:clamp(100px,16vw,220px);line-height:1;color:rgba(255,255,255,.04);user-select:none;white-space:nowrap;letter-spacing:-.02em;}
+.hero-research-label{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gray-mid);margin-bottom:16px;}
+.hero-research-title{font-family:var(--serif);font-size:clamp(28px,3vw,42px);color:var(--white);line-height:1.2;font-weight:400;margin-bottom:20px;}
+.hero-research-desc{font-size:14px;color:rgba(245,244,240,.82);font-weight:400;line-height:1.8;max-width:440px;}
+.research-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1px solid var(--black);}
+.research-card{padding:40px 36px;border-right:1px solid var(--black);border-bottom:1px solid var(--black);position:relative;overflow:hidden;transition:background .25s;text-decoration:none;color:inherit;display:block;}
+.research-card:nth-child(2n){border-right:none;}
+.research-card-last{grid-column:1/-1;border-right:none !important;border-bottom:none;}
+.research-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .35s ease;}
+.research-card:hover::before{transform:scaleX(1);}
+.research-card:hover{background:#f0ede8;}
+.research-card-num{font-family:var(--serif);font-size:64px;color:var(--gray-light);line-height:1;margin-bottom:20px;font-style:italic;}
+.research-card-title{font-size:15px;font-weight:500;line-height:1.35;margin-bottom:14px;}
+.research-card-desc{font-size:13px;color:var(--gray-dark);font-weight:400;line-height:1.8;}
+.research-more{display:inline-flex;align-items:center;gap:10px;margin-top:36px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--black);font-weight:500;}
+.research-more::after{content:'→';transition:transform .2s;display:inline-block;}
+.research-more:hover::after{transform:translateX(6px);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.hero-left > *{animation:fadeUp .7s ease both;}
+.hero-left > *:nth-child(1){animation-delay:.1s;}
+.hero-left > *:nth-child(2){animation-delay:.25s;}
+.hero-left > *:nth-child(3){animation-delay:.4s;}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;} .hero-left{border-right:none;padding:48px 20px;}
+  .hero-right{min-height:280px;padding:32px 20px;}
+  .research-grid{grid-template-columns:1fr;}
+  .research-card{border-right:none;} .research-card-last{grid-column:1;}
+}
+</style>
+
+<!-- HERO -->
+<section class="hero" style="border-bottom:1px solid var(--black);">
+  <div class="hero-left">
+    <div>
+      <p class="hero-tag">{site.tagline}</p>
+      <h1 class="hero-name">Masanori<br /><em>Takezawa</em></h1>
+      <p class="hero-name-jp">{site.name_jp} <span style="font-family:var(--sans);font-size:13px;font-weight:400;color:var(--gray-mid);letter-spacing:.04em;">Ph.D.</span></p>
+      <div class="hero-affil">
+        <strong>{site.title_en}</strong>
+        {site.department_en}<br />
+        {site.school_en}<br />
+        {site.university_en}
+        <span class="hero-centers">
+          {site.affiliated_centers.map((c: any) => (
+            typeof c === 'string'
+              ? <>{c}<br /></>
+              : <><a href={c.url} target="_blank" style="color:var(--gray-mid);text-decoration:none;">{c.name}</a><br /></>
+          ))}
+        </span>
+      </div>
+      <p style="font-size:13px;color:var(--gray-mid);font-weight:400;margin-top:14px;font-style:italic;">{site.keywords}</p>
+      <div class="hero-bottom">
+        <a class="hero-link hero-link-rm" href={site.links.researchmap} target="_blank">
+          <span class="rm-label">日本語プロフィール</span>
+          <span class="rm-main">ResearchMap</span>
+        </a>
+        <a class="hero-link" href={site.links.google_scholar} target="_blank">Google Scholar</a>
+        <a class="hero-link" href={site.links.orcid} target="_blank">ORCID</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg-text">Evolution</div>
+    <p class="hero-research-label">Research Focus</p>
+    <h2 class="hero-research-title" set:html={site.hero_title.replace('\n', '<br />')}></h2>
+    <p class="hero-research-desc">{site.hero_desc}</p>
+  </div>
+</section>
+
+<!-- UPDATES -->
+<section id="updates">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Recent Updates</h2>
+    </div>
+    <div>
+      {updates.updates.map((u: any) => (
+        <div class="update-item">
+          <span class="update-date">{u.date}</span>
+          <span class="update-text" set:html={u.text.replace(/\*([^*]+)\*/g, '<em>$1</em>')}><span class="update-tag">{u.tag}</span></span>
+        </div>
+      ))}
+    </div>
+    <a class="view-all" href="/lab/">For lab member news, see Lab</a>
+  </div>
+</section>
+
+<!-- RESEARCH THEMES -->
+<section id="research">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Research Themes</h2>
+    </div>
+    <div class="research-grid">
+      {themes.map((t: any, i: number) => {
+        const isLast = i === themes.length - 1;
+        const cardNums = ['01','02','03','04','05'];
+        // Short questions from lead_en (first sentence)
+        const shortDesc = t.lead_en.trim().split(/(?<=[.?])\s/)[0];
+        return (
+          <a
+            class={`research-card${isLast ? ' research-card-last' : ''}`}
+            href={`/research/#theme-${t.id}`}
+          >
+            <div class="research-card-num">{cardNums[i]}</div>
+            <h3 class="research-card-title">{t.title_en}</h3>
+            <p class="research-card-desc">{shortDesc}</p>
+          </a>
+        );
+      })}
+    </div>
+    <a class="research-more" href="/research/">Read more about my research</a>
+  </div>
+</section>
+</BaseLayout>

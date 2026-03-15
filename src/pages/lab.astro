@@ -1,0 +1,254 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { load } from 'js-yaml';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+function parseFrontmatter(raw: string) {
+  const match = raw.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return {};
+  return load(match[1]) as Record<string, any>;
+}
+const members = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/lab/members.md'), 'utf-8'));
+const alumni = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/lab/alumni.md'), 'utf-8'));
+const theses = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/lab/theses.md'), 'utf-8'));
+const news = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/lab/news.md'), 'utf-8'));
+
+// Group PhD alumni by year desc
+const phdAlumni = (alumni.phd || []).sort((a: any, b: any) => b.year - a.year);
+const maAlumni = (alumni.masters || []).sort((a: any, b: any) => b.year - a.year);
+const newsItems = news.news || [];
+---
+<BaseLayout title="Lab — Masanori Takezawa" activePage="lab">
+<style>
+.page-top{margin-top:var(--nav-h);border-bottom:1px solid var(--black);padding:64px 48px 0;}
+.section-tabs{display:flex;border-bottom:1px solid var(--black);}
+.section-tab{padding:20px 40px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:none;background:none;font-family:var(--sans);color:var(--gray-dark);border-bottom:3px solid transparent;margin-bottom:-1px;transition:all .2s;white-space:nowrap;}
+.section-tab.active{color:var(--black);border-bottom-color:var(--black);}
+.section-tab:hover:not(.active){color:var(--black);}
+.tab-panel{display:none;} .tab-panel.active{display:block;}
+.lab-inner{max-width:1200px;margin:0 auto;padding:64px 48px;}
+
+/* Members */
+.member-group-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:500;margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--black);}
+.member-group-label:first-child{margin-top:0;}
+.member-row{display:flex;align-items:baseline;gap:24px;padding:14px 0;border-bottom:1px solid var(--gray-light);}
+.member-row:last-child{border-bottom:none;}
+.member-year{font-size:12px;color:var(--gray-mid);width:28px;flex-shrink:0;}
+.member-name-en{font-size:15px;font-weight:500;flex:1;}
+.member-name-jp{font-family:var(--jp);font-size:13px;color:var(--gray-dark);}
+.member-links{display:flex;gap:10px;margin-left:auto;}
+.member-link{font-size:11px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--accent);border:1px solid var(--accent);padding:3px 8px;transition:all .2s;}
+.member-link:hover{background:var(--accent);color:var(--white);}
+.undergrad-names{font-size:14px;color:var(--gray-dark);line-height:2.2;font-family:var(--jp);}
+
+/* Alumni PhD */
+.alumni-item{padding:28px 0;border-bottom:1px solid var(--gray-light);display:grid;grid-template-columns:60px 1fr auto;gap:0 24px;align-items:start;}
+.alumni-item:last-child{border-bottom:none;}
+.alumni-year{font-size:13px;color:var(--gray-mid);padding-top:3px;}
+.alumni-name-en{font-size:16px;font-weight:500;margin-bottom:4px;}
+.alumni-name-jp{font-family:var(--jp);font-size:13px;color:var(--gray-dark);margin-bottom:6px;}
+.alumni-degree{font-size:13px;color:var(--gray-dark);margin-bottom:6px;}
+.alumni-position{font-size:13px;color:var(--gray-mid);}
+.alumni-links{display:flex;gap:8px;flex-direction:column;align-items:flex-end;padding-top:4px;}
+
+/* MA Alumni table */
+.ma-table{width:100%;border-collapse:collapse;}
+.ma-table th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-mid);padding:8px 0;border-bottom:2px solid var(--black);text-align:left;}
+.ma-table td{padding:12px 0;border-bottom:1px solid var(--gray-light);font-size:14px;vertical-align:top;}
+.ma-table td:first-child{color:var(--gray-mid);width:64px;}
+.ma-table td:last-child{font-family:var(--jp);color:var(--gray-dark);}
+
+/* Theses */
+.thesis-item{padding:20px 0;border-bottom:1px solid var(--gray-light);}
+.thesis-item:last-child{border-bottom:none;}
+.thesis-year{font-size:12px;color:var(--gray-mid);margin-bottom:4px;}
+.thesis-author{font-family:var(--jp);font-size:13px;color:var(--gray-dark);margin-bottom:6px;}
+.thesis-title{font-size:14px;font-weight:500;line-height:1.5;color:var(--black);}
+.thesis-note{font-size:12px;color:var(--gray-mid);margin-top:4px;}
+
+/* News */
+.news-toolbar{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap;}
+.news-btn{font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:7px 16px;background:none;border:1px solid var(--black);cursor:pointer;color:var(--gray-dark);transition:all .2s;}
+.news-btn.active{background:var(--black);color:var(--white);}
+.news-btn:hover:not(.active){background:var(--gray-light);}
+.news-item{padding:20px 0;border-bottom:1px solid var(--gray-light);display:grid;grid-template-columns:140px 1fr;gap:0 24px;align-items:baseline;}
+.news-item:last-child{border-bottom:none;}
+.news-date{font-size:13px;color:var(--gray-mid);font-family:var(--jp);white-space:nowrap;}
+.news-text{font-family:var(--jp);font-size:14px;line-height:2.0;color:var(--black);}
+.news-text a{color:var(--accent);text-decoration:none;}
+.news-text a:hover{text-decoration:underline;}
+.news-tag{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border:1px solid;margin-right:8px;vertical-align:middle;}
+.news-tag.award{border-color:var(--accent);color:var(--accent);}
+.news-tag.jsps{border-color:var(--black);color:var(--black);}
+.news-tag.grant{border-color:var(--gray-mid);color:var(--gray-mid);}
+.news-item.hidden{display:none;}
+.en-note{font-size:13px;color:var(--gray-mid);background:#f9f8f4;border:1px solid var(--gray-light);padding:12px 16px;margin-bottom:28px;line-height:1.7;}
+.thesis-section-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:500;margin:48px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--black);}
+.thesis-section-label:first-child{margin-top:0;}
+@media(max-width:900px){
+  .page-top{padding:48px 20px 0;}
+  .section-tabs{overflow-x:auto;touch-action:pan-x;scrollbar-width:none;}
+  .section-tabs::-webkit-scrollbar{display:none;}
+  .section-tab{padding:14px 18px;font-size:12px;}
+  .lab-inner{padding:40px 20px;}
+  .alumni-item{grid-template-columns:48px 1fr;} .alumni-links{display:none;}
+  .news-item{grid-template-columns:1fr;gap:4px;}
+}
+</style>
+
+<div class="page-top">
+  <p class="page-header-label">Takezawa Laboratory</p>
+  <h1 class="page-header-title">Lab</h1>
+  <div class="section-tabs">
+    <button class="section-tab active" onclick="switchTab('members',this)">Members</button>
+    <button class="section-tab" onclick="switchTab('alumni',this)">Alumni</button>
+    <button class="section-tab" onclick="switchTab('theses',this)">Theses</button>
+    <button class="section-tab" onclick="switchTab('news',this)">Lab News</button>
+  </div>
+</div>
+
+<!-- MEMBERS -->
+<div id="tab-members" class="tab-panel active">
+  <div class="lab-inner">
+    <p class="member-group-label">Doctoral Students</p>
+    {(members.doctoral || []).map((m: any) => (
+      <div class="member-row">
+        <span class="member-year">{m.year}</span>
+        <span class="member-name-en">{m.name_en}</span>
+        <span class="member-name-jp">{m.name_jp}</span>
+        <div class="member-links">
+          {m.researchmap && <a class="member-link" href={m.researchmap} target="_blank">RM</a>}
+          {m.website && <a class="member-link" href={m.website} target="_blank">Web</a>}
+        </div>
+      </div>
+    ))}
+
+    <p class="member-group-label">Master's Students</p>
+    {(members.masters || []).map((m: any) => (
+      <div class="member-row">
+        <span class="member-year">{m.year}</span>
+        <span class="member-name-en">{m.name_en}</span>
+        <span class="member-name-jp">{m.name_jp}</span>
+      </div>
+    ))}
+
+    <p class="member-group-label">Undergraduate (B4)</p>
+    <div class="undergrad-names">
+      {(members.undergrad_b4 || []).map((m: any) => m.name_jp).join('　／　')}
+    </div>
+
+    <p class="member-group-label">Undergraduate (B3)</p>
+    <div class="undergrad-names">
+      {(members.undergrad_b3 || []).map((m: any) => m.name_jp).join('　／　')}
+    </div>
+  </div>
+</div>
+
+<!-- ALUMNI -->
+<div id="tab-alumni" class="tab-panel">
+  <div class="lab-inner">
+    <p class="member-group-label" style="margin-top:0;">PhD Alumni</p>
+    {phdAlumni.map((a: any) => (
+      <div class="alumni-item">
+        <div class="alumni-year">{a.year}</div>
+        <div>
+          <p class="alumni-name-en">{a.name_en}</p>
+          <p class="alumni-name-jp">{a.name_jp}</p>
+          <p class="alumni-degree">{a.degree}, {a.institution}</p>
+          {a.position_title && a.position_title !== '—' && (
+            <p class="alumni-position">{a.position_title}{a.position_org ? `, ${a.position_org}` : ''}</p>
+          )}
+        </div>
+        <div class="alumni-links">
+          {a.researchmap && <a class="member-link" href={a.researchmap} target="_blank">RM</a>}
+          {a.website && <a class="member-link" href={a.website} target="_blank">Web</a>}
+        </div>
+      </div>
+    ))}
+
+    <p class="member-group-label">Master's Alumni</p>
+    <table class="ma-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Name (EN)</th>
+          <th>Name (JP)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {maAlumni.map((a: any) => (
+          <tr>
+            <td>{a.year}</td>
+            <td>{a.name_en}</td>
+            <td>{a.name_jp}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- THESES -->
+<div id="tab-theses" class="tab-panel">
+  <div class="lab-inner">
+    <p class="thesis-section-label">Doctoral Dissertations</p>
+    {(theses.dissertations || []).map((t: any) => (
+      <div class="thesis-item">
+        <div class="thesis-year">{t.year} — {t.degree}</div>
+        <div class="thesis-author">{t.author_jp}</div>
+        <div class="thesis-title">{t.title}</div>
+        {t.note && <div class="thesis-note">{t.note}</div>}
+      </div>
+    ))}
+
+    <p class="thesis-section-label">Master's Theses</p>
+    {(theses.masters_theses || []).map((t: any) => (
+      <div class="thesis-item">
+        <div class="thesis-year">{t.year}</div>
+        <div class="thesis-author">{t.author_jp}</div>
+        <div class="thesis-title">{t.title}</div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<!-- NEWS -->
+<div id="tab-news" class="tab-panel">
+  <div class="lab-inner">
+    <div class="en-note">This section is in Japanese. For an English summary, browser translation is recommended.</div>
+    <div class="news-toolbar">
+      <button class="news-btn active" onclick="filterNews('all',this)">すべて</button>
+      <button class="news-btn" onclick="filterNews('award',this)">受賞</button>
+      <button class="news-btn" onclick="filterNews('jsps',this)">学振</button>
+      <button class="news-btn" onclick="filterNews('grant',this)">グラント</button>
+    </div>
+    {newsItems.map((n: any) => (
+      <div class="news-item" data-tag={n.tag}>
+        <span class="news-date">{n.date}</span>
+        <span class="news-text">
+          <span class={`news-tag ${n.tag}`}>{n.tag === 'award' ? '受賞' : n.tag === 'jsps' ? '学振' : 'グラント'}</span>
+          <span set:html={n.text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')}></span>
+          {n.url && <> <a href={n.url} target="_blank">→ 詳細</a></>}
+        </span>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+function switchTab(tab: string, btn: HTMLElement) {
+  document.querySelectorAll('.section-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + tab)?.classList.add('active');
+}
+function filterNews(tag: string, btn: HTMLElement) {
+  document.querySelectorAll('.news-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.news-item').forEach(item => {
+    const el = item as HTMLElement;
+    el.classList.toggle('hidden', tag !== 'all' && el.dataset.tag !== tag);
+  });
+}
+</script>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+interface Props { title: string; activePage?: string; }
+const { title, activePage = '' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+  <Nav activePage={activePage} />
+  <slot />
+  <Footer />
+  <script>
+    document.getElementById('nav-hamburger')?.addEventListener('click', () => {
+      document.querySelector('.nav-links')?.classList.toggle('open');
+      document.getElementById('nav-hamburger')?.classList.toggle('open');
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => {
+        document.querySelector('.nav-links')?.classList.remove('open');
+        document.getElementById('nav-hamburger')?.classList.remove('open');
+      });
+    });
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (nav) nav.style.borderBottomColor = window.scrollY > 60 ? 'rgba(10,10,10,.25)' : 'var(--black)';
+    });
+  </script>
+</body>
+</html>

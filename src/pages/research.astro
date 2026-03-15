@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { load } from 'js-yaml';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+function parseFrontmatter(raw: string) {
+  const match = raw.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return {};
+  return load(match[1]) as Record<string, any>;
+}
+
+const perspData = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/research/perspective.md'), 'utf-8'));
+const themesData = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/research/themes.md'), 'utf-8'));
+const themes = themesData.themes || [];
+---
+<BaseLayout title="Research — Masanori Takezawa" activePage="research">
+<style>
+.page-lang-toggle{display:flex;gap:0;border:1px solid var(--black);width:fit-content;margin:32px 48px 0;}
+.page-lang-btn{font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:9px 20px;background:none;border:none;border-right:1px solid var(--black);cursor:pointer;color:var(--gray-dark);transition:all .2s;}
+.page-lang-btn:last-child{border-right:none;}
+.page-lang-btn.active{background:var(--black);color:var(--white);}
+.lang-en{display:block;} .lang-ja{display:none;}
+.lang-ja-active .lang-en{display:none;} .lang-ja-active .lang-ja{display:block;}
+.perspective{border-bottom:1px solid var(--black);}
+.perspective-inner{max-width:1200px;margin:0 auto;padding:72px 48px;}
+.perspective-label{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:28px;}
+.perspective-title{font-family:var(--serif);font-size:clamp(22px,2.8vw,34px);font-weight:400;line-height:1.2;margin-bottom:48px;max-width:820px;}
+.perspective-body{max-width:780px;}
+.va-block{margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--gray-light);}
+.va-block:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.va-heading{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:14px;}
+.va-text{font-size:15px;line-height:1.9;color:var(--gray-dark);font-weight:400;}
+.va-text p{margin-bottom:1.2em;} .va-text p:last-child{margin-bottom:0;}
+.va-text strong{font-weight:500;color:var(--black);} .va-text em{font-style:italic;}
+.va-directions{border-left:2px solid var(--accent);padding-left:24px;}
+.va-directions ol{list-style:none;counter-reset:dir;}
+.va-directions li{counter-increment:dir;padding:12px 0;border-bottom:1px solid var(--gray-light);font-size:14px;line-height:1.75;color:var(--gray-dark);display:flex;gap:16px;}
+.va-directions li:last-child{border-bottom:none;}
+.va-directions li::before{content:counter(dir);font-family:var(--serif);font-size:22px;color:var(--gray-light);line-height:1;flex-shrink:0;margin-top:2px;}
+.ja-text{font-family:var(--jp);font-size:14px;line-height:2.1;color:var(--gray-dark);}
+.ja-text p{margin-bottom:1.2em;} .ja-text p:last-child{margin-bottom:0;}
+.ja-text strong{font-weight:400;color:var(--black);}
+.themes{border-bottom:1px solid var(--black);}
+.themes-inner{max-width:1200px;margin:0 auto;padding:72px 48px 72px 72px;}
+.themes-header{display:flex;align-items:baseline;gap:24px;margin-bottom:52px;}
+.themes-num{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;}
+.themes-title{font-family:var(--serif);font-size:clamp(28px,3.5vw,48px);font-weight:400;line-height:1.1;}
+.theme-item{display:grid;grid-template-columns:64px 1fr;gap:0 40px;padding:48px 0;border-bottom:1px solid var(--gray-light);align-items:start;position:relative;}
+.theme-item::before{content:'';position:absolute;left:-24px;top:0;bottom:0;width:3px;background:var(--accent);transform:scaleY(0);transform-origin:top;transition:transform .35s ease;}
+.theme-item:hover::before{transform:scaleY(1);}
+.theme-item:last-child{border-bottom:none;padding-bottom:0;}
+.theme-num{font-family:var(--serif);font-size:52px;color:var(--gray-light);line-height:1;font-style:italic;margin-top:-8px;}
+.theme-title{font-family:var(--serif);font-size:clamp(20px,2.2vw,28px);font-weight:400;line-height:1.2;margin-bottom:16px;}
+.theme-title-ja{font-family:var(--jp);font-size:clamp(18px,2vw,24px);font-weight:400;line-height:1.4;margin-bottom:16px;}
+.theme-lead{font-size:15px;line-height:1.85;color:var(--gray-dark);font-weight:400;max-width:720px;margin-bottom:0;}
+.theme-readmore{margin-top:20px;border-top:1px solid var(--gray-light);}
+.theme-toggle{background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-mid);padding:12px 0;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.theme-toggle:hover{color:var(--black);}
+.theme-toggle-icon{font-size:16px;line-height:1;transition:transform .3s;display:inline-block;}
+.theme-toggle.open .theme-toggle-icon{transform:rotate(45deg);}
+.theme-detail{display:none;padding:20px 0 8px;}
+.theme-detail.open{display:block;}
+.theme-detail p{font-size:15px;line-height:1.9;color:var(--gray-dark);font-weight:400;margin-bottom:1.4em;max-width:720px;}
+.theme-detail p:last-child{margin-bottom:0;}
+@media(max-width:900px){
+  .page-lang-toggle{margin:24px 20px 0;}
+  .perspective-inner,.themes-inner{padding:48px 20px;}
+  .theme-item{grid-template-columns:1fr;} .theme-num{font-size:36px;margin-bottom:8px;}
+}
+</style>
+
+<!-- LANG TOGGLE -->
+<div class="page-lang-toggle" id="lang-toggle-wrap">
+  <button class="page-lang-btn active" onclick="setLang('en',this)">EN</button>
+  <button class="page-lang-btn" onclick="setLang('ja',this)">JA</button>
+</div>
+
+<!-- PERSPECTIVE -->
+<section class="perspective" id="research-content">
+  <div class="perspective-inner">
+    <p class="perspective-label">Overarching Perspective</p>
+
+    <!-- EN -->
+    <div class="lang-en">
+      <h2 class="perspective-title">{perspData.title_en}</h2>
+      <div class="perspective-body">
+        {perspData.blocks_en.map((block: any) => (
+          <div class="va-block">
+            <p class="va-heading">{block.heading}</p>
+            {block.text && (
+              <div class="va-text" set:html={block.text
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+                .split('\n\n').map((p: string) => `<p>${p}</p>`).join('')
+              } />
+            )}
+            {block.directions && (
+              <div class="va-directions">
+                <ol>{block.directions.map((d: string) => <li>{d}</li>)}</ol>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- JA -->
+    <div class="lang-ja">
+      <h2 class="perspective-title" style="font-family:var(--jp);font-weight:400;">{perspData.title_ja}</h2>
+      <div class="perspective-body">
+        {perspData.blocks_ja.map((block: any) => (
+          <div class="va-block">
+            <p class="va-heading">{block.heading}</p>
+            {block.text && (
+              <div class="ja-text" set:html={block.text
+                .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                .split('\n\n').map((p: string) => `<p>${p}</p>`).join('')
+              } />
+            )}
+            {block.directions && (
+              <div class="va-directions">
+                <ol>{block.directions.map((d: string) => <li><span class="ja-text">{d}</span></li>)}</ol>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THEMES -->
+<section class="themes" id="themes-section">
+  <div class="themes-inner">
+    <div class="themes-header">
+      <span class="themes-num">Research Themes</span>
+      <h2 class="themes-title lang-en">Topics &amp; Projects</h2>
+      <h2 class="themes-title lang-ja" style="font-family:var(--jp);font-weight:400;">研究テーマ</h2>
+    </div>
+
+    {themes.map((t: any) => (
+      <div class="theme-item" id={`theme-${t.id}`}>
+        <div class="theme-num">{t.id}</div>
+        <div class="theme-content">
+          <!-- EN -->
+          <div class="lang-en">
+            <h3 class="theme-title" set:html={t.title_en.replace(' and ', '<br />and ').replace(' of ', '<br />of ')}></h3>
+            <p class="theme-lead">{t.lead_en.trim()}</p>
+            <div class="theme-readmore">
+              <button class="theme-toggle" onclick="toggleTheme(this)" aria-expanded="false">
+                <span class="theme-toggle-icon">+</span><span>Read more</span>
+              </button>
+              <div class="theme-detail" set:html={t.detail_en.trim().split('\n\n').map((p: string) => `<p>${p}</p>`).join('')}></div>
+            </div>
+          </div>
+          <!-- JA -->
+          <div class="lang-ja">
+            <h3 class="theme-title-ja">{t.title_ja}</h3>
+            <div class="ja-text" set:html={t.text_ja.trim().split('\n\n').map((p: string) => `<p>${p}</p>`).join('')}></div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+function setLang(lang: string, btn: HTMLElement) {
+  document.querySelectorAll('.page-lang-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const content = document.getElementById('research-content');
+  const themes = document.getElementById('themes-section');
+  if (lang === 'ja') {
+    content?.classList.add('lang-ja-active');
+    themes?.classList.add('lang-ja-active');
+  } else {
+    content?.classList.remove('lang-ja-active');
+    themes?.classList.remove('lang-ja-active');
+  }
+}
+function toggleTheme(btn: HTMLElement) {
+  const detail = btn.nextElementSibling as HTMLElement;
+  const isOpen = detail.classList.contains('open');
+  detail.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  btn.setAttribute('aria-expanded', String(!isOpen));
+  const label = btn.querySelector('span:last-child');
+  if (label) label.textContent = isOpen ? 'Read more' : 'Close';
+}
+</script>
+</BaseLayout>

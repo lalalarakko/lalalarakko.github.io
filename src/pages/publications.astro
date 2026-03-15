@@ -1,0 +1,292 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { load } from 'js-yaml';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+function parseFrontmatter(raw: string) {
+  const match = raw.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return {};
+  return load(match[1]) as Record<string, any>;
+}
+
+const papersData = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/publications/papers.md'), 'utf-8'));
+const preprintsData = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/publications/preprints.md'), 'utf-8'));
+const booksData = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/publications/books.md'), 'utf-8'));
+const miscData = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/publications/misc.md'), 'utf-8'));
+
+const papers = papersData.papers || [];
+const preprints = preprintsData.preprints || [];
+const books = booksData.books || [];
+const misc = miscData.misc || [];
+
+// Group papers by year
+const papersByYear: Record<number, any[]> = {};
+for (const p of papers) {
+  if (!papersByYear[p.year]) papersByYear[p.year] = [];
+  papersByYear[p.year].push(p);
+}
+const paperYears = Object.keys(papersByYear).map(Number).sort((a,b) => b-a);
+
+// Group books by year
+const booksByYear: Record<number, any[]> = {};
+for (const b of books) {
+  if (!booksByYear[b.year]) booksByYear[b.year] = [];
+  booksByYear[b.year].push(b);
+}
+const bookYears = Object.keys(booksByYear).map(Number).sort((a,b) => b-a);
+
+// Preprints by year
+const preprintsByYear: Record<number, any[]> = {};
+for (const p of preprints) {
+  if (!preprintsByYear[p.year]) preprintsByYear[p.year] = [];
+  preprintsByYear[p.year].push(p);
+}
+const preprintYears = Object.keys(preprintsByYear).map(Number).sort((a,b) => b-a);
+
+// Misc by year
+const miscByYear: Record<number, any[]> = {};
+for (const m of misc) {
+  if (!miscByYear[m.year]) miscByYear[m.year] = [];
+  miscByYear[m.year].push(m);
+}
+const miscYears = Object.keys(miscByYear).map(Number).sort((a,b) => b-a);
+
+const cats = ['all','cooperation','culture','crowd','misc_tag'];
+const catLabels: Record<string,string> = {all:'All',cooperation:'Cooperation',culture:'Cultural Evolution',crowd:'Wisdom of Crowds',misc_tag:'Misc.'};
+---
+<BaseLayout title="Publications — Masanori Takezawa" activePage="publications">
+<style>
+.page-top{margin-top:var(--nav-h);border-bottom:1px solid var(--black);padding:64px 48px 0;}
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:0;}
+.section-tabs{display:flex;border-bottom:1px solid var(--black);}
+.section-tab{padding:20px 48px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:none;background:none;font-family:var(--sans);color:var(--gray-dark);border-bottom:3px solid transparent;margin-bottom:-1px;transition:all .2s;white-space:nowrap;}
+.section-tab.active{color:var(--black);border-bottom-color:var(--black);}
+.section-tab:hover:not(.active){color:var(--black);}
+.tab-panel{display:none;} .tab-panel.active{display:block;}
+.toolbar{padding:20px 48px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--gray-light);}
+.filter-group{display:flex;gap:0;border:1px solid var(--black);}
+.filter-btn{padding:9px 20px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;background:none;border:none;border-right:1px solid var(--black);cursor:pointer;color:var(--gray-dark);transition:all .2s;font-family:var(--sans);}
+.filter-btn:last-child{border-right:none;}
+.filter-btn.active{background:var(--black);color:var(--white);}
+.filter-btn:hover:not(.active){background:var(--gray-light);}
+.pub-list{padding:0 48px 60px;}
+.year-heading{padding:20px 0 0;font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;border-top:2px solid var(--black);margin-top:40px;}
+.year-heading:first-child{margin-top:40px;}
+.pub-item{display:grid;grid-template-columns:1fr 180px;gap:20px 28px;padding:22px 0;border-bottom:1px solid var(--gray-light);align-items:start;transition:opacity .25s;}
+.pub-item.hidden{display:none;}
+.pub-title{font-size:15px;font-weight:500;color:var(--black);line-height:1.45;margin-bottom:5px;}
+.pub-authors{font-size:13px;color:var(--gray-dark);font-weight:400;margin-bottom:3px;}
+.pub-authors .me{font-weight:500;color:var(--black);}
+.pub-journal{font-size:13px;color:var(--gray-mid);font-style:italic;}
+.pub-links{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:6px;}
+.pub-doi{font-size:12px;color:var(--accent);text-decoration:none;display:inline-block;letter-spacing:.03em;}
+.pub-doi:hover{text-decoration:underline;}
+.pub-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;padding-top:4px;}
+.pub-badge{font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px solid;white-space:nowrap;}
+.pub-badge.peer{border-color:var(--black);color:var(--black);}
+.pub-badge.conf{border-color:var(--gray-mid);color:var(--gray-mid);}
+.pub-badge.invited{border-color:var(--accent);color:var(--accent);}
+.pub-badge.last{border-color:var(--gray-light);color:var(--gray-mid);}
+.book-item{display:grid;grid-template-columns:80px 1fr;gap:24px;padding:28px 0;border-bottom:1px solid var(--gray-light);align-items:start;}
+.book-item:last-child{border-bottom:none;}
+.book-year{font-size:13px;color:var(--gray-mid);}
+.book-title{font-size:15px;font-weight:500;line-height:1.45;margin-bottom:5px;}
+.book-detail{font-size:13px;color:var(--gray-dark);font-weight:400;line-height:1.7;}
+.book-detail em{font-style:italic;}
+.rm-notice{padding:40px 48px;border-top:1px solid var(--black);display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.rm-notice p{font-size:14px;color:var(--gray-dark);font-weight:400;line-height:1.7;max-width:640px;}
+.rm-btn{font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--black);border:1px solid var(--black);padding:10px 20px;white-space:nowrap;transition:all .2s;}
+.rm-btn:hover{background:var(--black);color:var(--white);}
+@media(max-width:900px){
+  .page-top{padding:48px 20px 0;}
+  .section-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x;scrollbar-width:none;}
+  .section-tabs::-webkit-scrollbar{display:none;}
+  .section-tab{padding:14px 20px;font-size:12px;}
+  .toolbar{padding:12px 20px;flex-wrap:wrap;gap:6px;}
+  .filter-group{overflow-x:auto;touch-action:pan-x;scrollbar-width:none;flex-wrap:nowrap;}
+  .filter-btn{padding:6px 10px;font-size:11px;}
+  .pub-list{padding:0 20px 40px;}
+  .pub-item{grid-template-columns:1fr;gap:8px;}
+  .pub-meta{flex-direction:row;align-items:flex-start;}
+  .book-item{grid-template-columns:1fr;}
+  .rm-notice{padding:32px 20px;}
+}
+</style>
+
+<div class="page-top">
+  <div class="page-header">
+    <div>
+      <p class="page-header-label">Academic Output</p>
+      <h1 class="page-header-title">Publications</h1>
+    </div>
+  </div>
+  <div class="section-tabs">
+    <button class="section-tab active" onclick="switchTab('papers',this)">Papers</button>
+    <button class="section-tab" onclick="switchTab('preprints',this)">Preprints</button>
+    <button class="section-tab" onclick="switchTab('books',this)">Books &amp; Chapters</button>
+    <button class="section-tab" onclick="switchTab('misc',this)">Misc. &amp; Reviews</button>
+  </div>
+</div>
+
+<!-- PAPERS TAB -->
+<div id="tab-papers" class="tab-panel active">
+  <div class="toolbar">
+    <div class="filter-group">
+      {cats.map(cat => (
+        <button
+          class={`filter-btn${cat === 'all' ? ' active' : ''}`}
+          onclick={`filterPubs('${cat}',this)`}
+        >{catLabels[cat]}</button>
+      ))}
+    </div>
+  </div>
+  <div class="pub-list" id="pub-list">
+    {paperYears.map(year => (
+      <>
+        <div class="year-heading">{year}</div>
+        {papersByYear[year].map((p: any) => (
+          <div class="pub-item" data-cat={p.cat || ''}>
+            <div>
+              <p class="pub-title">{p.title}</p>
+              <p class="pub-authors" set:html={p.authors.replace('Takezawa, M.', '<span class="me">Takezawa, M.</span>')}></p>
+              <p class="pub-journal">{p.journal}</p>
+              {p.doi && (
+                <div class="pub-links">
+                  <a class="pub-doi" href={`https://doi.org/${p.doi}`} target="_blank">DOI: {p.doi}</a>
+                </div>
+              )}
+            </div>
+            <div class="pub-meta">
+              {p.badge_peer !== false && <span class="pub-badge peer">Peer Reviewed</span>}
+              {p.badge_conf && <span class="pub-badge conf">Proceedings</span>}
+              {p.badge_invited && <span class="pub-badge invited">Invited</span>}
+              {p.role === 'lead' && <span class="pub-badge last">Lead Author</span>}
+              {p.role === 'last' && <span class="pub-badge last">Last Author</span>}
+              {p.role === 'corresponding' && <span class="pub-badge last">Corresponding</span>}
+            </div>
+          </div>
+        ))}
+      </>
+    ))}
+  </div>
+</div>
+
+<!-- PREPRINTS TAB -->
+<div id="tab-preprints" class="tab-panel">
+  <div class="pub-list" style="padding-top:40px;">
+    {preprintYears.map(year => (
+      <>
+        <div class="year-heading" style="margin-top:0;">{year}</div>
+        {preprintsByYear[year].map((p: any) => (
+          <div class="pub-item" data-cat="">
+            <div>
+              <p class="pub-title">{p.title}</p>
+              <p class="pub-authors" set:html={p.authors.replace('Takezawa, M.', '<span class="me">Takezawa, M.</span>')}></p>
+              <p class="pub-journal">{p.server}{p.date ? `, ${p.date}` : ''}</p>
+              {p.doi && (
+                <div class="pub-links">
+                  <a class="pub-doi" href={`https://doi.org/${p.doi}`} target="_blank">DOI: {p.doi}</a>
+                </div>
+              )}
+            </div>
+            <div class="pub-meta">
+              {p.role === 'last' && <span class="pub-badge last">Last Author</span>}
+            </div>
+          </div>
+        ))}
+      </>
+    ))}
+  </div>
+</div>
+
+<!-- BOOKS TAB -->
+<div id="tab-books" class="tab-panel">
+  <div class="pub-list" style="padding-top:40px;">
+    {bookYears.map(year => (
+      <>
+        <div class="year-heading" style={bookYears[0] === year ? 'margin-top:0;' : ''}>{year}</div>
+        {booksByYear[year].map((b: any) => (
+          <div class="book-item">
+            <div class="book-year">{b.year}</div>
+            <div>
+              <p class="book-title">{b.title}</p>
+              <div class="book-detail">
+                <p>{b.authors}</p>
+                {b.book && <p>In <em>{b.book}</em>{b.editors ? `, ${b.editors}` : ''}</p>}
+                <p>{b.publisher}{b.note ? `. ${b.note}` : ''}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </>
+    ))}
+  </div>
+</div>
+
+<!-- MISC TAB -->
+<div id="tab-misc" class="tab-panel">
+  <div class="pub-list" style="padding-top:40px;">
+    {miscYears.map(year => (
+      <>
+        <div class="year-heading" style={miscYears[0] === year ? 'margin-top:0;' : ''}>{year}</div>
+        {miscByYear[year].map((m: any) => (
+          <div class="pub-item" data-cat="">
+            <div>
+              <p class="pub-title">{m.title}</p>
+              <p class="pub-authors" set:html={m.authors.replace('Takezawa, M.', '<span class="me">Takezawa, M.</span>')}></p>
+              <p class="pub-journal">{m.journal}</p>
+            </div>
+            <div class="pub-meta">
+              {m.badge_invited && <span class="pub-badge invited">Invited</span>}
+            </div>
+          </div>
+        ))}
+      </>
+    ))}
+  </div>
+</div>
+
+<!-- ResearchMap notice -->
+<div class="rm-notice">
+  <p>For the complete record including all Japanese-language publications, grants, and activities, the full profile is available on <strong>ResearchMap</strong> (in Japanese).</p>
+  <a class="rm-btn" href="https://researchmap.jp/lalalarakko" target="_blank">ResearchMap (Japanese) →</a>
+</div>
+
+<script>
+function switchTab(tab: string, btn: HTMLElement) {
+  document.querySelectorAll('.section-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + tab)?.classList.add('active');
+  const allBtn = document.querySelector('.filter-btn[onclick*="\'all\'"]') as HTMLElement;
+  if (allBtn) filterPubs('all', allBtn);
+}
+function filterPubs(cat: string, btn: HTMLElement) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const items = document.querySelectorAll('#tab-papers .pub-item');
+  let shown = 0;
+  items.forEach(item => {
+    const el = item as HTMLElement;
+    const show = cat === 'all' || el.dataset.cat === cat;
+    el.classList.toggle('hidden', !show);
+    if (show) shown++;
+  });
+  // Hide empty year headings
+  const pubList = document.getElementById('pub-list');
+  if (!pubList) return;
+  const children = Array.from(pubList.children);
+  children.forEach((el, i) => {
+    if (el.classList.contains('year-heading')) {
+      let hasVisible = false;
+      for (let j = i+1; j < children.length; j++) {
+        if (children[j].classList.contains('year-heading')) break;
+        if (children[j].classList.contains('pub-item') && !children[j].classList.contains('hidden')) { hasVisible = true; break; }
+      }
+      (el as HTMLElement).style.display = hasVisible ? '' : 'none';
+    }
+  });
+}
+</script>
+</BaseLayout>

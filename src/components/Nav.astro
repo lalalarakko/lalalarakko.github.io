@@ -1,0 +1,22 @@
+---
+interface Props { activePage?: string; }
+const { activePage = '' } = Astro.props;
+const links = [
+  { href: '/research/', label: 'Research' },
+  { href: '/publications/', label: 'Publications' },
+  { href: '/lab/', label: 'Lab' },
+  { href: '/cv/', label: 'CV' },
+  { href: '/contact/', label: 'Contact' },
+];
+---
+<nav id="nav">
+  <a class="nav-name" href="/">Masanori Takezawa</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    {links.map(l => (
+      <li><a href={l.href} class={activePage === l.label.toLowerCase() ? 'active' : ''}>{l.label}</a></li>
+    ))}
+  </ul>
+</nav>
