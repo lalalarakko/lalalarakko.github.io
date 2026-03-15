@@ -16,7 +16,7 @@ const themes = themesData.themes || [];
 ---
 <BaseLayout title="Research — Masanori Takezawa" activePage="research">
 <style>
-.page-lang-toggle{display:flex;gap:0;border:1px solid var(--black);width:fit-content;margin:32px 48px 0;}
+.page-lang-toggle{display:flex;gap:0;border:1px solid var(--black);width:fit-content;margin:0 48px;padding-top:32px;}
 .page-lang-btn{font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:9px 20px;background:none;border:none;border-right:1px solid var(--black);cursor:pointer;color:var(--gray-dark);transition:all .2s;}
 .page-lang-btn:last-child{border-right:none;}
 .page-lang-btn.active{background:var(--black);color:var(--white);}
@@ -166,7 +166,7 @@ const themes = themesData.themes || [];
 </section>
 
 <script>
-function setLang(lang: string, btn: HTMLElement) {
+function setLang(lang, btn) {
   document.querySelectorAll('.page-lang-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   const content = document.getElementById('research-content');
@@ -179,8 +179,8 @@ function setLang(lang: string, btn: HTMLElement) {
     themes?.classList.remove('lang-ja-active');
   }
 }
-function toggleTheme(btn: HTMLElement) {
-  const detail = btn.nextElementSibling as HTMLElement;
+function toggleTheme(btn) {
+  const detail = btn.nextElementSibling;
   const isOpen = detail.classList.contains('open');
   detail.classList.toggle('open', !isOpen);
   btn.classList.toggle('open', !isOpen);

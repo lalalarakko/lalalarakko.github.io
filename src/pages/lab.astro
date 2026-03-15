@@ -1,254 +1,848 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { load } from 'js-yaml';
-import { readFileSync } from 'fs';
-import { join } from 'path';
-function parseFrontmatter(raw: string) {
-  const match = raw.match(/^---\n([\s\S]*?)\n---/);
-  if (!match) return {};
-  return load(match[1]) as Record<string, any>;
-}
-const members = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/lab/members.md'), 'utf-8'));
-const alumni = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/lab/alumni.md'), 'utf-8'));
-const theses = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/lab/theses.md'), 'utf-8'));
-const news = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/lab/news.md'), 'utf-8'));
-
-// Group PhD alumni by year desc
-const phdAlumni = (alumni.phd || []).sort((a: any, b: any) => b.year - a.year);
-const maAlumni = (alumni.masters || []).sort((a: any, b: any) => b.year - a.year);
-const newsItems = news.news || [];
 ---
 <BaseLayout title="Lab — Masanori Takezawa" activePage="lab">
 <style>
-.page-top{margin-top:var(--nav-h);border-bottom:1px solid var(--black);padding:64px 48px 0;}
-.section-tabs{display:flex;border-bottom:1px solid var(--black);}
-.section-tab{padding:20px 40px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:none;background:none;font-family:var(--sans);color:var(--gray-dark);border-bottom:3px solid transparent;margin-bottom:-1px;transition:all .2s;white-space:nowrap;}
+
+
+
+
+
+
+
+
+
+
+
+
+.page-top{margin-top:var(--nav-h);}
+.page-header{border-bottom:1px solid var(--black);padding:64px 48px 48px;}
+.page-header-label{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:12px;}
+.page-header-title{font-family:var(--serif);font-size:clamp(40px,5vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.01em;margin-bottom:16px;}
+.page-header-desc{font-size:15px;color:var(--gray-dark);font-weight:400;max-width:640px;line-height:1.8;}
+
+/* SECTION TABS */
+.section-tabs{display:flex;border-bottom:1px solid var(--black);position:sticky;top:var(--nav-h);background:var(--white);z-index:50;}
+.section-tab{padding:20px 32px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:none;background:none;font-family:var(--sans);color:var(--gray-dark);border-bottom:3px solid transparent;margin-bottom:-1px;transition:all .2s;}
 .section-tab.active{color:var(--black);border-bottom-color:var(--black);}
 .section-tab:hover:not(.active){color:var(--black);}
-.tab-panel{display:none;} .tab-panel.active{display:block;}
-.lab-inner{max-width:1200px;margin:0 auto;padding:64px 48px;}
+.tab-panel{display:none;}.tab-panel.active{display:block;}
 
-/* Members */
-.member-group-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:500;margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--black);}
-.member-group-label:first-child{margin-top:0;}
-.member-row{display:flex;align-items:baseline;gap:24px;padding:14px 0;border-bottom:1px solid var(--gray-light);}
-.member-row:last-child{border-bottom:none;}
-.member-year{font-size:12px;color:var(--gray-mid);width:28px;flex-shrink:0;}
-.member-name-en{font-size:15px;font-weight:500;flex:1;}
-.member-name-jp{font-family:var(--jp);font-size:13px;color:var(--gray-dark);}
-.member-links{display:flex;gap:10px;margin-left:auto;}
-.member-link{font-size:11px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--accent);border:1px solid var(--accent);padding:3px 8px;transition:all .2s;}
-.member-link:hover{background:var(--accent);color:var(--white);}
-.undergrad-names{font-size:14px;color:var(--gray-dark);line-height:2.2;font-family:var(--jp);}
+/* MEMBERS */
+.members-section{padding:56px 48px;border-bottom:1px solid var(--black);}
+.members-section:last-child{border-bottom:none;}
+.members-section-label{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:24px;}
+.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;}
+.member-card{background:var(--white);padding:28px 24px;border:1px solid var(--gray-light);transition:border-color .2s,box-shadow .2s;}
+.member-card:hover{border-color:var(--gray-mid);box-shadow:0 2px 12px rgba(0,0,0,.05);}
+.member-name{font-size:15px;font-weight:500;margin-bottom:3px;}
+.member-name-jp{font-family:var(--jp);font-size:13px;font-weight:400;color:var(--gray-dark);margin-bottom:8px;letter-spacing:.06em;}
+.member-degree{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+.member-topic{font-size:13px;color:var(--gray-dark);font-weight:400;line-height:1.6;}
+/* Compact student list (B3/B4) */
+.students-list-wrap{border:1px solid var(--black);}
+.students-list-header{display:grid;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-mid);padding:10px 20px;border-bottom:1px solid var(--black);background:var(--white);}
+.students-row{display:flex;align-items:baseline;gap:16px;padding:10px 20px;border-bottom:1px solid var(--gray-light);font-size:14px;}
+.students-row:last-child{border-bottom:none;}
+.students-row-jp{font-family:var(--jp);font-weight:400;}
+.students-row-year{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);white-space:nowrap;}
 
-/* Alumni PhD */
-.alumni-item{padding:28px 0;border-bottom:1px solid var(--gray-light);display:grid;grid-template-columns:60px 1fr auto;gap:0 24px;align-items:start;}
-.alumni-item:last-child{border-bottom:none;}
-.alumni-year{font-size:13px;color:var(--gray-mid);padding-top:3px;}
-.alumni-name-en{font-size:16px;font-weight:500;margin-bottom:4px;}
-.alumni-name-jp{font-family:var(--jp);font-size:13px;color:var(--gray-dark);margin-bottom:6px;}
-.alumni-degree{font-size:13px;color:var(--gray-dark);margin-bottom:6px;}
-.alumni-position{font-size:13px;color:var(--gray-mid);}
-.alumni-links{display:flex;gap:8px;flex-direction:column;align-items:flex-end;padding-top:4px;}
+/* ALUMNI */
+.alumni-section{padding:64px 48px;}
+.alumni-section-label{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:28px;}
+.alumni-table{width:100%;border-collapse:collapse;table-layout:fixed;}
+.alumni-table th{text-align:left;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-mid);font-weight:400;padding:0 0 14px;border-bottom:1px solid var(--black);}
+.alumni-table td{padding:16px 12px 16px 0;border-bottom:1px solid var(--gray-light);vertical-align:top;}
+.alumni-table tr:last-child td{border-bottom:none;}
+.alumni-yr{width:64px;font-size:13px;color:var(--gray-mid);padding-top:18px;}
+.alumni-name-en{font-size:15px;font-weight:500;margin-bottom:2px;}
+.alumni-name-jp{font-family:var(--jp);font-size:12px;font-weight:400;color:var(--gray-mid);margin-bottom:3px;}
+.alumni-inst{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-mid);margin-bottom:6px;}
+.alumni-thesis{font-size:12px;color:var(--gray-dark);font-style:italic;line-height:1.55;margin-top:4px;}
+.alumni-thesis.tba{color:var(--gray-mid);font-style:normal;}
+.alumni-links{display:flex;gap:12px;margin-top:8px;}
+.alumni-links a{font-size:13px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:var(--accent);}
+.alumni-links a:hover{text-decoration:underline;}
+.alumni-pos-cell{font-size:14px;padding-top:18px;}
+.alumni-pos-title{font-weight:500;margin-bottom:2px;}
+.alumni-pos-org{font-size:12px;color:var(--gray-dark);font-weight:400;line-height:1.5;}
 
-/* MA Alumni table */
-.ma-table{width:100%;border-collapse:collapse;}
-.ma-table th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-mid);padding:8px 0;border-bottom:2px solid var(--black);text-align:left;}
-.ma-table td{padding:12px 0;border-bottom:1px solid var(--gray-light);font-size:14px;vertical-align:top;}
-.ma-table td:first-child{color:var(--gray-mid);width:64px;}
-.ma-table td:last-child{font-family:var(--jp);color:var(--gray-dark);}
+/* MA ALUMNI (compact) */
+.ma-alumni-section{padding:0 48px 64px;}
+.ma-alumni-section-label{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:20px;padding-top:48px;border-top:1px solid var(--black);}
+.ma-table{width:100%;border-collapse:collapse;table-layout:fixed;}
+.ma-table th{text-align:left;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-mid);font-weight:400;padding:0 0 12px;border-bottom:1px solid var(--black);}
+.ma-table td{padding:10px 12px 10px 0;border-bottom:1px solid var(--gray-light);font-size:14px;vertical-align:middle;}
+.ma-table tr:last-child td{border-bottom:none;}
+.ma-yr{width:64px;font-size:13px;color:var(--gray-mid);}
+.ma-name-en{font-size:14px;font-weight:500;color:var(--black);}
+.ma-name-jp{font-family:var(--jp);font-size:13px;font-weight:400;color:var(--gray-mid);}
 
-/* Theses */
-.thesis-item{padding:20px 0;border-bottom:1px solid var(--gray-light);}
+/* THESES */
+.thesis-section{padding:64px 48px;}
+.thesis-section-label{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:8px;}
+.thesis-tabs{display:flex;gap:0;margin-bottom:32px;border-bottom:1px solid var(--gray-light);}
+.thesis-subtab{padding:12px 24px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:none;background:none;font-family:var(--sans);color:var(--gray-mid);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s;}
+.thesis-subtab.active{color:var(--black);border-bottom-color:var(--black);}
+.thesis-subpanel{display:none;}.thesis-subpanel.active{display:block;}
+.thesis-year-heading{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--black);font-weight:500;padding:20px 0 12px;border-top:1px solid var(--black);margin-top:28px;}
+.thesis-year-heading.first{margin-top:0;border-top:2px solid var(--black);}
+.thesis-item{display:grid;grid-template-columns:44px 1fr;gap:10px 18px;padding:12px 0;border-bottom:1px solid var(--gray-light);align-items:start;}
 .thesis-item:last-child{border-bottom:none;}
-.thesis-year{font-size:12px;color:var(--gray-mid);margin-bottom:4px;}
-.thesis-author{font-family:var(--jp);font-size:13px;color:var(--gray-dark);margin-bottom:6px;}
-.thesis-title{font-size:14px;font-weight:500;line-height:1.5;color:var(--black);}
-.thesis-note{font-size:12px;color:var(--gray-mid);margin-top:4px;}
+.thesis-deg{font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:3px 6px;border:1px solid;white-space:nowrap;margin-top:2px;}
+.thesis-deg.phd{border-color:var(--black);color:var(--black);}
+.thesis-deg.ma{border-color:var(--gray-mid);color:var(--gray-mid);}
+.thesis-deg.ba{border-color:var(--gray-light);color:var(--gray-mid);}
+.thesis-title{font-size:14px;line-height:1.55;margin-bottom:3px;}
+.thesis-author{font-family:var(--jp);font-size:12px;color:var(--gray-mid);}
+.thesis-pos{font-size:13px;color:var(--gray-mid);margin-top:2px;}
 
-/* News */
-.news-toolbar{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap;}
-.news-btn{font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:7px 16px;background:none;border:1px solid var(--black);cursor:pointer;color:var(--gray-dark);transition:all .2s;}
-.news-btn.active{background:var(--black);color:var(--white);}
-.news-btn:hover:not(.active){background:var(--gray-light);}
-.news-item{padding:20px 0;border-bottom:1px solid var(--gray-light);display:grid;grid-template-columns:140px 1fr;gap:0 24px;align-items:baseline;}
+/* NEWS */
+.news-section{padding:64px 48px;}
+.news-note{font-size:13px;color:var(--gray-dark);font-weight:400;line-height:1.8;border-left:3px solid var(--gray-light);padding-left:20px;margin-bottom:36px;max-width:600px;}
+.news-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;}
+.news-filter-btn{padding:6px 16px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-family:var(--sans);background:none;border:1px solid var(--gray-light);cursor:pointer;transition:all .2s;color:var(--gray-dark);}
+.news-filter-btn:hover{border-color:var(--gray-mid);color:var(--black);}
+.news-filter-btn.active{background:var(--black);color:var(--white);border-color:var(--black);}
+.news-list{list-style:none;}
+.news-item{display:grid;grid-template-columns:80px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--gray-light);align-items:start;}
 .news-item:last-child{border-bottom:none;}
-.news-date{font-size:13px;color:var(--gray-mid);font-family:var(--jp);white-space:nowrap;}
-.news-text{font-family:var(--jp);font-size:14px;line-height:2.0;color:var(--black);}
-.news-text a{color:var(--accent);text-decoration:none;}
-.news-text a:hover{text-decoration:underline;}
-.news-tag{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border:1px solid;margin-right:8px;vertical-align:middle;}
-.news-tag.award{border-color:var(--accent);color:var(--accent);}
-.news-tag.jsps{border-color:var(--black);color:var(--black);}
-.news-tag.grant{border-color:var(--gray-mid);color:var(--gray-mid);}
 .news-item.hidden{display:none;}
-.en-note{font-size:13px;color:var(--gray-mid);background:#f9f8f4;border:1px solid var(--gray-light);padding:12px 16px;margin-bottom:28px;line-height:1.7;}
-.thesis-section-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:500;margin:48px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--black);}
-.thesis-section-label:first-child{margin-top:0;}
+.news-date{font-size:12px;color:var(--gray-mid);padding-top:3px;white-space:nowrap;}
+.news-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;}
+.news-tag{font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border:1px solid;display:inline-block;}
+.news-tag.award{border-color:var(--accent);color:var(--accent);}
+.news-tag.jsps{border-color:#2980b9;color:#2980b9;}
+.news-tag.grant{border-color:#27ae60;color:#27ae60;}
+.news-
+.news-body a{color:var(--accent);text-decoration:none;font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin-left:8px;vertical-align:middle;}
+.news-body a:hover{text-decoration:underline;}
+
+
+
+
+
+
+
+
 @media(max-width:900px){
-  .page-top{padding:48px 20px 0;}
-  .section-tabs{overflow-x:auto;touch-action:pan-x;scrollbar-width:none;}
-  .section-tabs::-webkit-scrollbar{display:none;}
-  .section-tab{padding:14px 18px;font-size:12px;}
-  .lab-inner{padding:40px 20px;}
-  .alumni-item{grid-template-columns:48px 1fr;} .alumni-links{display:none;}
-  .news-item{grid-template-columns:1fr;gap:4px;}
+  
+  .page-header{padding:48px 20px 32px;}
+  .members-section,.alumni-section,.ma-alumni-section,.thesis-section,.news-section{padding-left:20px;padding-right:20px;}
+  .section-tab{padding:16px 14px;font-size:13px;}
+  .alumni-yr,.ma-yr{display:none;}
+  /* PhD alumni: stack Current Position below Name on mobile */
+  .alumni-table thead{display:none;}
+  .alumni-table tr{display:block;padding:16px 0;border-bottom:1px solid var(--gray-light);}
+  .alumni-table tr:last-child{border-bottom:none;}
+  .alumni-table td{display:block;padding:0;border:none;}
+  .alumni-pos-cell{margin-top:8px;padding-top:8px !important;border-top:1px solid var(--gray-light) !important;}
+  /* Master's alumni: hide Japanese name column on very small screens */
+  .ma-name-jp{font-size:12px;}
+  .thesis-item{grid-template-columns:1fr;}.thesis-deg{display:inline-block;margin-bottom:4px;}
+  
+  
+  /* Accessibility: larger fonts on mobile */
+  
+  
+  .update-date,.update-text,.cv-entry-title,.cv-entry-place,.cv-entry-note{font-size:15px;}
+  .pub-title{font-size:16px;} .pub-authors,.pub-journal{font-size:14px;}
+  .section-num,.page-header-label,.perspective-label,.themes-num{font-size:13px;}
+  .filter-btn,.pub-badge,.update-tag{font-size:12px;}
+  .hero-affil{font-size:15px;} .hero-research-desc{font-size:15px;}
+  .research-card-desc{font-size:14px;}
+  .footer-links a,
+
 }
+
+/* ── MOBILE NAV ── */
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.nav-hamburger span{display:block;width:22px;height:1px;background:var(--black);transition:all .3s;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+@media(max-width:680px){
+  .nav-hamburger{display:flex;}
+  
+  .nav-links.open{display:flex;}
+  .nav-links li{border-bottom:1px solid var(--gray-light);}
+  
+  
+}
+
 </style>
 
 <div class="page-top">
-  <p class="page-header-label">Takezawa Laboratory</p>
-  <h1 class="page-header-title">Lab</h1>
+  <div class="page-header">
+    <p class="page-header-label">Takezawa Laboratory</p>
+    <h1 class="page-header-title">Lab</h1>
+    <p class="page-header-desc">Hokkaido University · Department of Behavioral Science. We study the evolutionary and cognitive foundations of human sociality through experiments, computational models, and theoretical analysis.</p>
+  </div>
+
   <div class="section-tabs">
-    <button class="section-tab active" onclick="switchTab('members',this)">Members</button>
+    <button class="section-tab active" onclick="switchTab('members',this)">Current Members</button>
     <button class="section-tab" onclick="switchTab('alumni',this)">Alumni</button>
     <button class="section-tab" onclick="switchTab('theses',this)">Theses</button>
     <button class="section-tab" onclick="switchTab('news',this)">Lab News</button>
   </div>
-</div>
 
-<!-- MEMBERS -->
-<div id="tab-members" class="tab-panel active">
-  <div class="lab-inner">
-    <p class="member-group-label">Doctoral Students</p>
-    {(members.doctoral || []).map((m: any) => (
-      <div class="member-row">
-        <span class="member-year">{m.year}</span>
-        <span class="member-name-en">{m.name_en}</span>
-        <span class="member-name-jp">{m.name_jp}</span>
-        <div class="member-links">
-          {m.researchmap && <a class="member-link" href={m.researchmap} target="_blank">RM</a>}
-          {m.website && <a class="member-link" href={m.website} target="_blank">Web</a>}
+  <!-- ══════════════════════════════════════
+       CURRENT MEMBERS  (as of April 2026)
+  ══════════════════════════════════════ -->
+  <div id="tab-members" class="tab-panel active">
+
+    <!-- Doctoral -->
+    <div class="members-section">
+      <p class="members-section-label">Doctoral Students</p>
+      <div class="members-grid">
+        <div class="member-card">
+          <p class="member-name">Kaito Takenishi</p>
+          <p class="member-name-jp">竹西 海人</p>
+          <p class="member-degree">PhD Student · D1</p>
+          <p class="member-topic"></p>
+          <div class="alumni-links">
+            <a href="https://researchmap.jp/pocha_ama" target="_blank">ResearchMap</a>
+            <a href="https://sites.google.com/view/kaitotakenishi" target="_blank">Website</a>
+          </div>
         </div>
       </div>
-    ))}
-
-    <p class="member-group-label">Master's Students</p>
-    {(members.masters || []).map((m: any) => (
-      <div class="member-row">
-        <span class="member-year">{m.year}</span>
-        <span class="member-name-en">{m.name_en}</span>
-        <span class="member-name-jp">{m.name_jp}</span>
-      </div>
-    ))}
-
-    <p class="member-group-label">Undergraduate (B4)</p>
-    <div class="undergrad-names">
-      {(members.undergrad_b4 || []).map((m: any) => m.name_jp).join('　／　')}
     </div>
 
-    <p class="member-group-label">Undergraduate (B3)</p>
-    <div class="undergrad-names">
-      {(members.undergrad_b3 || []).map((m: any) => m.name_jp).join('　／　')}
-    </div>
-  </div>
-</div>
-
-<!-- ALUMNI -->
-<div id="tab-alumni" class="tab-panel">
-  <div class="lab-inner">
-    <p class="member-group-label" style="margin-top:0;">PhD Alumni</p>
-    {phdAlumni.map((a: any) => (
-      <div class="alumni-item">
-        <div class="alumni-year">{a.year}</div>
-        <div>
-          <p class="alumni-name-en">{a.name_en}</p>
-          <p class="alumni-name-jp">{a.name_jp}</p>
-          <p class="alumni-degree">{a.degree}, {a.institution}</p>
-          {a.position_title && a.position_title !== '—' && (
-            <p class="alumni-position">{a.position_title}{a.position_org ? `, ${a.position_org}` : ''}</p>
-          )}
+    <!-- Master's -->
+    <div class="members-section">
+      <p class="members-section-label">Master's Students</p>
+      <div class="members-grid">
+        <div class="member-card">
+          <p class="member-name">Yusuke Saito</p>
+          <p class="member-name-jp">齋藤 悠輔</p>
+          <p class="member-degree">M.A. Student · M2</p>
+          <p class="member-topic"></p>
         </div>
-        <div class="alumni-links">
-          {a.researchmap && <a class="member-link" href={a.researchmap} target="_blank">RM</a>}
-          {a.website && <a class="member-link" href={a.website} target="_blank">Web</a>}
+        <div class="member-card">
+          <p class="member-name">Zen Nakazawa</p>
+          <p class="member-name-jp">中澤 禅</p>
+          <p class="member-degree">M.A. Student · M1</p>
+          <p class="member-topic"></p>
+        </div>
+        <div class="member-card">
+          <p class="member-name">Wakana Hirasawa</p>
+          <p class="member-name-jp">平澤 若菜</p>
+          <p class="member-degree">M.A. Student · M1</p>
+          <p class="member-topic"></p>
+        </div>
+        <div class="member-card">
+          <p class="member-name">Kanayo Higashi</p>
+          <p class="member-name-jp">東 叶世</p>
+          <p class="member-degree">M.A. Student · M1</p>
+          <p class="member-topic"></p>
         </div>
       </div>
-    ))}
+    </div>
 
-    <p class="member-group-label">Master's Alumni</p>
-    <table class="ma-table">
-      <thead>
-        <tr>
-          <th>Year</th>
-          <th>Name (EN)</th>
-          <th>Name (JP)</th>
-        </tr>
-      </thead>
-      <tbody>
-        {maAlumni.map((a: any) => (
+    <!-- Bachelor's -->
+    <div class="members-section">
+      <p class="members-section-label">Undergraduate Students</p>
+      <div class="students-list-wrap">
+        <div class="students-row" style="background:var(--gray-light);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-dark);">
+          <span style="flex:1;">Name</span><span style="width:120px;">Year</span>
+        </div>
+        <div class="students-row"><span class="students-row-jp" style="flex:1;">岩渕 佑生</span><span class="students-row-year">B4</span></div>
+        <div class="students-row"><span class="students-row-jp" style="flex:1;">山口 歩夢</span><span class="students-row-year">B4</span></div>
+        <div class="students-row"><span class="students-row-jp" style="flex:1;">南間 桃花</span><span class="students-row-year">B4</span></div>
+        <div class="students-row"><span class="students-row-jp" style="flex:1;">中込 正信</span><span class="students-row-year">B4</span></div>
+        <div class="students-row"><span class="students-row-jp" style="flex:1;">横山 穂実</span><span class="students-row-year">B4</span></div>
+        <div class="students-row"><span class="students-row-jp" style="flex:1;">小島 優芽</span><span class="students-row-year">B3</span></div>
+        <div class="students-row"><span class="students-row-jp" style="flex:1;">鹿ノ内 陽介</span><span class="students-row-year">B3</span></div>
+        <div class="students-row"><span class="students-row-jp" style="flex:1;">森 爽歌</span><span class="students-row-year">B3</span></div>
+      </div>
+    </div>
+
+  </div><!-- /members -->
+
+  <!-- ══════════════════════════════════════
+       ALUMNI
+  ══════════════════════════════════════ -->
+  <div id="tab-alumni" class="tab-panel">
+
+    <!-- PhD Alumni -->
+    <div class="alumni-section" style="border-bottom:1px solid var(--black);">
+      <p class="alumni-section-label">PhD Alumni</p>
+      <table class="alumni-table">
+        <thead>
           <tr>
-            <td>{a.year}</td>
-            <td>{a.name_en}</td>
-            <td>{a.name_jp}</td>
+            <th style="width:48px;">Year</th>
+            <th>Name</th>
+            <th style="min-width:200px;">Current Position</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- THESES -->
-<div id="tab-theses" class="tab-panel">
-  <div class="lab-inner">
-    <p class="thesis-section-label">Doctoral Dissertations</p>
-    {(theses.dissertations || []).map((t: any) => (
-      <div class="thesis-item">
-        <div class="thesis-year">{t.year} — {t.degree}</div>
-        <div class="thesis-author">{t.author_jp}</div>
-        <div class="thesis-title">{t.title}</div>
-        {t.note && <div class="thesis-note">{t.note}</div>}
-      </div>
-    ))}
-
-    <p class="thesis-section-label">Master's Theses</p>
-    {(theses.masters_theses || []).map((t: any) => (
-      <div class="thesis-item">
-        <div class="thesis-year">{t.year}</div>
-        <div class="thesis-author">{t.author_jp}</div>
-        <div class="thesis-title">{t.title}</div>
-      </div>
-    ))}
-  </div>
-</div>
-
-<!-- NEWS -->
-<div id="tab-news" class="tab-panel">
-  <div class="lab-inner">
-    <div class="en-note">This section is in Japanese. For an English summary, browser translation is recommended.</div>
-    <div class="news-toolbar">
-      <button class="news-btn active" onclick="filterNews('all',this)">すべて</button>
-      <button class="news-btn" onclick="filterNews('award',this)">受賞</button>
-      <button class="news-btn" onclick="filterNews('jsps',this)">学振</button>
-      <button class="news-btn" onclick="filterNews('grant',this)">グラント</button>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="alumni-yr">2025</td>
+            <td>
+              <p class="alumni-name-en">Yuta Kido</p>
+              <p class="alumni-name-jp">貴堂 雄太</p>
+              <p class="alumni-inst">Hokkaido University · PhD in Literature</p>
+              <div class="alumni-links">
+                <a href="https://researchmap.jp/yutakido" target="_blank">ResearchMap</a>
+                <a href="https://kidd000.github.io" target="_blank">Website</a>
+              </div>
+            </td>
+            <td class="alumni-pos-cell">
+              <p class="alumni-pos-title">JSPS Postdoctoral Fellow (PD)</p>
+              <p class="alumni-pos-org">University of Tokyo</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="alumni-yr">2025</td>
+            <td>
+              <p class="alumni-name-en">Shuhei Tsuchida</p>
+              <p class="alumni-name-jp">土田 修平</p>
+              <p class="alumni-inst">Hokkaido University · PhD in Human Sciences</p>
+              <div class="alumni-links"></div>
+            </td>
+            <td class="alumni-pos-cell"><p class="alumni-pos-title">—</p></td>
+          </tr>
+          <tr>
+            <td class="alumni-yr">2024</td>
+            <td>
+              <p class="alumni-name-en">Shogo Homma</p>
+              <p class="alumni-name-jp">本間 祥吾</p>
+              <p class="alumni-inst">Hokkaido University · PhD in Human Sciences</p>
+              <div class="alumni-links">
+                <a href="https://researchmap.jp/shogo_homma" target="_blank">ResearchMap</a>
+                <a href="https://shogohomma.notion.site" target="_blank">Website</a>
+              </div>
+            </td>
+            <td class="alumni-pos-cell">
+              <p class="alumni-pos-title">Project Assistant Professor</p>
+              <p class="alumni-pos-org">Graduate School of Informatics<br>Nagoya University</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="alumni-yr">2023</td>
+            <td>
+              <p class="alumni-name-en">Seiya Nakata</p>
+              <p class="alumni-name-jp">中田 星矢</p>
+              <p class="alumni-inst">Hokkaido University · PhD in Human Sciences</p>
+              <div class="alumni-links">
+                <a href="https://researchmap.jp/seiyanakata" target="_blank">ResearchMap</a>
+                <a href="https://sites.google.com/view/seiyanakata/" target="_blank">Website</a>
+              </div>
+            </td>
+            <td class="alumni-pos-cell">
+              <p class="alumni-pos-title">Project Researcher</p>
+              <p class="alumni-pos-org">IRCN<br>University of Tokyo</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="alumni-yr">2019</td>
+            <td>
+              <p class="alumni-name-en">Masaki Suyama</p>
+              <p class="alumni-name-jp">須山 巨基</p>
+              <p class="alumni-inst">Hokkaido University · PhD in Literature</p>
+              <div class="alumni-links">
+                <a href="https://researchmap.jp/MasakiSuyama" target="_blank">ResearchMap</a>
+                <a href="https://sites.google.com/view/masaki-suyama-cdl/" target="_blank">Website</a>
+              </div>
+            </td>
+            <td class="alumni-pos-cell">
+              <p class="alumni-pos-title">Lecturer</p>
+              <p class="alumni-pos-org">Dept. of Psychology<br>Yasuda Women's University</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="alumni-yr">2017</td>
+            <td>
+              <p class="alumni-name-en">Yo Nakawake</p>
+              <p class="alumni-name-jp">中分 遥</p>
+              <p class="alumni-inst">Hokkaido University · PhD in Literature</p>
+              <div class="alumni-links">
+                <a href="https://researchmap.jp/nakawake" target="_blank">ResearchMap</a>
+                <a href="https://sites.google.com/site/ynakawake/home/japanese" target="_blank">Website</a>
+              </div>
+            </td>
+            <td class="alumni-pos-cell">
+              <p class="alumni-pos-title">Associate Professor</p>
+              <p class="alumni-pos-org">School of Advanced Science and Technology<br>JAIST</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="alumni-yr">2012</td>
+            <td>
+              <p class="alumni-name-en">Tatsunori Ishii</p>
+              <p class="alumni-name-jp">石井 辰典</p>
+              <p class="alumni-inst">Sophia University · PhD in Psychology</p>
+              <div class="alumni-links">
+                <a href="https://researchmap.jp/t.ishii1108" target="_blank">ResearchMap</a>
+                <a href="https://novemberrain1108.wordpress.com/profile/" target="_blank">Website</a>
+              </div>
+            </td>
+            <td class="alumni-pos-cell">
+              <p class="alumni-pos-title">Associate Professor</p>
+              <p class="alumni-pos-org">Dept. of Psychology<br>Nihon Joshi University</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="alumni-yr">2012</td>
+            <td>
+              <p class="alumni-name-en">Fuyuko Izawa</p>
+              <p class="alumni-name-jp">伊澤 冬子</p>
+              <p class="alumni-inst">Sophia University · PhD in Psychology</p>
+              <div class="alumni-links"></div>
+            </td>
+            <td class="alumni-pos-cell"><p class="alumni-pos-title">—</p></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    {newsItems.map((n: any) => (
-      <div class="news-item" data-tag={n.tag}>
-        <span class="news-date">{n.date}</span>
-        <span class="news-text">
-          <span class={`news-tag ${n.tag}`}>{n.tag === 'award' ? '受賞' : n.tag === 'jsps' ? '学振' : 'グラント'}</span>
-          <span set:html={n.text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')}></span>
-          {n.url && <> <a href={n.url} target="_blank">→ 詳細</a></>}
-        </span>
+
+    <!-- Master's Alumni -->
+    <div class="ma-alumni-section">
+      <p class="ma-alumni-section-label">Master's Alumni</p>
+      <table class="ma-table">
+        <thead>
+          <tr>
+            <th style="width:64px;">Year</th>
+            <th style="width:200px;">Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="ma-yr">2025</td><td class="ma-name-en">Hinako Sasagawa</td><td class="ma-name-jp">笹川 陽奈子</td></tr>
+          <tr><td class="ma-yr">2025</td><td class="ma-name-en">Kaito Takenishi</td><td class="ma-name-jp">竹西 海人</td></tr>
+          <tr><td class="ma-yr">2024</td><td class="ma-name-en">Chinatsu Sano</td><td class="ma-name-jp">佐野 千夏</td></tr>
+          <tr><td class="ma-yr">2022</td><td class="ma-name-en">Sae Abe</td><td class="ma-name-jp">阿部 紗采</td></tr>
+          <tr><td class="ma-yr">2022</td><td class="ma-name-en">Hiroyuki Yoshitomi</td><td class="ma-name-jp">𠮷富 広之</td></tr>
+          <tr><td class="ma-yr">2021</td><td class="ma-name-en">Yuta Kido</td><td class="ma-name-jp">貴堂 雄太</td></tr>
+          <tr><td class="ma-yr">2021</td><td class="ma-name-en">Shun Watanabe</td><td class="ma-name-jp">渡辺 舜</td></tr>
+          <tr><td class="ma-yr">2020</td><td class="ma-name-en">Taiju Yukihira</td><td class="ma-name-jp">行平 大樹</td></tr>
+          <tr><td class="ma-yr">2019</td><td class="ma-name-en">Shogo Homma</td><td class="ma-name-jp">本間 祥吾</td></tr>
+          <tr><td class="ma-yr">2019</td><td class="ma-name-en">Seiya Nakata</td><td class="ma-name-jp">中田 星矢</td></tr>
+          <tr><td class="ma-yr">2017</td><td class="ma-name-en">Toshimasa Kita</td><td class="ma-name-jp">喜多 敏正</td></tr>
+          <tr><td class="ma-yr">2016</td><td class="ma-name-en">Kei Oie</td><td class="ma-name-jp">大家 慧</td></tr>
+          <tr><td class="ma-yr">2014</td><td class="ma-name-en">Masaki Suyama</td><td class="ma-name-jp">須山 巨基</td></tr>
+          <tr><td class="ma-yr">2014</td><td class="ma-name-en">Keishiro Kamura</td><td class="ma-name-jp">加村 圭史朗</td></tr>
+          <tr><td class="ma-yr">2013</td><td class="ma-name-en">Arisa Miura</td><td class="ma-name-jp">三浦 亜利紗</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /alumni -->
+
+  <!-- ══════════════════════════════════════
+       THESES
+  ══════════════════════════════════════ -->
+  <div id="tab-theses" class="tab-panel">
+    <div class="thesis-section">
+      <p class="thesis-section-label">Student Theses</p>
+      <div class="thesis-tabs">
+        <button class="thesis-subtab active" onclick="switchSubTab('phd',this)">Dissertations</button>
+        <button class="thesis-subtab" onclick="switchSubTab('ma',this)">Master's Theses</button>
+        <button class="thesis-subtab" onclick="switchSubTab('ba',this)">Bachelor's Theses</button>
       </div>
-    ))}
+
+      <!-- ── PhD DISSERTATIONS ── -->
+      <div id="subtab-phd" class="thesis-subpanel active">
+
+        <div class="thesis-year-heading first">2025</div>
+        <div class="thesis-item">
+          <span class="thesis-deg phd">PhD</span>
+          <div>
+            <p class="thesis-title">協力と罰の共進化：罰に対する感受性を中心とした理論的および実証的研究</p>
+            <p class="thesis-author">土田 修平</p>
+            <p class="thesis-pos">Hokkaido University · PhD in Human Sciences</p>
+          </div>
+        </div>
+        <div class="thesis-item">
+          <span class="thesis-deg phd">PhD</span>
+          <div>
+            <p class="thesis-title">協力及びその文化差の起源を探る―文化的集団淘汰理論に基づく理論・実証的検討― <span style="font-size:12px;font-style:normal;color:var(--gray-mid);">[Written in English]</span></p>
+            <p class="thesis-author">貴堂 雄太</p>
+            <p class="thesis-pos">Hokkaido University · PhD in Human Sciences</p>
+          </div>
+        </div>
+
+        <div class="thesis-year-heading">2024</div>
+        <div class="thesis-item">
+          <span class="thesis-deg phd">PhD</span>
+          <div>
+            <p class="thesis-title">進化・学習・規範：強化学習の計算論モデルによる検討</p>
+            <p class="thesis-author">本間 祥吾</p>
+            <p class="thesis-pos">Hokkaido University · PhD in Human Sciences</p>
+          </div>
+        </div>
+
+        <div class="thesis-year-heading">2023</div>
+        <div class="thesis-item">
+          <span class="thesis-deg phd">PhD</span>
+          <div>
+            <p class="thesis-title">累積的文化進化のメカニズム：階層性、語順規則、技術に注目して</p>
+            <p class="thesis-author">中田 星矢</p>
+            <p class="thesis-pos">Hokkaido University · PhD in Human Sciences</p>
+          </div>
+        </div>
+
+        <div class="thesis-year-heading">2019</div>
+        <div class="thesis-item">
+          <span class="thesis-deg phd">PhD</span>
+          <div>
+            <p class="thesis-title">累積的文化進化における文化アトラクターの影響：実験室実験を通じた網羅的検討</p>
+            <p class="thesis-author">須山 巨基</p>
+            <p class="thesis-pos">Hokkaido University · PhD in Literature</p>
+          </div>
+        </div>
+
+        <div class="thesis-year-heading">2017</div>
+        <div class="thesis-item">
+          <span class="thesis-deg phd">PhD</span>
+          <div>
+            <p class="thesis-title">多数決と集合知 : 認識論的民主主義に対する行動科学的アプローチ</p>
+            <p class="thesis-author">中分 遥</p>
+            <p class="thesis-pos">Hokkaido University · PhD in Literature</p>
+          </div>
+        </div>
+
+        <div class="thesis-year-heading">2012</div>
+        <div class="thesis-item">
+          <span class="thesis-deg phd">PhD</span>
+          <div>
+            <p class="thesis-title">自己と他者のつながりとは何か? : 自己表象-他者表象のネットワーク・モデルの批判的検討</p>
+            <p class="thesis-author">石井 辰典</p>
+            <p class="thesis-pos">Sophia University · PhD in Psychology</p>
+          </div>
+        </div>
+        <div class="thesis-item">
+          <span class="thesis-deg phd">PhD</span>
+          <div>
+            <p class="thesis-title">楽観性から主観的ウェル・ビーイングへと至る道 : 2つの楽観性の影響プロセスの解明</p>
+            <p class="thesis-author">伊澤 冬子</p>
+            <p class="thesis-pos">Sophia University · PhD in Psychology</p>
+          </div>
+        </div>
+
+      </div><!-- /subtab-phd -->
+
+      <!-- ── MASTER'S ── -->
+      <div id="subtab-ma" class="thesis-subpanel">
+        <div class="thesis-year-heading first">2025</div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">規範遵守のメカニズム：強化学習モデルを用いた探索的シミュレーションによる検討</p><p class="thesis-author">笹川 陽奈子</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">全員一致による話し合いの集合知 ―確信度の重みづけ集約に基づく理論・実証的検討―</p><p class="thesis-author">竹西 海人</p></div></div>
+        <div class="thesis-year-heading">2024</div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">斜行伝達による非適応的文化進化：シミュレーションによる生起条件の検討</p><p class="thesis-author">佐野 千夏</p></div></div>
+        <div class="thesis-year-heading">2022</div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">集団に有益な規範の文化進化：計算論モデルによる検討</p><p class="thesis-author">阿部 紗采</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">偏狭な利他主義において見られる戦争均衡と平和均衡間の遷移現象に対するパラメータの影響の検討</p><p class="thesis-author">𠮷富 広之</p></div></div>
+        <div class="thesis-year-heading">2021</div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">規範内面化学習と協力行動の共進化：文化的集団淘汰に基づく理論的検討</p><p class="thesis-author">貴堂 雄太</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">強化学習エージェントの学習精度と環境変動への適応に関する理論的検証：モデルベース学習とモデルフリー学習の比較</p><p class="thesis-author">渡辺 舜</p></div></div>
+        <div class="thesis-year-heading">2020</div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">ゴルトン問題へのベイズ統計とモデル比較の観点からのアプローチ―環境の厳しさと規範の厳格さを事例とした検討―</p><p class="thesis-author">行平 大樹</p></div></div>
+        <div class="thesis-year-heading">2019</div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">リスク下における適応的な強化学習の進化：進化シミュレーションによる理論的検討</p><p class="thesis-author">本間 祥吾</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">教育が技術の累積的進化を促すメカニズム：計算論モデルを用いた理論的検討</p><p class="thesis-author">中田 星矢</p></div></div>
+        <div class="thesis-year-heading">2017</div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">言語と規範の帰納的学習において認知的バイアスがもつ機能―統計的推論の観点から―</p><p class="thesis-author">喜多 敏正</p></div></div>
+        <div class="thesis-year-heading">2016</div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">一般的信頼の醸成課程について：裏切り嫌悪による影響の検討</p><p class="thesis-author">大家 慧</p></div></div>
+        <div class="thesis-year-heading">2014</div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">The Emergence of Technological Structure: The Effects of Learnability and Functionality in the Evolution of Technology</p><p class="thesis-author">須山 巨基</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">恩送りにおける信念と実在—実験的検討</p><p class="thesis-author">加村 圭史朗</p></div></div>
+        <div class="thesis-year-heading">2013</div>
+        <div class="thesis-item"><span class="thesis-deg ma">M.A.</span><div><p class="thesis-title">他者の裏切りを恐れる心：信頼行動の感情基盤の検討</p><p class="thesis-author">三浦 亜利紗</p></div></div>
+      </div><!-- /subtab-ma -->
+
+      <!-- ── BACHELOR'S ── -->
+      <div id="subtab-ba" class="thesis-subpanel">
+        <div class="thesis-year-heading first">2025</div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">規範内面化メカニズムの識別：ベイジアン統計モデリングを用いた検討</p><p class="thesis-author">平澤 若菜</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">不完全伝達による累積的文化進化の促進：個人差のある環境での理論的検討</p><p class="thesis-author">蝦名 心之亮</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">文化的集団淘汰における多様性の影響：成功者模倣と選択的移住の比較を通して</p><p class="thesis-author">山田 涼生</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">日本におけるポピュラー音楽（1968〜2024）の進化 ―機械学習による音響特徴量の解析―</p><p class="thesis-author">中澤 禅</p></div></div>
+        <div class="thesis-year-heading">2024</div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">罰は平等を取り戻すための道具か：強化学習エージェントの進化シミュレーション</p><p class="thesis-author">瀬川 弘毅</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">文化的集団淘汰のメカニズム：成功者模倣の視点から</p><p class="thesis-author">鈴木 誠哲</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">文化的集団淘汰における選択的移住の役割：協力の進化を促すメカニズム</p><p class="thesis-author">前川 浩輝</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">一般的信頼の学習に社会的統計構造が与える影響：階層ベイズ認知モデルによる検討</p><p class="thesis-author">齋藤 悠輔</p></div></div>
+        <div class="thesis-year-heading">2023</div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">社会的ネットワークにおける多数派同調の進化：エージェントベースシミュレーションによる検討</p><p class="thesis-author">熊谷 彩花</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">教育が技術の累積的進化に与える影響：実験による探索的検討</p><p class="thesis-author">熊谷 龍之介</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">規範心理再訪：強化学習モデルによる探索的検討</p><p class="thesis-author">笹川 陽奈子</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">公共財問題ゲームにおける協力行動の計算論モデルによる検討</p><p class="thesis-author">石川 凱斗</p></div></div>
+        <div class="thesis-year-heading">2022</div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">成功者模倣による協力の拡がり：実験による検討</p><p class="thesis-author">折懸 海輝</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">根本的帰属の錯誤の合理性：ベイズ計算論モデルによる検討</p><p class="thesis-author">宮崎 燎</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">道徳的宗教の文化進化と協力の発生：数理モデルによる検討</p><p class="thesis-author">小宮 義史</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">斜行伝達の適応進化：遺伝子と文化の共進化理論に基づく検討</p><p class="thesis-author">佐野 千夏</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">名声追求による非適応的文化進化：エージェントシミュレーションによる検討</p><p class="thesis-author">青木 寛</p></div></div>
+        <div class="thesis-year-heading">2021</div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">協力集団模倣についての実験的検討</p><p class="thesis-author">山下 笑</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">協力行動と機能的MRSで測定された神経伝達物質の関連についての探索的研究</p><p class="thesis-author">大畠 颯悟</p></div></div>
+        <div class="thesis-year-heading">2020</div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">集団に有益な戦略の進化：文化的集団淘汰の実験的検討</p><p class="thesis-author">阿部 紗采</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">血縁を超えた大規模な協力の発生：概念的な検討</p><p class="thesis-author">若林 迪佳</p></div></div>
+        <div class="thesis-year-heading">2019</div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">協力の進化と文化的集団淘汰：集団間の伝達を想定したゲームによる実験的検証</p><p class="thesis-author">牧野 琴美</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">階層構造の文化進化：サイモンゲームを用いた実験的検討</p><p class="thesis-author">森 瑞希</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">モデルベース学習の進化的基盤：多段階意思決定課題を用いたコンピュータ・シミュレーション</p><p class="thesis-author">渡辺 舜</p></div></div>
+        <div class="thesis-year-heading">2018</div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">罰に対する感受性が協力行動の進化に与える影響：エージェントベースシミュレーションを用いた検討</p><p class="thesis-author">飯塚 光樹</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">群淘汰による協力の進化：空間構造の影響に関するコンピューターシミュレーション</p><p class="thesis-author">宮﨑 秀</p></div></div>
+        <div class="thesis-year-heading">2017</div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">文化進化に伝達モードは影響するか？：魚釣りゲームを用いた実験的検討</p><p class="thesis-author">清水 佳奈</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">芸術における累積的文化進化の検討；絵画の美しさはどのように決まるのか？</p><p class="thesis-author">千坂 優希</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">サンクション状況下における協力行動：強化学習に基づいた個人差の実験的検討</p><p class="thesis-author">中島 彩花</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">利他的行動を促進する規範の進化：遺伝子と文化の共進化モデルに基づく理論的検討</p><p class="thesis-author">七崎 航</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">科学的発見と累積的文化進化：実験的検討</p><p class="thesis-author">片山 沙苗</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">罰学習による規範の内面化の再解釈：強化学習モデルによる実験的検討</p><p class="thesis-author">本間 祥吾</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">教育が累積的文化進化に与える影響：コンピュータシミュレーションを用いた検討</p><p class="thesis-author">中田 星矢</p></div></div>
+        <div class="thesis-year-heading">2016</div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">物語の系統樹を再現する：記憶に基づく物語伝播を例にして</p><p class="thesis-author">伊藤 早紀</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">技術の発展における伝達モードの影響：魚釣りゲームによる実験検討</p><p class="thesis-author">海野 蓉子</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">長期間の公共財ゲームにおける金銭罰と象徴罰の効果</p><p class="thesis-author">菊地 大星</p></div></div>
+        <div class="thesis-year-heading">2015</div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">信頼はどのように獲得されるのか：信頼の汎化過程に関する研究</p><p class="thesis-author">下神田 茜</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">知識の伝達が科学的発見に及ぼす影響の検討</p><p class="thesis-author">木下 瞳</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">集合知はもっとも有能な人物よりも優れた成績を収めるのか：多属性型選択課題を用いた検討</p><p class="thesis-author">小山 創史</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">討論は集団の合理性を高めるのか？―Discursive dilemma 状況における実験的検討―</p><p class="thesis-author">山田 秋澄</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">帰納的推論としての規範の獲得―生成モデル・識別モデルを用いた実証的検討―</p><p class="thesis-author">喜多 敏正</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">科学的発見領域における伝達の影響についての実験的検討</p><p class="thesis-author">笹川 采佳</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">受けた大恩は恩送りに発展するのか―場面想定法を用いた実験的検討</p><p class="thesis-author">小松 遼貴</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">集合的評価の精度を生み出す計算アルゴリズムの実験的検討</p><p class="thesis-author">肥沼 加那子</p></div></div>
+        <div class="thesis-year-heading">2014</div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">善意と悪意のペイ・フォワードに関する研究：実験的検討</p><p class="thesis-author">熊谷 迪</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">動作の同期と自動模倣―じゃんけんを用いた実験的検討―</p><p class="thesis-author">仲鉢 梨加</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">善意の連鎖―恩送り―は存在するのか：実験ゲームを用いた検討</p><p class="thesis-author">小渕 真理</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">間接互恵性が印象に及ぼす影響</p><p class="thesis-author">加藤 千尋</p></div></div>
+        <div class="thesis-item"><span class="thesis-deg ba">B.A.</span><div><p class="thesis-title">人はいつ神さまのせいにするのか？：想起法を用いた実験的検討</p><p class="thesis-author">前井 のどか</p></div></div>
+      </div><!-- /subtab-ba -->
+
+    </div>
+  </div><!-- /theses -->
+
+  <!-- ══════════════════════════════════════
+       LAB NEWS
+  ══════════════════════════════════════ -->
+  <div id="tab-news" class="tab-panel">
+    <div class="news-section">
+      <p class="thesis-section-label">Lab News</p>
+      <p class="news-note"><em style="font-size:12px;color:var(--gray-mid);">This section is in Japanese. For English, please use your browser's translation feature (e.g. Chrome: right-click → "Translate to English").</em></p>
+
+      <div class="news-filters">
+        <button class="news-filter-btn active" onclick="filterNews('all',this)">すべて</button>
+        <button class="news-filter-btn" onclick="filterNews('award',this)">受賞</button>
+        <button class="news-filter-btn" onclick="filterNews('jsps',this)">学振</button>
+        <button class="news-filter-btn" onclick="filterNews('grant',this)">グラント</button>
+      </div>
+
+      <ul class="news-list">
+
+        <li class="news-item" data-tags="jsps">
+          <span class="news-date">2026年4月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag jsps">学振</span></div>
+            <p class="news-body"><strong>竹西海人</strong>が、日本学術振興会<strong>特別研究員DC1</strong>に採用。</p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="jsps">
+          <span class="news-date">2025年4月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag jsps">学振</span></div>
+            <p class="news-body"><strong>貴堂雄太</strong>が、日本学術振興会<strong>特別研究員PD</strong>に採用（受け入れ教員：大坪庸介、東京大学）。</p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="jsps">
+          <span class="news-date">2022年4月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag jsps">学振</span></div>
+            <p class="news-body"><strong>本間祥吾</strong>が、日本学術振興会<strong>特別研究員DC2</strong>に採用。</p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="jsps">
+          <span class="news-date">2022年4月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag jsps">学振</span></div>
+            <p class="news-body"><strong>貴堂雄太</strong>が、日本学術振興会<strong>特別研究員DC1</strong>に採用。</p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="jsps">
+          <span class="news-date">2020年4月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag jsps">学振</span></div>
+            <p class="news-body"><strong>中田星矢</strong>が、日本学術振興会<strong>特別研究員DC1</strong>に採用。</p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="jsps">
+          <span class="news-date">2015年4月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag jsps">学振</span></div>
+            <p class="news-body"><strong>須山巨基</strong>が、日本学術振興会<strong>特別研究員DC1</strong>に採用。</p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="jsps">
+          <span class="news-date">2014年4月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag jsps">学振</span></div>
+            <p class="news-body"><strong>中分遥</strong>が、日本学術振興会<strong>特別研究員DC2</strong>に採用。</p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2025年12月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">修士課程1年の<strong>齋藤悠輔</strong>が、日本人間行動進化学会第18回大会において<strong>若手発表賞</strong>を受賞。<a href="https://www.let.hokudai.ac.jp/news/27866" target="_blank">詳細→</a></p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2025年2月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">修士課程1年の<strong>竹西海人</strong>が、2024年度日本社会心理学会<strong>若手研究者奨励賞</strong>を受賞。<a href="https://www.let.hokudai.ac.jp/news/26227" target="_blank">詳細→</a></p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2024年12月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">修士課程1年の<strong>竹西海人</strong>が、日本人間行動進化学会第17回大会において<strong>若手発表賞（ポスター部門）</strong>を受賞。<a href="https://www.let.hokudai.ac.jp/news/25842" target="_blank">詳細→</a></p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2022年9月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">博士後期課程1年の<strong>貴堂雄太</strong>が、第68回日本グループ・ダイナミックス学会において<strong>優秀学会発表賞</strong>を受賞。<a href="https://www.let.hokudai.ac.jp/news/20214" target="_blank">詳細→</a></p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2021年12月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">博士後期課程2年の<strong>本間祥吾</strong>が<strong>若手発表賞最優秀賞</strong>、同じく博士後期課程2年の<strong>中田星矢</strong>と修士課程2年の<strong>貴堂雄太</strong>が<strong>優秀賞</strong>を、日本人間行動進化学会第14回大会にて受賞。<a href="https://www.let.hokudai.ac.jp/news/18757" target="_blank">詳細→</a></p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2021年9月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">修士課程2年の<strong>貴堂雄太</strong>が、Cultural Evolution Society Conference 2021 において<strong>Conference Prize for Local Student Presentations</strong>を受賞。<a href="https://www.let.hokudai.ac.jp/news/18275" target="_blank">詳細→</a></p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2020年1月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">修士課程2年の<strong>中田星矢</strong>が、2019年度日本社会心理学会<strong>若手研究者奨励賞</strong>を受賞。<a href="https://www.let.hokudai.ac.jp/news/13988" target="_blank">詳細→</a></p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2019年12月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">修士課程2年の<strong>中田星矢</strong>が、日本人間行動進化学会第12回大会において<strong>若手口頭発表賞</strong>を受賞（2年連続）。<a href="https://www.let.hokudai.ac.jp/news/13878" target="_blank">詳細→</a></p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2018年12月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">修士課程1年の<strong>本間祥吾</strong>が、2018年度日本社会心理学会<strong>若手研究者奨励賞</strong>を受賞。<a href="https://www.let.hokudai.ac.jp/news/5699" target="_blank">詳細→</a></p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2018年12月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">修士課程1年の<strong>中田星矢</strong>が、日本人間行動進化学会第11回大会において<strong>若手発表賞（ポスター部門）</strong>を受賞。<a href="https://www.let.hokudai.ac.jp/news/5672" target="_blank">詳細→</a></p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2017年1月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">博士後期課程2年の<strong>土田修平</strong>が、2016年度日本社会心理学会<strong>若手研究者奨励賞</strong>を受賞。<a href="https://www.let.hokudai.ac.jp/news/4947" target="_blank">詳細→</a></p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2016年12月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">博士後期課程2年の<strong>土田修平</strong>が、日本人間行動進化学会第9回大会において<strong>若手奨励賞（口頭発表部門）</strong>を受賞。<a href="https://www.let.hokudai.ac.jp/news/4908" target="_blank">詳細→</a></p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2014年2月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">修士課程1年の<strong>加村圭史朗</strong>と修士課程1年の<strong>須山巨基</strong>が、2013年度日本社会心理学会<strong>若手研究者奨励賞</strong>を受賞。<a href="https://www.let.hokudai.ac.jp/news/6611" target="_blank">詳細→</a></p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2012年12月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">修士課程2年の<strong>中分遥</strong>が、実験社会科学カンファレンスにおいて<strong>若手発表賞</strong>を受賞。</p>
+          </div>
+        </li>
+
+        <li class="news-item" data-tags="award">
+          <span class="news-date">2012年11月</span>
+          <div>
+            <div class="news-tags"><span class="news-tag award">受賞</span></div>
+            <p class="news-body">修士課程2年の<strong>中分遥</strong>が、日本社会心理学会<strong>若手研究者奨励賞</strong>を受賞。</p>
+          </div>
+        </li>
+
+      </ul>
+    </div>
   </div>
-</div>
+
+
+</div><!-- /page-top -->
 
 <script>
-function switchTab(tab: string, btn: HTMLElement) {
-  document.querySelectorAll('.section-tab').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.section-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
-  document.getElementById('tab-' + tab)?.classList.add('active');
 }
-function filterNews(tag: string, btn: HTMLElement) {
-  document.querySelectorAll('.news-btn').forEach(b => b.classList.remove('active'));
+function filterNews(tag, btn) {
+  document.querySelectorAll('.news-filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.news-item').forEach(item => {
-    const el = item as HTMLElement;
-    el.classList.toggle('hidden', tag !== 'all' && el.dataset.tag !== tag);
+    if (tag === 'all') {
+      item.classList.remove('hidden');
+    } else {
+      const tags = (item.dataset.tags || '').split(' ');
+      item.classList.toggle('hidden', !tags.includes(tag));
+    }
   });
+}
+function switchSubTab(id,btn){
+  document.querySelectorAll('.thesis-subpanel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.thesis-subtab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('subtab-'+id).classList.add('active');
+  btn.classList.add('active');
 }
 </script>
 </BaseLayout>
