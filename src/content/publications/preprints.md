@@ -5,14 +5,6 @@
 # ============================================================
 
 preprints:
-  - year: 2026
-    date: "Apr 2026"
-    authors: "Takenishi, K., & Takezawa, M."
-    title: "TBA"
-    server: ""
-    doi: ""
-    role: last
-
   - year: 2025
     date: "May 30, 2025"
     authors: "Suyama, M., Nakawake, Y., & Takezawa, M."

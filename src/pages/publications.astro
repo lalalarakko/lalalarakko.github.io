@@ -88,7 +88,7 @@ const catLabels: Record<string,string> = {all:'All',cooperation:'Cooperation',cu
 .pub-badge.conf{border-color:var(--gray-mid);color:var(--gray-mid);}
 .pub-badge.invited{border-color:var(--accent);color:var(--accent);}
 .pub-badge.last{border-color:var(--gray-light);color:var(--gray-mid);}
-.book-item{display:grid;grid-template-columns:80px 1fr;gap:24px;padding:28px 0;border-bottom:1px solid var(--gray-light);align-items:start;}
+.book-item{padding:28px 0;border-bottom:1px solid var(--gray-light);}
 .book-item:last-child{border-bottom:none;}
 .book-year{font-size:13px;color:var(--gray-mid);}
 .book-title{font-size:15px;font-weight:500;line-height:1.45;margin-bottom:5px;}
@@ -109,7 +109,7 @@ const catLabels: Record<string,string> = {all:'All',cooperation:'Cooperation',cu
   .pub-list{padding:0 20px 40px;}
   .pub-item{grid-template-columns:1fr;gap:8px;}
   .pub-meta{flex-direction:row;align-items:flex-start;}
-  .book-item{grid-template-columns:1fr;}
+
   .rm-notice{padding:32px 20px;}
 }
 </style>
@@ -208,7 +208,6 @@ const catLabels: Record<string,string> = {all:'All',cooperation:'Cooperation',cu
         <div class="year-heading" style={bookYears[0] === year ? 'margin-top:0;' : ''}>{year}</div>
         {booksByYear[year].map((b: any) => (
           <div class="book-item">
-            <div class="book-year">{b.year}</div>
             <div>
               <p class="book-title">{b.title}</p>
               <div class="book-detail">

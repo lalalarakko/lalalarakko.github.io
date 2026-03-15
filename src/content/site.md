@@ -31,5 +31,5 @@ links:
   google_scholar: "https://scholar.google.co.jp/citations?user=xbH6eocAAAAJ"
   orcid: "https://orcid.org/0000-0003-4103-0591"
 
-copyright_year: "2026"
+copyright_year: "2025"
 ---

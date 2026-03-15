@@ -16,7 +16,7 @@ const themes = themesData.themes || [];
 ---
 <BaseLayout title="Research — Masanori Takezawa" activePage="research">
 <style>
-.page-lang-toggle{display:flex;gap:0;border:1px solid var(--black);width:fit-content;margin:0 48px;padding-top:32px;}
+.page-lang-toggle{display:flex;gap:0;border:1px solid var(--black);width:fit-content;}
 .page-lang-btn{font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:9px 20px;background:none;border:none;border-right:1px solid var(--black);cursor:pointer;color:var(--gray-dark);transition:all .2s;}
 .page-lang-btn:last-child{border-right:none;}
 .page-lang-btn.active{background:var(--black);color:var(--white);}
@@ -53,7 +53,7 @@ const themes = themesData.themes || [];
 .theme-num{font-family:var(--serif);font-size:52px;color:var(--gray-light);line-height:1;font-style:italic;margin-top:-8px;}
 .theme-title{font-family:var(--serif);font-size:clamp(20px,2.2vw,28px);font-weight:400;line-height:1.2;margin-bottom:16px;}
 .theme-title-ja{font-family:var(--jp);font-size:clamp(18px,2vw,24px);font-weight:400;line-height:1.4;margin-bottom:16px;}
-.theme-lead{font-size:15px;line-height:1.85;color:var(--gray-dark);font-weight:400;max-width:720px;margin-bottom:0;}
+.theme-lead{font-size:15px !important;line-height:1.9;color:var(--gray-dark);font-weight:400;max-width:720px;margin-bottom:0;}
 .theme-readmore{margin-top:20px;border-top:1px solid var(--gray-light);}
 .theme-toggle{background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-mid);padding:12px 0;display:flex;align-items:center;gap:8px;transition:color .2s;}
 .theme-toggle:hover{color:var(--black);}
@@ -71,10 +71,10 @@ const themes = themesData.themes || [];
 </style>
 
 <!-- PAGE TOP -->
-<div class="page-top">
+<div class="page-top" style="padding-bottom:32px;">
   <p class="page-header-label">Cognition, Culture, and Social Evolution</p>
   <h1 class="page-header-title">Research</h1>
-  <div class="page-lang-toggle" id="lang-toggle-wrap" style="margin-top:28px;">
+  <div class="page-lang-toggle" id="lang-toggle-wrap" style="margin-top:24px;margin-left:0;">
     <button class="page-lang-btn active" onclick="setLang('en',this)">EN</button>
     <button class="page-lang-btn" onclick="setLang('ja',this)">JA</button>
   </div>
