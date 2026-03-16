@@ -10,60 +10,56 @@ function parseFrontmatter(raw: string) {
   return load(match[1]) as Record<string, any>;
 }
 
-const papersData = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/publications/papers.md'), 'utf-8'));
-const preprintsData = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/publications/preprints.md'), 'utf-8'));
-const booksData = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/publications/books.md'), 'utf-8'));
-const miscData = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/publications/misc.md'), 'utf-8'));
+const papersData   = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/publications/papers.md'), 'utf-8'));
+const preprintsData= parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/publications/preprints.md'), 'utf-8'));
+const booksData    = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/publications/books.md'), 'utf-8'));
+const miscData     = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/publications/misc.md'), 'utf-8'));
 
-const papers = papersData.papers || [];
-const preprints = preprintsData.preprints || [];
-const books = booksData.books || [];
-const misc = miscData.misc || [];
+const papers   = papersData.papers   || [];
+const preprints= preprintsData.preprints || [];
+const books    = booksData.books     || [];
+const misc     = miscData.misc       || [];
 
-// Group papers by year
-const papersByYear: Record<number, any[]> = {};
-for (const p of papers) {
-  if (!papersByYear[p.year]) papersByYear[p.year] = [];
-  papersByYear[p.year].push(p);
+function groupByYear(items: any[]) {
+  const d: Record<number, any[]> = {};
+  for (const item of items) {
+    if (!d[item.year]) d[item.year] = [];
+    d[item.year].push(item);
+  }
+  return Object.keys(d).map(Number).sort((a,b) => b-a).map(y => ({ year: y, items: d[y] }));
 }
-const paperYears = Object.keys(papersByYear).map(Number).sort((a,b) => b-a);
 
-// Group books by year
-const booksByYear: Record<number, any[]> = {};
-for (const b of books) {
-  if (!booksByYear[b.year]) booksByYear[b.year] = [];
-  booksByYear[b.year].push(b);
-}
-const bookYears = Object.keys(booksByYear).map(Number).sort((a,b) => b-a);
-
-// Preprints by year
-const preprintsByYear: Record<number, any[]> = {};
-for (const p of preprints) {
-  if (!preprintsByYear[p.year]) preprintsByYear[p.year] = [];
-  preprintsByYear[p.year].push(p);
-}
-const preprintYears = Object.keys(preprintsByYear).map(Number).sort((a,b) => b-a);
-
-// Misc by year
-const miscByYear: Record<number, any[]> = {};
-for (const m of misc) {
-  if (!miscByYear[m.year]) miscByYear[m.year] = [];
-  miscByYear[m.year].push(m);
-}
-const miscYears = Object.keys(miscByYear).map(Number).sort((a,b) => b-a);
+const paperGroups  = groupByYear(papers);
+const preprintGroups= groupByYear(preprints);
+const bookGroups   = groupByYear(books);
+const miscGroups   = groupByYear(misc);
 
 const cats = ['all','cooperation','culture','crowd','misc_tag'];
-const catLabels: Record<string,string> = {all:'All',cooperation:'Cooperation',culture:'Cultural Evolution',crowd:'Wisdom of Crowds',misc_tag:'Misc.'};
+const catLabels: Record<string,string> = {
+  all:'All', cooperation:'Cooperation',
+  culture:'Cultural Evolution', crowd:'Wisdom of Crowds', misc_tag:'Misc.'
+};
+
+function highlightMe(s: string) {
+  return (s || '').replace('Takezawa, M.', '<span class="me">Takezawa, M.</span>');
+}
+function highlightMeJa(s: string) {
+  return (s || '').replace('竹澤正哲', '<span class="me">竹澤正哲</span>');
+}
 ---
 <BaseLayout title="Publications — Masanori Takezawa" activePage="publications">
 <style>
 .page-top{margin-top:var(--nav-h);border-bottom:1px solid var(--black);padding:64px 48px 0;}
-.page-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:0;}
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:0;}
+.page-lang-toggle{display:flex;gap:0;border:1px solid var(--black);width:fit-content;margin-bottom:8px;}
+.page-lang-btn{font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:9px 20px;background:none;border:none;border-right:1px solid var(--black);cursor:pointer;color:var(--gray-dark);transition:all .2s;}
+.page-lang-btn:last-child{border-right:none;}
+.page-lang-btn.active{background:var(--black);color:var(--white);}
 .section-tabs{display:flex;border-bottom:1px solid var(--black);}
 .section-tab{padding:20px 48px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:none;background:none;font-family:var(--sans);color:var(--gray-dark);border-bottom:3px solid transparent;margin-bottom:-1px;transition:all .2s;white-space:nowrap;}
 .section-tab.active{color:var(--black);border-bottom-color:var(--black);}
 .section-tab:hover:not(.active){color:var(--black);}
-.tab-panel{display:none;} .tab-panel.active{display:block;}
+.tab-panel{display:none;}.tab-panel.active{display:block;}
 .toolbar{padding:20px 48px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--gray-light);}
 .filter-group{display:flex;gap:0;border:1px solid var(--black);}
 .filter-btn{padding:9px 20px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;background:none;border:none;border-right:1px solid var(--black);cursor:pointer;color:var(--gray-dark);transition:all .2s;font-family:var(--sans);}
@@ -80,36 +76,44 @@ const catLabels: Record<string,string> = {all:'All',cooperation:'Cooperation',cu
 .pub-authors .me{font-weight:500;color:var(--black);}
 .pub-journal{font-size:13px;color:var(--gray-mid);font-style:italic;}
 .pub-links{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:6px;}
-.pub-doi{font-size:12px;color:var(--accent);text-decoration:none;display:inline-block;letter-spacing:.03em;}
+.pub-doi{font-size:12px;color:var(--accent);text-decoration:none;letter-spacing:.03em;}
 .pub-doi:hover{text-decoration:underline;}
 .pub-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;padding-top:4px;}
 .pub-badge{font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px solid;white-space:nowrap;}
 .pub-badge.peer{border-color:var(--black);color:var(--black);}
-.pub-badge.conf{border-color:var(--gray-mid);color:var(--gray-mid);}
 .pub-badge.invited{border-color:var(--accent);color:var(--accent);}
 .pub-badge.last{border-color:var(--gray-light);color:var(--gray-mid);}
-.book-item{padding:28px 0;border-bottom:1px solid var(--gray-light);}
+.pub-badge.jp{border-color:var(--gray-mid);color:var(--gray-mid);}
+.book-item{display:grid;grid-template-columns:1fr 180px;gap:20px 28px;padding:28px 0;border-bottom:1px solid var(--gray-light);align-items:start;}
 .book-item:last-child{border-bottom:none;}
-.book-year{font-size:13px;color:var(--gray-mid);}
 .book-title{font-size:15px;font-weight:500;line-height:1.45;margin-bottom:5px;}
-.book-detail{font-size:13px;color:var(--gray-dark);font-weight:400;line-height:1.7;}
+.book-detail{font-size:13px;color:var(--gray-dark);font-weight:400;line-height:1.8;}
 .book-detail em{font-style:italic;}
+.book-detail .pub-doi{font-size:12px;}
 .rm-notice{padding:40px 48px;border-top:1px solid var(--black);display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
 .rm-notice p{font-size:14px;color:var(--gray-dark);font-weight:400;line-height:1.7;max-width:640px;}
 .rm-btn{font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--black);border:1px solid var(--black);padding:10px 20px;white-space:nowrap;transition:all .2s;}
 .rm-btn:hover{background:var(--black);color:var(--white);}
+/* JA typography */
+.ja-text{font-family:var(--jp);font-size:13px;line-height:1.7;}
+.ja-title{font-family:var(--jp);font-size:15px;font-weight:500;line-height:1.45;}
+/* lang switching */
+.lang-ja .pub-content-en{display:none;}
+.lang-ja .pub-content-ja{display:block;}
+.pub-content-ja{display:none;}
+.pub-content-en{display:block;}
 @media(max-width:900px){
   .page-top{padding:48px 20px 0;}
-  .section-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x;scrollbar-width:none;}
+  .section-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
   .section-tabs::-webkit-scrollbar{display:none;}
   .section-tab{padding:14px 20px;font-size:12px;}
-  .toolbar{padding:12px 20px;flex-wrap:wrap;gap:6px;}
-  .filter-group{overflow-x:auto;touch-action:pan-x;scrollbar-width:none;flex-wrap:nowrap;}
+  .toolbar{padding:12px 20px;flex-wrap:wrap;}
+  .filter-group{overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap;}
   .filter-btn{padding:6px 10px;font-size:11px;}
   .pub-list{padding:0 20px 40px;}
   .pub-item{grid-template-columns:1fr;gap:8px;}
+  .book-item{grid-template-columns:1fr;}
   .pub-meta{flex-direction:row;align-items:flex-start;}
-
   .rm-notice{padding:32px 20px;}
 }
 </style>
@@ -119,6 +123,10 @@ const catLabels: Record<string,string> = {all:'All',cooperation:'Cooperation',cu
     <div>
       <p class="page-header-label">Academic Output</p>
       <h1 class="page-header-title">Publications</h1>
+    </div>
+    <div class="page-lang-toggle">
+      <button class="page-lang-btn active" id="pub-lang-en" onclick="setPubLang('en')">EN</button>
+      <button class="page-lang-btn" id="pub-lang-ja" onclick="setPubLang('ja')">JA</button>
     </div>
   </div>
   <div class="section-tabs">
@@ -142,15 +150,24 @@ const catLabels: Record<string,string> = {all:'All',cooperation:'Cooperation',cu
     </div>
   </div>
   <div class="pub-list" id="pub-list">
-    {paperYears.map(year => (
+    {paperGroups.map(({ year, items }) => (
       <>
         <div class="year-heading">{year}</div>
-        {papersByYear[year].map((p: any) => (
+        {items.map((p: any) => (
           <div class="pub-item" data-cat={p.cat || ''}>
             <div>
-              <p class="pub-title">{p.title}</p>
-              <p class="pub-authors" set:html={p.authors.replace('Takezawa, M.', '<span class="me">Takezawa, M.</span>')}></p>
-              <p class="pub-journal">{p.journal}</p>
+              <!-- EN -->
+              <div class="pub-content-en">
+                <p class="pub-title">{p.title_en}</p>
+                <p class="pub-authors" set:html={highlightMe(p.authors_en)}></p>
+                <p class="pub-journal">{p.journal_en}</p>
+              </div>
+              <!-- JA -->
+              <div class="pub-content-ja">
+                <p class="pub-title ja-title">{p.title_ja || p.title_en}</p>
+                <p class="pub-authors" set:html={highlightMe(p.authors_en)}></p>
+                <p class="pub-journal">{p.journal_ja || p.journal_en}</p>
+              </div>
               {p.doi && (
                 <div class="pub-links">
                   <a class="pub-doi" href={`https://doi.org/${p.doi}`} target="_blank">DOI: {p.doi}</a>
@@ -158,12 +175,12 @@ const catLabels: Record<string,string> = {all:'All',cooperation:'Cooperation',cu
               )}
             </div>
             <div class="pub-meta">
-              {p.badge_peer !== false && <span class="pub-badge peer">Peer Reviewed</span>}
-              {p.badge_conf && <span class="pub-badge conf">Proceedings</span>}
+              <span class="pub-badge peer">Peer Reviewed</span>
               {p.badge_invited && <span class="pub-badge invited">Invited</span>}
-              {p.role === 'lead' && <span class="pub-badge last">Lead Author</span>}
               {p.role === 'last' && <span class="pub-badge last">Last Author</span>}
               {p.role === 'corresponding' && <span class="pub-badge last">Corresponding</span>}
+              {p.badge_corresponding && <span class="pub-badge last">Corresponding</span>}
+              {p.title_ja && <span class="pub-badge jp">In Japanese</span>}
             </div>
           </div>
         ))}
@@ -175,15 +192,22 @@ const catLabels: Record<string,string> = {all:'All',cooperation:'Cooperation',cu
 <!-- PREPRINTS TAB -->
 <div id="tab-preprints" class="tab-panel">
   <div class="pub-list" style="padding-top:40px;">
-    {preprintYears.map(year => (
+    {preprintGroups.map(({ year, items }) => (
       <>
         <div class="year-heading" style="margin-top:0;">{year}</div>
-        {preprintsByYear[year].map((p: any) => (
-          <div class="pub-item" data-cat="">
+        {items.map((p: any) => (
+          <div class="pub-item">
             <div>
-              <p class="pub-title">{p.title}</p>
-              <p class="pub-authors" set:html={p.authors.replace('Takezawa, M.', '<span class="me">Takezawa, M.</span>')}></p>
-              <p class="pub-journal">{p.server}{p.date ? `, ${p.date}` : ''}</p>
+              <div class="pub-content-en">
+                <p class="pub-title">{p.title_en}</p>
+                <p class="pub-authors" set:html={highlightMe(p.authors_en)}></p>
+                <p class="pub-journal">{p.server}{p.date ? `, ${p.date}` : ''}</p>
+              </div>
+              <div class="pub-content-ja">
+                <p class="pub-title ja-title">{p.title_ja || p.title_en}</p>
+                <p class="pub-authors" set:html={highlightMe(p.authors_en)}></p>
+                <p class="pub-journal">{p.server}{p.date ? `, ${p.date}` : ''}</p>
+              </div>
               {p.doi && (
                 <div class="pub-links">
                   <a class="pub-doi" href={`https://doi.org/${p.doi}`} target="_blank">DOI: {p.doi}</a>
@@ -203,18 +227,45 @@ const catLabels: Record<string,string> = {all:'All',cooperation:'Cooperation',cu
 <!-- BOOKS TAB -->
 <div id="tab-books" class="tab-panel">
   <div class="pub-list" style="padding-top:40px;">
-    {bookYears.map(year => (
+    {bookGroups.map(({ year, items }) => (
       <>
-        <div class="year-heading" style={bookYears[0] === year ? 'margin-top:0;' : ''}>{year}</div>
-        {booksByYear[year].map((b: any) => (
+        <div class="year-heading" style="margin-top:0;">{year}</div>
+        {items.map((b: any) => (
           <div class="book-item">
+            <!-- col 1: content (EN or JA) -->
             <div>
-              <p class="book-title">{b.title}</p>
-              <div class="book-detail">
-                <p>{b.authors}</p>
-                {b.book && <p>In <em>{b.book}</em>{b.editors ? `, ${b.editors}` : ''}</p>}
-                <p>{b.publisher}{b.note ? `. ${b.note}` : ''}</p>
+              <div class="pub-content-en">
+                <p class="book-title">{b.chapter_en || b.book_en}</p>
+                <div class="book-detail">
+                  <p>{b.authors_en}</p>
+                  {b.chapter_en && b.book_en && (
+                    <p>In {b.editors_en ? `${b.editors_en}, ` : ''}<em>{b.book_en}</em>{b.pages ? ` (pp. ${b.pages})` : ''}. {b.publisher_en}.</p>
+                  )}
+                  {!b.chapter_en && b.publisher_en && <p>{b.publisher_en}.</p>}
+                  {b.doi && <p><a class="pub-doi" href={`https://doi.org/${b.doi}`} target="_blank">DOI: {b.doi}</a></p>}
+                  {b.isbn && !b.doi && <p style="font-size:12px;color:var(--gray-mid);">ISBN: {b.isbn}</p>}
+                  {b.reprint_note && <p style="font-size:12px;color:var(--gray-mid);font-style:italic;">{b.reprint_note}</p>}
+                </div>
               </div>
+              <div class="pub-content-ja">
+                <p class="book-title ja-title">{b.chapter_ja || b.chapter_en || b.book_ja || b.book_en}</p>
+                <div class="book-detail ja-text">
+                  <p>{b.authors_ja || b.authors_en}</p>
+                  {(b.chapter_ja || b.chapter_en) && (b.book_ja || b.book_en) && (
+                    <p>{b.editors_ja ? `${b.editors_ja}` : ''}{b.editors_ja ? '、' : ''}<em>{b.book_ja || b.book_en}</em>{b.pages ? `（pp. ${b.pages}）` : ''}。{b.publisher_ja || b.publisher_en}。</p>
+                  )}
+                  {!(b.chapter_ja || b.chapter_en) && (b.publisher_ja || b.publisher_en) && (
+                    <p>{b.publisher_ja || b.publisher_en}。</p>
+                  )}
+                  {b.doi && <p><a class="pub-doi" href={`https://doi.org/${b.doi}`} target="_blank">DOI: {b.doi}</a></p>}
+                  {b.isbn && !b.doi && <p style="font-size:12px;color:var(--gray-mid);">ISBN: {b.isbn}</p>}
+                  {b.reprint_note && <p style="font-size:12px;color:var(--gray-mid);font-style:italic;">{b.reprint_note}</p>}
+                </div>
+              </div>
+            </div>
+            <!-- col 2: badge -->
+            <div class="pub-meta">
+              {b.chapter_ja && <span class="pub-badge jp">In Japanese</span>}
             </div>
           </div>
         ))}
@@ -226,18 +277,31 @@ const catLabels: Record<string,string> = {all:'All',cooperation:'Cooperation',cu
 <!-- MISC TAB -->
 <div id="tab-misc" class="tab-panel">
   <div class="pub-list" style="padding-top:40px;">
-    {miscYears.map(year => (
+    {miscGroups.map(({ year, items }) => (
       <>
-        <div class="year-heading" style={miscYears[0] === year ? 'margin-top:0;' : ''}>{year}</div>
-        {miscByYear[year].map((m: any) => (
-          <div class="pub-item" data-cat="">
+        <div class="year-heading" style="margin-top:0;">{year}</div>
+        {items.map((m: any) => (
+          <div class="pub-item">
             <div>
-              <p class="pub-title">{m.title}</p>
-              <p class="pub-authors" set:html={m.authors.replace('Takezawa, M.', '<span class="me">Takezawa, M.</span>')}></p>
-              <p class="pub-journal">{m.journal}</p>
+              <div class="pub-content-en">
+                <p class="pub-title">{m.title_en}</p>
+                <p class="pub-authors" set:html={highlightMe(m.authors_en || m.authors_ja)}></p>
+                <p class="pub-journal">{m.journal_en}</p>
+              </div>
+              <div class="pub-content-ja">
+                <p class="pub-title ja-title">{m.title_ja || m.title_en}</p>
+                <p class="pub-authors" set:html={highlightMe(m.authors_en)}></p>
+                <p class="pub-journal">{m.journal_ja || m.journal_en}</p>
+              </div>
+              {m.doi && (
+                <div class="pub-links">
+                  <a class="pub-doi" href={`https://doi.org/${m.doi}`} target="_blank">DOI: {m.doi}</a>
+                </div>
+              )}
             </div>
             <div class="pub-meta">
               {m.badge_invited && <span class="pub-badge invited">Invited</span>}
+              {m.title_ja && <span class="pub-badge jp">In Japanese</span>}
             </div>
           </div>
         ))}
@@ -253,26 +317,37 @@ const catLabels: Record<string,string> = {all:'All',cooperation:'Cooperation',cu
 </div>
 
 <script is:inline>
+function setPubLang(lang) {
+  const pubArea = document.getElementById('pub-area');
+  document.getElementById('pub-lang-en').classList.toggle('active', lang === 'en');
+  document.getElementById('pub-lang-ja').classList.toggle('active', lang === 'ja');
+  // Apply to all tab panels
+  document.querySelectorAll('.tab-panel').forEach(panel => {
+    panel.classList.toggle('lang-ja', lang === 'ja');
+  });
+}
+
 function switchTab(tab, btn) {
   document.querySelectorAll('.section-tab').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById('tab-' + tab)?.classList.add('active');
+  const panel = document.getElementById('tab-' + tab);
+  panel?.classList.add('active');
+  // Re-apply current lang to newly activated panel
+  const isJa = document.getElementById('pub-lang-ja')?.classList.contains('active');
+  if (isJa) panel?.classList.add('lang-ja');
   const allBtn = document.querySelector('.filter-btn[onclick*="\'all\'"]');
   if (allBtn) filterPubs('all', allBtn);
 }
+
 function filterPubs(cat, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   const items = document.querySelectorAll('#tab-papers .pub-item');
-  let shown = 0;
   items.forEach(item => {
-    const el = item;
-    const show = cat === 'all' || el.dataset.cat === cat;
-    el.classList.toggle('hidden', !show);
-    if (show) shown++;
+    const show = cat === 'all' || item.dataset.cat === cat;
+    item.classList.toggle('hidden', !show);
   });
-  // Hide empty year headings
   const pubList = document.getElementById('pub-list');
   if (!pubList) return;
   const children = Array.from(pubList.children);

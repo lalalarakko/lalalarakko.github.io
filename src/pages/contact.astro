@@ -1,37 +1,34 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { load } from 'js-yaml';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+function parseFrontmatter(raw: string) {
+  const match = raw.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return {};
+  return load(match[1]) as Record<string, any>;
+}
+
+const contact = parseFrontmatter(readFileSync(join(process.cwd(), 'src/content/contact.md'), 'utf-8'));
+const profiles = contact.profiles || [];
+const addressEnLines = (contact.address_en || '').trim().split('\n');
+const addressJpLines = (contact.address_jp || '').trim().split('\n');
 ---
 <BaseLayout title="Contact — Masanori Takezawa" activePage="contact">
 <style>
-
-
-
-
-
-
-
-
-
-
-
-
-
 .page-top{margin-top:var(--nav-h);}
-
-/* HERO CONTACT BAND */
 .contact-hero{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--black);min-height:340px;}
 .contact-hero-left{padding:64px 48px;border-right:1px solid var(--black);}
 .contact-hero-label{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:14px;}
 .contact-hero-title{font-family:var(--serif);font-size:clamp(40px,5vw,68px);font-weight:400;line-height:1.05;letter-spacing:-.01em;margin-bottom:24px;}
 .contact-hero-desc{font-size:15px;color:var(--gray-dark);font-weight:400;line-height:1.85;max-width:480px;}
-
 .contact-hero-right{padding:64px 48px;display:flex;flex-direction:column;justify-content:center;gap:28px;}
 .contact-block-label{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-mid);margin-bottom:8px;}
 .contact-email{font-family:var(--serif);font-size:22px;color:var(--black);font-style:italic;}
 .contact-address{font-size:15px;color:var(--gray-dark);font-weight:400;line-height:1.9;}
 .contact-address strong{font-weight:500;color:var(--black);}
-
-/* PROFILES GRID */
+.contact-address-jp{font-family:var(--jp);font-size:13px;color:var(--gray-dark);line-height:2.0;margin-top:12px;padding-top:12px;border-top:1px solid var(--gray-light);}
 .profiles-section{padding:64px 48px;border-bottom:1px solid var(--black);}
 .profiles-label{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:36px;}
 .profiles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--black);border:1px solid var(--black);}
@@ -44,90 +41,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .profile-card-link{font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--black);display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid var(--black);padding-bottom:2px;width:fit-content;transition:all .2s;}
 .profile-card-link:hover{color:var(--accent);border-color:var(--accent);}
 .profile-card-link::after{content:'↗';}
-
-/* AFFILIATIONS */
-.affil-section{padding:64px 48px;}
-.affil-label{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:36px;}
-.affil-list{display:flex;flex-direction:column;gap:0;}
-.affil-item{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--gray-light);align-items:center;}
-.affil-item:first-child{padding-top:0;}
-.affil-item:last-child{border-bottom:none;}
-.affil-role{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-mid);}
-.affil-name{font-size:14px;font-weight:400;}
-.affil-name a{color:var(--black);text-decoration:none;border-bottom:1px solid var(--gray-light);transition:border-color .2s;}
-.affil-name a:hover{border-color:var(--black);}
-
-
-
-
-
-
-
-
 @media(max-width:900px){
-  
   .contact-hero{grid-template-columns:1fr;}
   .contact-hero-left{border-right:none;padding:48px 20px;}
   .contact-hero-right{padding:32px 20px;border-top:1px solid var(--black);}
-  .profiles-section,.affil-section{padding:40px 20px;}
+  .profiles-section{padding:40px 20px;}
   .profiles-grid{grid-template-columns:1fr;}
-  .affil-item{grid-template-columns:1fr;gap:4px;}
-  
-  
-  /* Accessibility: larger fonts on mobile */
-  
-  
-  .update-date,.update-text,.cv-entry-title,.cv-entry-place,.cv-entry-note{font-size:15px;}
-  .pub-title{font-size:16px;} .pub-authors,.pub-journal{font-size:14px;}
-  .section-num,.page-header-label,.perspective-label,.themes-num{font-size:13px;}
-  .filter-btn,.pub-badge,.update-tag{font-size:12px;}
-  .hero-affil{font-size:15px;} .hero-research-desc{font-size:15px;}
-  .research-card-desc{font-size:14px;}
-  .footer-links a,
-
 }
-
-/* ── MOBILE NAV ── */
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
-.nav-hamburger span{display:block;width:22px;height:1px;background:var(--black);transition:all .3s;}
-.nav-hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
-.nav-hamburger.open span:nth-child(2){opacity:0;}
-.nav-hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
-@media(max-width:680px){
-  .nav-hamburger{display:flex;}
-  
-  .nav-links.open{display:flex;}
-  .nav-links li{border-bottom:1px solid var(--gray-light);}
-  
-  
-}
-
 </style>
 
 <div class="page-top">
-
   <div class="contact-hero">
     <div class="contact-hero-left">
       <p class="contact-hero-label">Get in Touch</p>
       <h1 class="contact-hero-title">Contact</h1>
-      <p class="contact-hero-desc">I welcome inquiries about research collaboration, graduate admission to the lab, and media or public engagement. </p>
+      <p class="contact-hero-desc">I welcome inquiries about research collaboration, graduate admission to the lab, and media or public engagement.</p>
     </div>
     <div class="contact-hero-right">
       <div>
         <p class="contact-block-label">Email</p>
-        <p class="contact-email">m.takezawa [at] let.hokudai.ac.jp</p>
+        <p class="contact-email">{contact.email}</p>
       </div>
       <div>
         <p class="contact-block-label">Postal Address</p>
-        <p class="contact-address">
-          <strong>Masanori Takezawa</strong><br>
-          Department of Behavioral Science<br>
-          Graduate School of Humanities and Human Sciences<br>
-          Hokkaido University<br>
-          Kita 10, Nishi 7, Kita-ku<br>
-          Sapporo 060-0810, Japan<br><br>
-          <span style="font-family:'Noto Sans JP',sans-serif;font-size:13px;">〒060-0810<br>北海道札幌市北区北10条西7丁目<br>北海道大学大学院文学研究院<br>行動科学研究室<br>竹澤正哲</span>
-        </p>
+        <div class="contact-address">
+          <strong>{addressEnLines[0]}</strong><br/>
+          {addressEnLines.slice(1).map((line: string) => <>{line}<br/></>)}
+        </div>
+        <div class="contact-address-jp">
+          {addressJpLines.map((line: string) => <>{line}<br/></>)}
+        </div>
       </div>
     </div>
   </div>
@@ -135,46 +78,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="profiles-section">
     <p class="profiles-label">Academic Profiles</p>
     <div class="profiles-grid">
-
-      <div class="profile-card">
-        <div>
-          <div class="profile-card-header"><span class="profile-service">ResearchMap</span></div>
-          <p class="profile-card-title">ResearchMap</p>
-          <p class="profile-card-desc">Complete official record of academic output, including all publications, grants, and affiliations — the mandatory Japanese researcher database.</p>
+      {profiles.map((p: any) => (
+        <div class="profile-card">
+          <div>
+            <div class="profile-card-header">
+              <span class="profile-service">{p.service}</span>
+            </div>
+            <p class="profile-card-title">{p.service}</p>
+            <p class="profile-card-desc">{p.description}</p>
+          </div>
+          <a class="profile-card-link" href={p.url} target="_blank">
+            {p.id || 'View Profile'}
+          </a>
         </div>
-        <a class="profile-card-link" href="https://researchmap.jp/lalalarakko?lang=en" target="_blank">researchmap.jp/lalalarakko</a>
-      </div>
-
-      <div class="profile-card">
-        <div>
-          <div class="profile-card-header"><span class="profile-service">Google Scholar</span></div>
-          <p class="profile-card-title">Google Scholar</p>
-          <p class="profile-card-desc">Citation metrics, h-index, and auto-updated list of papers indexed across the web.</p>
-        </div>
-        <a class="profile-card-link" href="https://scholar.google.co.jp/citations?user=xbH6eocAAAAJ&hl=en" target="_blank">View Profile</a>
-      </div>
-
-      <div class="profile-card">
-        <div>
-          <div class="profile-card-header"><span class="profile-service">ORCID</span></div>
-          <p class="profile-card-title">ORCID iD</p>
-          <p class="profile-card-desc">Persistent digital identifier linking research activities and publications across institutions and systems.</p>
-        </div>
-        <a class="profile-card-link" href="http://orcid.org/0000-0003-4103-0591" target="_blank">0000-0003-4103-0591</a>
-      </div>
-
-      <div class="profile-card">
-        <div>
-          <div class="profile-card-header"><span class="profile-service">ResearchGate</span></div>
-          <p class="profile-card-title">ResearchGate</p>
-          <p class="profile-card-desc">Preprints, co-author network, and paper requests for collaboration.</p>
-        </div>
-        <a class="profile-card-link" href="https://www.researchgate.net/profile/Masanori_Takezawa" target="_blank">View Profile</a>
-      </div>
-
+      ))}
     </div>
   </div>
-
-
-</div><!-- /page-top -->
+</div>
 </BaseLayout>

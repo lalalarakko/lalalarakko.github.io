@@ -14,6 +14,8 @@ masters:
   - name_en: "Yusuke Saito"
     name_jp: "齋藤 悠輔"
     year: "M2"
+    researchmap: "https://researchmap.jp/yusuke__saito"
+    website: "https://usk-website.pages.dev/"
 
   - name_en: "Zen Nakazawa"
     name_jp: "中澤 禅"

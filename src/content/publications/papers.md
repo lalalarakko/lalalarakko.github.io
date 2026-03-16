@@ -1,335 +1,391 @@
 ---
-# ============================================================
-# publications/papers.md — 査読済み論文リスト
-# 新しいものを上に追加してください
-# cat: cooperation / culture / crowd / misc_tag（空欄も可）
-# doi: DOIのみ記載（例: 10.1038/s41598-021-99244-0）
-# ============================================================
+# publications/papers.md
+# Source: researchmap 2026-03-17
 
 papers:
   - year: 2025
-    authors: "Kido, Y., & Takezawa, M."
-    title: "Empirical evidence for the spread of cooperation through copying successful groups"
-    journal: "Scientific Reports, 15, 12065, Apr 11, 2025"
-    doi: "10.1038/s41598-025-96399-6"
+    authors_en: 'Kido, Y., & Takezawa, M.'
+    title_en: 'Empirical evidence for the spread of Cooperation through copying successful groups'
+    journal_en: 'Scientific Reports, 15, 22289'
+    authors_ja: 'Yuta Kido・Masanori Takezawa'
+    journal_ja: 'Scientific Reports, 15, 22289'
+    doi: '10.1038/s41598-025-07863-0'
     cat: cooperation
     role: last
+    badge_corresponding: true
 
   - year: 2025
-    authors: "Sano, C., & Takezawa, M."
-    title: "Maladaptive cultural evolution through oblique transmission: a simulation study"
-    journal: "Letters on Evolutionary Behavioral Science, 16(1) 8–13, May 2, 2025"
-    doi: "10.5178/lebs.2025.103"
+    authors_en: 'Sano, C., & Takezawa, M.'
+    title_en: 'Examining the Possibility of Maladaptive Cultural Evolution through Oblique Transmission'
+    journal_en: 'Letters on Evolutionary Behavioral Science, 16(1), 8–13'
+    authors_ja: 'Chinatsu Sano・Masanori Takezawa'
+    journal_ja: 'Letters on Evolutionary Behavioral Science, 16(1), 8–13'
+    doi: '10.5178/lebs.2025.124'
     cat: culture
     role: last
 
   - year: 2025
-    authors: "Mata, J., Knobl, B., & Takezawa, M."
-    title: "Adolescents' and parents' willingness to reduce meat and increase plant-based foods for sustainable family meals"
-    journal: "Appetite, 204, 107715, Jan 1, 2025"
-    doi: "10.1016/j.appet.2024.107715"
-    cat:
-    role: last
+    authors_en: 'Mata, J., Knobl, V., & Takezawa, M.'
+    title_en: 'Exploring the role of adolescents in healthier, more sustainable family meals: A decision study on meat consumption'
+    journal_en: 'Appetite, 107916'
+    doi: '10.1016/j.appet.2025.107916'
+    role: contributor
 
   - year: 2024
-    authors: "Homma, S., Takezawa, M., & Nakawake, Y."
-    title: "Evolution of norm internalization through cultural group selection: An agent-based model"
-    journal: "Journal of Theoretical Biology, 578, 111683, Feb 2024"
-    doi: "10.1016/j.jtbi.2023.111683"
+    authors_en: 'Homma, S., & Takezawa, M.'
+    title_en: 'Risk preference as an outcome of evolutionarily adaptive learning mechanisms: An evolutionary simulation under diverse risky environments'
+    journal_en: 'PLOS ONE, 19(8), e0307991'
+    doi: '10.1371/journal.pone.0307991'
+    role: last
+    badge_corresponding: true
+
+  - year: 2024
+    authors_en: 'Kido, Y., & Takezawa, M.'
+    title_en: 'Coevolution of norm psychology and cooperation through exapted conformity'
+    journal_en: 'Evolutionary Human Sciences, 6, e35'
+    doi: '10.1017/ehs.2024.37'
     cat: cooperation
-    role: corresponding
+    role: last
+    badge_corresponding: true
 
   - year: 2023
-    authors: "Nakata, S., Ohira, I., & Takezawa, M."
-    title: "Micro-macro dynamics of cumulative cultural evolution: an iterated learning study on word-order regularization"
-    journal: "Evolutionary Human Sciences, 5, e28, 2023"
-    doi: "10.1017/ehs.2023.23"
+    authors_en: 'Nakata, S., & Takezawa, M.'
+    title_en: 'Hierarchical structures emerge from the cultural transmission: an iterated learning experiment using a non-linguistic task'
+    journal_en: 'Frontiers in Artificial Intelligence, 6, 1221329'
+    authors_ja: 'Seiya Nakata・Masanori Takezawa'
+    journal_ja: 'Frontiers in Artificial Intelligence, 6, 1221329'
+    doi: '10.3389/frai.2023.1221329'
     cat: culture
     role: last
+    badge_corresponding: true
 
   - year: 2023
-    authors: "Nakawake, Y., & Takezawa, M."
-    title: "Numerical and spatial problem-solving strategies in nonhuman primates and human adults"
-    journal: "Scientific Reports, 13, 17523, Oct 2023"
-    doi: "10.1038/s41598-023-44618-3"
-    cat:
+    authors_en: 'Nakata, S., & Takezawa, M.'
+    title_en: 'Conditions under which faithful cultural transmission through teaching promotes cumulative cultural evolution'
+    journal_en: 'Scientific Reports, 13, 20986'
+    authors_ja: 'Seiya Nakata・Masanori Takezawa'
+    journal_ja: 'Scientific Reports, 13, 20986'
+    doi: '10.1038/s41598-023-47018-7'
+    cat: culture
     role: last
+    badge_corresponding: true
+
+  - year: 2023
+    authors_en: 'Jackson, J., Halberstadt, J., Takezawa, M., Liew, K., Smith, K., Apicella, C., & Gray, K.'
+    title_en: 'Generalized morality culturally evolves as an adaptive heuristic in large social networks.'
+    journal_en: 'Journal of Personality and Social Psychology, 125, 1207–1238'
+    authors_ja: 'Joshua Conrad Jackson・Jamin Halberstad・Masanori Takezawa・Kongmeng Liew・Kristopher Smith・Coren Apicella・Kurt Gray'
+    journal_ja: 'Journal of Personality and Social Psychology, 125, 1207–1238'
+    doi: '10.1037/pspa0000358'
+    role: contributor
 
   - year: 2022
-    authors: "Kido, Y., & Takezawa, M."
-    title: "When does majority rule work? A meta-analysis of experimental studies"
-    journal: "Psychological Review, 129(6), 1290–1315, Nov 2022"
-    doi: "10.1037/rev0000379"
-    cat: crowd
-    role: last
-
-  - year: 2021
-    authors: "Ishii, T., & Takezawa, M."
-    title: "Does social projection promote cooperation? An examination via a Bayesian statistical approach [社会的投影は協力行動を促進するか？ベイズ統計的アプローチによる検討]"
-    journal: "Japanese Journal of Social Psychology (社会心理学研究), 37(1), 12–24, 2021"
-    doi: "10.14966/jssp.1901"
-    cat: cooperation
-    role: last
-
-  - year: 2021
-    authors: "Nakata, S., & Takezawa, M."
-    title: "Cultural transmission promotes the emergence of hierarchical structure in artificial languages"
-    journal: "PLOS ONE, 16(12), e0261335, Dec 2021"
-    doi: "10.1371/journal.pone.0261335"
+    authors_en: 'Nakata, S., Ohira, A., & Takezawa, M.'
+    title_en: 'Evolution of the Word Order Rules Through Communication and Cultural Transmission: An Iterated Learning Experiment'
+    journal_en: 'Proceedings of the Joint Conference on Language Evolution (jcole), 542–550'
+    authors_ja: 'Seiya Nakata・Akane Ohira・Masanori Takezawa'
+    journal_ja: 'Proceedings of the Joint Conference on Language Evolution (JCoLE), 542–550'
+    doi: '10.17617/2.3398549'
     cat: culture
-    role: last
-
-  - year: 2021
-    authors: "Homma, S., & Takezawa, M."
-    title: "Adaptive reinforcement learning in a changing environment: a theoretical and empirical analysis"
-    journal: "PLOS ONE, 16(8), e0256038, Aug 2021"
-    doi: "10.1371/journal.pone.0256038"
-    cat: misc_tag
-    role: last
-
-  - year: 2021
-    authors: "Kido, Y., & Takezawa, M."
-    title: "The robust beauty of majority rules: How averaging and tallying compare in accuracy across various social judgment tasks"
-    journal: "Frontiers in Psychology, 12, 634823, Mar 2021"
-    doi: "10.3389/fpsyg.2021.634823"
-    cat: crowd
     role: last
 
   - year: 2020
-    authors: "Nakata, S., & Takezawa, M."
-    title: "Roles of cultural transmission in the emergence of hierarchical structures: Laboratory studies using the iterated learning paradigm"
-    journal: "Proceedings of the 25th International Symposium on Artificial Life and Robotics (ALIFE 2020), 1002–1006, 2020"
-    cat: culture
-    role: last
-    badge_peer: true
-    badge_conf: true
-
-  - year: 2019
-    authors: "Takezawa, M."
-    title: "Explaining endurance and changes of social norms: Unexplained questions in evolutionary social sciences [社会規範の維持と変化を説明する：進化社会科学における未解決の問い]"
-    journal: "Journal of Japanese Society for Artificial Intelligence (人工知能学会誌), 34(2), 168–175, Mar 2019"
-    cat: misc_tag
-    role: lead
-    badge_invited: true
-
-  - year: 2019
-    authors: "Nakawake, Y., & Takezawa, M."
-    title: "Preconditions for a division of labor requiring partner choice"
-    journal: "Letters on Evolutionary Behavioral Science, 10(1), 1–5, 2019"
-    doi: "10.5178/lebs.2019.68"
-    cat: cooperation
-    role: last
-
-  - year: 2018
-    authors: "Horita, Y., & Takezawa, M."
-    title: "Cultural differences in strength of conformity explained through pathogen stress: a statistical test using hierarchical Bayesian estimation"
-    journal: "Frontiers in Psychology, 9, 1921, Oct 2018"
-    doi: "10.3389/fpsyg.2018.01921"
-    cat: misc_tag
-    role: last
-
-  - year: 2018
-    authors: "Takezawa, M., Gummerum, M., Keller, M., & Mata, J."
-    title: "Developmental and cultural differences in the wisdom of crowds for risky choice"
-    journal: "Journal of Experimental Child Psychology, 175, 206–220, Nov 2018"
-    doi: "10.1016/j.jecp.2018.06.005"
-    cat: crowd
-    role: lead
-
-  - year: 2018
-    authors: "Takezawa, M., Gummerum, M., Keller, M., & Mata, J."
-    title: "Age-related differences in the wisdom of crowds: Aggregation and consensus effects"
-    journal: "Developmental Psychology, 54(8), 1560–1568, Aug 2018"
-    doi: "10.1037/dev0000539"
-    cat: crowd
-    role: lead
-
-  - year: 2017
-    authors: "Nakawake, Y., & Takezawa, M."
-    title: "Predicting religious ritual behavior using wrist-worn fitness trackers"
-    journal: "PLOS ONE, 12(10), e0187141, Oct 2017"
-    doi: "10.1371/journal.pone.0187141"
-    cat:
-    role: last
-
-  - year: 2017
-    authors: "Takezawa, M., & Nakawake, Y."
-    title: "Toward behavioral evolutionary political science: A review of research on cultural group selection and the evolution of cooperation"
-    journal: "Japanese Journal of Political Science (年報政治学), 2017-II, 64–88, 2017"
-    cat: cooperation
-    role: lead
-    badge_invited: true
-
-  - year: 2017
-    authors: "Takezawa, M., Gummerum, M., & Keller, M."
-    title: "A developmental analysis of wisdom of crowds: Aggregation and consensus effects"
-    journal: "Journal of Experimental Child Psychology, 154, 100–117, Feb 2017"
-    doi: "10.1016/j.jecp.2016.09.010"
-    cat: crowd
-    role: lead
-
-  - year: 2016
-    authors: "Takezawa, M., & Price, M. E."
-    title: "Revisiting 'the evolution of reciprocity in sizable groups': Continuous reciprocity in the repeated n-person prisoner's dilemma"
-    journal: "Journal of Theoretical Biology, 411, 8–16, Dec 2016"
-    doi: "10.1016/j.jtbi.2016.09.004"
-    cat: cooperation
-    role: lead
-
-  - year: 2016
-    authors: "Ishii, T., & Takezawa, M."
-    title: "Empirical tests of the similarity-projection hypothesis [類似性投影仮説の実証的検討]"
-    journal: "Japanese Journal of Social Psychology (社会心理学研究), 32(2), 88–99, 2016"
-    doi: "10.14966/jssp.32.2_88"
-    cat: cooperation
-    role: last
-
-  - year: 2015
-    authors: "Suyama, M., & Takezawa, M."
-    title: "Cultural attractors and the evolution of cumulative culture: an experimental and computational study"
-    journal: "Evolutionary Behavioral Sciences, 9(3), 192–207, Jul 2015"
-    doi: "10.1037/ebs0000031"
+    authors_en: 'Nakata, S., & Takezawa, M.'
+    title_en: 'Roles of cultural transmission in the emergence of hierarchical structures: Laboratory studies using the iterated learning paradigm'
+    journal_en: 'Proceedings of the Twenty-fifth International Symposium on Artificial Life and Robotics, 1002–1006'
+    authors_ja: 'Seiya Nakata・Masanori Takezawa'
+    journal_ja: 'Proceedings of the Twenty-Fifth International Symposium on Artificial Life and Robotics, 1002–1006'
     cat: culture
     role: last
 
-  - year: 2015
-    authors: "Takezawa, M., Gummerum, M., & Keller, M."
-    title: "The role of peers, parents, and culture in the wisdom of crowds phenomenon in children"
-    journal: "PLOS ONE, 10(3), e0120029, Mar 2015"
-    doi: "10.1371/journal.pone.0120029"
-    cat: crowd
-    role: lead
+  - year: 2019
+    authors_en: 'Takezawa, M.'
+    title_en: 'Explaining endurance and changes of social norms: Unexplained questions in evolutionary social sciences'
+    journal_en: 'Journal of Japanese Society for Artificial Intelligence, 34(2), 168–175'
+    authors_ja: '竹澤正哲'
+    title_ja: '社会規範の維持と変化を説明する：進化社会科学における未解決の問い'
+    journal_ja: '人工知能学会誌, 34(2), 168–175'
+    doi: '10.11517/jjsai.34.2_168'
+    cat: cooperation
+    role: corresponding
+    badge_invited: true
+
+  - year: 2019
+    authors_en: 'Takezawa, M.'
+    title_en: 'Intergroup conflict and the evolution of altruism'
+    journal_en: 'Biological Science, 70(3), 178–185'
+    authors_ja: '竹澤正哲'
+    title_ja: '集団間葛藤と利他性の進化'
+    journal_ja: '生物科学, 70(3), 178–185'
+    cat: cooperation
+    role: corresponding
+    badge_invited: true
+
+  - year: 2018
+    authors_en: 'Takezawa, M.'
+    title_en: 'Cultural Differences in Strength of Conformity Explained Through Pathogen Stress: A Statistical Test Using Hierarchical Bayesian Estimation'
+    journal_en: 'Frontiers in Psychology, 9, 1921'
+    doi: '10.3389/fpsyg.2018.01921'
+    role: last
+
+  - year: 2018
+    authors_en: 'TAKEZAWA Masanori'
+    title_en: 'On the necessity of rigorous modeling in psychology'
+    journal_en: 'Japanese Psychological Review, 61(1), 42–54'
+    authors_ja: '竹澤 正哲'
+    title_ja: '心理学におけるモデリングの必要性'
+    journal_ja: '心理学評論, 61(1), 42–54'
+    doi: '10.24602/sjpr.61.1_42'
+    role: corresponding
+    badge_invited: true
+
+  - year: 2018
+    authors_en: 'Krockow, E.M., Takezawa, M., Pulford, B.D., Colman, A.M., Smithers, S., Kita, T., & Nakawake, Y.'
+    title_en: 'Commitment-enhancing tools in centipede games: Evidencing european–Japanese differences in trust and cooperation'
+    journal_en: 'Judgment and Decision Making, 13(1), 61–72'
+    authors_ja: 'Krockow, E. M・Takezawa, M・Pulford, B. D・Colman, A. M・Smithers, S・Kita, T・Nakawake, Y'
+    journal_ja: 'Judgment and Decision Making, 13(1), 61–72'
+    doi: '10.1017/S1930297500008822'
+    cat: cooperation
+    role: contributor
+
+  - year: 2017
+    authors_en: 'Horita, Y., Takezawa, M., Inukai, K., Kita, T., & Masuda, N.'
+    title_en: 'Reinforcement learning accounts for moody conditional cooperation behavior: experimental results'
+    journal_en: 'Scientific Reports, 7, 39275'
+    doi: '10.1038/srep39275'
+    cat: cooperation
+    role: contributor
+
+  - year: 2017
+    authors_en: 'Krockow, E.M., Takezawa, M., Pulford, B.D., Colman, A.M., & Kita, T.'
+    title_en: 'Cooperation and trust in Japanese and British samples: Evidence from incomplete information games'
+    journal_en: 'International Perspectives in Psychology: Research, Practice, Consultation, 6(4), 227–245'
+    doi: '10.1037/ipp0000074'
+    cat: cooperation
+    role: contributor
+
+  - year: 2016
+    authors_en: 'Ezaki, T., Horita, Y., Takezawa, M., & Masuda, N.'
+    title_en: 'Reinforcement Learning Explains Conditional Cooperation and Its Moody Cousin'
+    journal_en: 'PLOS Computational Biology, 12(7), e1005034'
+    doi: '10.1371/journal.pcbi.1005034'
+    cat: cooperation
+    role: contributor
+
+  - year: 2016
+    authors_en: 'Horita, Y., Takezawa, M., Kinjo, T., Nakawake, Y., & Masuda, N.'
+    title_en: 'Transient nature of cooperation by pay-it-forward reciprocity'
+    journal_en: 'Scientific Reports, 6, 19471'
+    doi: '10.1038/srep19471'
+    cat: cooperation
+    role: contributor
+
+  - year: 2016
+    authors_en: 'Ishii, T., & Takezawa, M.'
+    title_en: 'Strategies for the inference of mental states: Projection and stereotyping'
+    journal_en: 'Research in Social Psychology, 32(3), 187–199'
+    authors_ja: '石井辰典・竹澤正哲'
+    title_ja: '心的状態の推測方略：投影とステレオタイプ化'
+    journal_ja: '社会心理学研究, 32(3), 187–199'
+    doi: '10.14966/jssp.0941'
+    role: last
 
   - year: 2014
-    authors: "Takezawa, M., & Price, M. E."
-    title: "Discrimination between kin and non-kin in the prisoner's dilemma game"
-    journal: "Letters on Evolutionary Behavioral Science, 5(1), 5–8, 2014"
-    doi: "10.5178/lebs.2014.27"
+    authors_en: 'Watanabe, T., Takezawa, M., Nakawake, Y., Kunimatsu, A., Yamasue, H., Nakamura, M., Miyashita, Y., & Masuda, N.'
+    title_en: 'Two distinct neural mechanisms underlying indirect reciprocity'
+    journal_en: 'Proceedings of the National Academy of Sciences of the United States of America, 111(11), 3990–3995'
+    doi: '10.1073/pnas.1318570111'
     cat: cooperation
-    role: lead
+    role: contributor
 
-  - year: 2013
-    authors: "Takezawa, M., Gummerum, M., & Keller, M."
-    title: "A stage for the rational tail of the emotional dog: Roles of moral reasoning in group decision making"
-    journal: "Journal of Experimental Psychology: General, 142(3), 705–729, Aug 2013"
-    doi: "10.1037/a0029898"
-    cat: crowd
-    role: lead
+  - year: 2014
+    authors_en: 'Horita, Y., & Takezawa, M.'
+    title_en: 'Observation enhances third-party punishment only among people who were not hot-tempered'
+    journal_en: 'Letters on Evolutionary Behavioral Science, 5(1), 5–8'
+    doi: '10.5178/lebs.2014.28'
+    role: last
 
   - year: 2012
-    authors: "Takezawa, M., & Price, M. E."
-    title: "Revisiting 'the evolution of reciprocity in sizable groups': An agent-based simulation study"
-    journal: "Journal of Theoretical Biology, 311, 8–17, Oct 2012"
-    doi: "10.1016/j.jtbi.2012.07.005"
-    cat: cooperation
-    role: lead
-
-  - year: 2012
-    authors: "Takezawa, M."
-    title: "Statistical analysis with Bayesian hierarchical models for developmental and cross-cultural comparisons [発達・文化比較のためのベイズ階層モデルによる統計解析]"
-    journal: "Japanese Psychological Review (心理学評論), 55(1), 33–49, 2012"
-    cat: misc_tag
-    role: lead
+    authors_en: 'Takezawa, M.'
+    title_en: 'Potentials of socio-ecological approach from the evolutionary perspective : Comments on Takemura and Sato''s article'
+    journal_en: 'Japanese Psychological Review, 55(1), 64–69'
+    authors_ja: '竹澤正哲'
+    title_ja: '進化的視点からみた社会生態学的アプローチの可能性 : 竹村・佐藤論文へのコメント (特集 幸福感と文化)'
+    journal_ja: '心理学評論, 55(1), 64–69'
+    doi: '10.24602/sjpr.55.1_64'
+    role: corresponding
     badge_invited: true
 
   - year: 2011
-    authors: "Takezawa, M., & Price, M. E."
-    title: "Kin discrimination in the prisoner's dilemma: An experiment with small groups"
-    journal: "Letters on Evolutionary Behavioral Science, 2, 24–27, 2011"
-    doi: "10.5178/lebs.2011.9"
+    authors_en: 'Tane, K., & Takezawa, M.'
+    title_en: 'Perception of human face does not induce cooperation in darkness'
+    journal_en: 'Letters on Evolutionary Behavioral Science, 2(2), 24–27'
+    doi: '10.5178/lebs.2011.15'
     cat: cooperation
-    role: lead
+    role: last
 
   - year: 2010
-    authors: "Gummerum, M., Keller, M., Takezawa, M., & Mata, J."
-    title: "To give or not to give: Children's and adolescents' sharing and moral negotiations in economic decision situations"
-    journal: "Child Development, 81(3), 765–786, May/Jun 2010"
-    doi: "10.1111/j.1467-8624.2010.01443.x"
-    cat:
+    authors_en: 'Zhu, L., Keller, M., Gummerum, M., & Takezawa, M.'
+    title_en: 'A cross-cultural perspective on the development of sharing behavior: Integrating behavioral economics and psychology'
+    journal_en: 'Personality, Human Development, and Culture: International Perspectives on Psychological Science, 2, 141–153'
+    doi: '10.4324/9780203848388'
+    role: last
+
+  - year: 2010
+    authors_en: 'Takezawa, M., & Price, M.'
+    title_en: 'Revisiting "The Evolution of Reciprocity in Sizable Groups": Continuous reciprocity in the repeated n-person prisoner&apos;s dilemma'
+    journal_en: 'Journal of Theoretical Biology, 264(2), 188–196'
+    authors_ja: 'Masanori Takezawa・Michael E. Price'
+    journal_ja: 'Journal of Theoretical Biology, 264(2), 188–196'
+    doi: '10.1016/j.jtbi.2010.01.028'
+    cat: cooperation
+    role: corresponding
+
+  - year: 2010
+    authors_en: 'Garcia-Retamero, R., Takezawa, M., & Galesic, M.'
+    title_en: 'Simple mechanisms for gathering social information'
+    journal_en: 'New Ideas in Psychology, 28(1), 49–63'
+    doi: '10.1016/j.newideapsych.2009.05.002'
+    role: contributor
+
+  - year: 2009
+    authors_en: 'Ohtsubo, Y., Takezawa, M., & Fukuno, M.'
+    title_en: 'Mutual liking and meta-perception accuracy'
+    journal_en: 'European Journal of Social Psychology, 39(5), 707–718'
+    doi: '10.1002/ejsp.568'
+    role: contributor
+
+  - year: 2009
+    authors_en: 'Garcia-Retamero, R., Takezawa, M., & Gigerenzer, G.'
+    title_en: 'Influence of group learning in search processes.'
+    journal_en: 'Psicothema, 21(3), 369–375'
+    authors_ja: 'Garcia-Retamero, R.・Takezawa, M.・Gigerenzer, G.'
+    journal_ja: 'Psicothema, 21(3), 369–375'
+    role: contributor
+
+  - year: 2009
+    authors_en: 'Gummerum, M., Takezawa, M., & Keller, M.'
+    title_en: 'The influence of social category and reciprocity on adults'' and children''s altruistic behaviour.'
+    journal_en: 'Evolutionary Psychology, 7(2), 295–316'
+    authors_ja: 'Gummerum, M・Takezawa, M・Keller, M'
+    journal_ja: 'Evolutionary Psychology, 7(2), 295–316'
+    doi: '10.1177/147470490900700212'
+    cat: cooperation
+    role: contributor
+
+  - year: 2009
+    authors_en: 'Leman, P., Keller, M., Takezawa, M., & Gummerum, M.'
+    title_en: 'Children''s and Adolescents'' Decisions about Sharing Money with Others'
+    journal_en: 'Social Development, 18(3), 711–727'
+    authors_ja: 'Patrick J. Leman・Monika Keller・Masanori Takezawa・Michaela Gummerum'
+    journal_ja: 'Social Development, 18(3), 711–727'
+    doi: '10.1111/j.1467-9507.2008.00486.x'
+    role: contributor
+
+  - year: 2009
+    authors_en: 'Garcia-Retamero, R., Takezawa, M., & Gigerenzer, G.'
+    title_en: 'Does Imitation Benefit Cue Order Learning?'
+    journal_en: 'Experimental Psychology, 56(5), 307–320'
+    doi: '10.1027/1618-3169.56.5.307'
     role: contributor
 
   - year: 2008
-    authors: "Takezawa, M., & Price, M. E."
-    title: "Revisiting 'the evolution of cooperation in sizable groups': An experiment-based critique"
-    journal: "Journal of Theoretical Biology, 252(2), 246–255, May 2008"
-    doi: "10.1016/j.jtbi.2008.01.016"
-    cat: cooperation
-    role: lead
+    authors_en: 'Garcia-Retamero, R., Takezawa, M., & Gigerenzer, G.'
+    title_en: 'Group communication and decision-making strategies'
+    journal_en: 'Psicothema, 20(4), 753–759'
+    role: contributor
+
+  - year: 2008
+    authors_en: 'Gummerum, M., Keller, M., Takezawa, M., & Mata, J.'
+    title_en: 'To give or not to give: Children''s and adolescents'' sharing and moral negotiations in economic decision situations'
+    journal_en: 'Child Development, 79(3), 562–576'
+    authors_ja: 'Michaela Gummerum・Monika Keller・Masanori Takezawa・Jutta Mata'
+    journal_ja: 'Child Development, 79(3), 562–576'
+    doi: '10.1111/j.1467-8624.2008.01143.x'
+    role: contributor
 
   - year: 2007
-    authors: "Takezawa, M., Gummerum, M., & Keller, M."
-    title: "Why peers are important in children's moral development: The role of peer discussion on moral reasoning"
-    journal: "Journal of Experimental Child Psychology, 96(2), 129–142, Feb 2007"
-    doi: "10.1016/j.jecp.2006.09.001"
-    cat:
-    role: lead
+    authors_en: 'Efferson, C., Takezawa, M., & McElreath, R.'
+    title_en: 'New methods in quantitative ethnography - Economic experiments and variation in the price of equality'
+    journal_en: 'Current Anthropology, 48(6), 912–919'
+    doi: '10.1086/523016'
+    role: contributor
 
   - year: 2007
-    authors: "Gummerum, M., Keller, M., Takezawa, M., & Mata, J."
-    title: "When legal rules and moral norms conflict: Children's reasoning about fair division"
-    journal: "Journal of Experimental Child Psychology, 98(2), 84–100, Oct 2007"
-    doi: "10.1016/j.jecp.2007.05.004"
-    cat:
+    authors_en: 'Barre, H. Clark, Keller, M., Takezawa, M., & Wichary, S.'
+    title_en: 'Relationships and emotions in children''s understanding of social contract violations'
+    journal_en: 'Journal of Evolutionary Psychology, 5(1), 213–234'
+    authors_ja: 'Barre, H. Clark・Keller, Monika・Takezawa, Masanori・Wichary, Szymon'
+    journal_ja: 'Journal of Evolutionary Psychology, 5(1), 213–234'
+    doi: '10.1556/jep.2007.1022'
     role: contributor
 
   - year: 2006
-    authors: "Takezawa, M., & Gummerum, M."
-    title: "The role of individual differences in moral development on group decisions in the dictator game"
-    journal: "Group Processes and Intergroup Relations, 9(4), 521–537, Oct 2006"
-    doi: "10.1177/1368430206067558"
+    authors_en: 'Takezawa, M., Gummerum, M., & Keller, M.'
+    title_en: 'A stage for the rational tail of the emotional dog: Roles of moral reasoning in group decision making'
+    journal_en: 'Journal of Economic Psychology, 27(1), 117–139'
+    doi: '10.1016/j.joep.2005.06.012'
     cat: crowd
-    role: lead
+    role: corresponding
 
   - year: 2006
-    authors: "Keller, M., Gummerum, M., Canz, T., Takezawa, M., & Mata, J."
-    title: "Reasoning and emotions in prosocial decision making in middle childhood and adolescence"
-    journal: "Zeitschrift für Psychologie / Journal of Psychology, 214(4), 203–218, 2006"
-    doi: "10.1026/0044-3409.214.4.203"
-    cat:
+    authors_en: 'Garcia-Retamero, R., Takezawa, M., & Gigerenzer, G.'
+    title_en: 'How to learn good cue orders: When social learning benefits simple heuristics'
+    journal_en: 'Proceedings of the 28th Annual Conference of the Cognitive Science Society, 1352–1357'
+    authors_ja: 'R. Garcia-Retamero・M. Takezawa・G. Gigerenzer'
+    journal_ja: 'Proceedings of the 28th Annual Conference of the Cognitive Science Society, 1352–1357'
     role: contributor
-
-  - year: 2006
-    authors: "Takezawa, M., Gummerum, M., & Keller, M."
-    title: "A framework for peer relationships in children's moral development"
-    journal: "Merrill-Palmer Quarterly, 52(3), 524–555, Jul 2006"
-    doi: "10.1353/mpq.2006.0022"
-    cat:
-    role: lead
 
   - year: 2005
-    authors: "Takezawa, M., & Gummerum, M."
-    title: "Understanding group decisions: The role of moral reasoning in the ultimatum game"
-    journal: "Group Processes and Intergroup Relations, 8(4), 361–374, Oct 2005"
-    doi: "10.1177/1368430205056466"
-    cat: crowd
-    role: lead
+    authors_en: 'Kameda, T., Takezawa, M., & Hastie, R.'
+    title_en: 'Where Do Social Norms Come From?'
+    journal_en: 'Current Directions in Psychological Science, 14(6), 331–334'
+    doi: '10.1111/j.0963-7214.2005.00392.x'
+    cat: cooperation
+    role: contributor
 
   - year: 2003
-    authors: "Keller, M., Gummerum, M., Wang, X. T., & Takezawa, M."
-    title: "More than a fair deal: Understanding resource allocation as a cultural practice"
-    journal: "Child Development, 74(6), 1694–1714, Nov/Dec 2003"
-    doi: "10.1046/j.1467-8624.2003.00644.x"
-    cat:
+    authors_en: 'Kameda, T., Takezawa, M., & Hastie, R.'
+    title_en: 'The logic of social sharing: An evolutionary game analysis of adaptive norm development'
+    journal_en: 'Personality and Social Psychology Review, 7(1), 2–19'
+    cat: cooperation
     role: contributor
 
   - year: 2002
-    authors: "Takezawa, M."
-    title: "Cross-cultural patterns of trust: Economic games and self-reports in a Japanese sample"
-    journal: "Japanese Journal of Social Psychology (社会心理学研究), 18(2), 109–117, 2002"
-    cat: cooperation
-    role: lead
+    authors_en: 'Kameda, T., Takezawa, M., Tindale, R. S., & Smith, C. M.'
+    title_en: 'Social sharing and risk reduction - Exploring a computational algorithm for the psychology of windfall gains'
+    journal_en: 'Evolution and Human Behavior, 23(1), 11–33'
+    doi: '10.1016/S1090-5138(01)00086-1'
+    role: contributor
 
-  - year: 2001
-    authors: "Takezawa, M., & Gummerum, M."
-    title: "Adolescent trust in peers: Cross-cultural differences in the ultimatum game"
-    journal: "Psychologia, 44(3), 157–170, 2001"
+  - year: 1999
+    authors_en: 'Takezawa, M., & Kameda, T.'
+    title_en: 'Ownership and Sharing : Exploring Social Foundations of Communal Sharing Norm by Evolutionary Game Analysis'
+    journal_en: 'Cognitive Studies, 6(2), 191–205'
+    authors_ja: '竹澤正哲・亀田達也'
+    title_ja: '所有と分配：共同分配規範の社会的発生基盤に関する進化ゲーム分析'
+    journal_ja: '認知科学, 6(2), 191–205'
+    doi: '10.11225/jcss.6.191'
     cat: cooperation
-    role: lead
+    role: corresponding
+
+  - year: 1999
+    authors_en: 'Takezawa, M.'
+    title_en: 'The Effect of an Unfair Treatment in the Resolution of a Social Dilemma'
+    journal_en: 'Japanese Journal of Experimental Social Psychology, 39(1), 30–40'
+    authors_ja: '竹澤 正哲'
+    title_ja: '社会的ジレンマの解決において不公正感が果たす役割'
+    journal_ja: '実験社会心理学研究, 39(1), 30–40'
+    doi: '10.2130/jjesp.39.30'
+    role: corresponding
 
   - year: 1997
-    authors: "Takezawa, M."
-    title: "Social value orientation and cooperation in social dilemmas [社会的価値志向性と社会的ジレンマにおける協力行動]"
-    journal: "Japanese Journal of Social Psychology (社会心理学研究), 12(3), 172–182, 1997"
-    cat: cooperation
-    role: lead
+    authors_en: 'Kameda, T., Ohtsubo, Y., & Takezawa, M.'
+    title_en: 'Centrality in sociocognitive networks and social influence: An illustration in a group decision-making context'
+    journal_en: 'Journal of Personality and Social Psychology, 73(2), 296–309'
+    doi: '10.1037/0022-3514.73.2.296'
+    cat: crowd
+    role: contributor
+
 ---

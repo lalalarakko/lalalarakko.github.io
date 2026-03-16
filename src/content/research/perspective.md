@@ -6,7 +6,7 @@
 # ============================================================
 
 title_en: "The Perspective Underlying My Research: A Culture-Gene Coevolutionary Approach"
-title_ja: "私の研究を貫く視点：文化・遺伝子共進化アプローチ"
+title_ja: "研究を支える視点：文化と遺伝子の共進化アプローチ"
 
 blocks_en:
   - heading: "Starting Point"
@@ -31,17 +31,17 @@ blocks_en:
 blocks_ja:
   - heading: "出発点"
     text: |
-      私が学部生だった1990年代、こうしたやり取りをよく耳にしました。「それは社会学的な発想ですね。私は心理学者なので、その視点は取りません。私は心理学的な視点からこの現象を説明します」。私は、学問上のこうした分業のあり方に違和感を覚えていました。人間や社会という共通の対象を理解するには、複数の視点を組み合わせることが重要ではないかと考えていたからです。
+      私が学部生だった1990年代、こんなやり取りをよく耳にしました。「それは社会学的な発想ですね。私は心理学者なので、そのような考え方に関心ありません。私は心理学者なので、心理学的な視点からこの現象を説明したいのです」。私は、学問上のこうした分業のあり方に違和感を覚えていました。人間や社会という共通の対象を理解するには、複数の視点を組み合わせることが重要ではないかと考えていたからです。
 
   - heading: "札幌からベルリンへ"
     text: |
-      北海道大学（1995–2000）で**亀田達也**・**山岸俊男**から指導を受けている中で出会ったのが、culture-gene coevolutionary approach でした。2000年から2006年まで所属していたベルリンの Max Planck Institute for Human Development, Center for Adaptive Behavior and Cognition で研究生活を送り、**Gerd Gigerenzer** や **Richard McElreath** と交流し、また当時ベルリン高等研究所に滞在していた **Peter Richerson**, **Rob Boyd**, **Joe Henrich**, **Ernst Fehr** らと接するなかで、私の研究の基盤となる視点は次第に明確な形をとるようになりました。
+      北海道大学（1995–2000）で**亀田達也**・**山岸俊男**から指導を受けている中で出会ったのが、culture-gene coevolutionary approach でした。その後、ベルリンの Max Planck Institute for Human Development, Center for Adaptive Behavior and Cognition で研究生活（2000-2006）で**Gerd Gigerenzer** や **Richard McElreath** と交流し、さらに当時ベルリン高等研究所に滞在していた **Peter Richerson**, **Rob Boyd**, **Joe Henrich**, **Ernst Fehr** らと接するなかで、私の研究の基盤となる視点は次第に明確な形をとるようになりました。
 
-  - heading: "理論的枠組み"
+  - heading: "理論的な考え方"
     text: |
       人間の心は進化の産物であり、学習、模倣、社会化を可能にする諸能力は、進化の過程で形成されてきた適応的な心理的基盤の一部と考えられる。社会や文化は、そのような能力を備えた個人間の相互作用と、知識・行動様式・価値観の文化的伝達、およびその累積を通じて形成される。
 
-      この視点から、私は主に二つの方向で研究を行っている。
+      この視点から、私は主に二つの方向で研究を行っています。
 
   - heading: "二つの研究方向"
     directions:

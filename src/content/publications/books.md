@@ -1,127 +1,204 @@
 ---
-# ============================================================
-# publications/books.md — 書籍・章
-# ============================================================
+# publications/books.md
+# Source: researchmap 2026-03-17
 
 books:
   - year: 2023
-    authors: "Nakata, S., & Takezawa, M. [中田星矢・竹澤正哲]"
-    title: "Education and Cumulative Cultural Evolution: Examining Micro-Macro Dynamics through Computational Modeling (Chapter 7) [教育と累積的文化進化――計算論モデルによるマイクロ―マクロ・ダイナミクスの検討（第7章）]"
-    book: "Exploring the Origins of Education: Evolutionary and Cultural Perspectives [教育の起源を探る]"
-    editors: "Hashiya, K., & Naruse, K. (Eds.) [橋彌和秀・成瀬和弥（編）]"
-    publisher: "Keiso Shobo [勁草書房]"
-    role: lead
+    authors_en: 'Takezawa, M.'
+    chapter_en: 'Evolutionary Psychology and Cognition (Ch. 4)'
+    book_en: 'Development in Evolutionary Psychology'
+    editors_en: 'R. Oda & Y. Ohtsubo (Eds.)'
+    publisher_en: 'Asakura Publishers'
+    authors_ja: '竹澤正哲'
+    chapter_ja: '進化心理学と認知（第4章）'
+    book_ja: '広がる！進化心理学'
+    editors_ja: '小田亮・大坪庸介（編）'
+    publisher_ja: '朝倉出版'
+    pages: '38-50'
+    isbn: '9784254523065'
 
   - year: 2023
-    authors: "Takezawa, M. [竹澤正哲]"
-    title: "Cooperation and Altruism [協力と利他性]"
-    book: "Encyclopedia of Human Behavior from Evolutionary Perspective [進化でみる人間行動の事典]"
-    editors: "Hasegawa, T., & Matsuzawa, T. (Eds.) [長谷川寿一・松沢哲郎（編）]"
-    publisher: "Asakura Shoten [朝倉書店]"
-    role: lead
+    authors_en: 'Nakata, S., & Takezawa, M.'
+    chapter_en: 'Teaching and cumulative cultural evolution: Exploring micro-macro dynamics with computational models of teaching'
+    book_en: 'Exploring the origins of education: Evolutionary and cultural perspective'
+    editors_en: 'J. Ando (Ed.)'
+    publisher_en: 'Chitose Press'
+    authors_ja: '中田星矢・竹澤正哲'
+    chapter_ja: '教育と累積的文化進化――計算論モデルによるマイクロ―マクロ・ダイナミクスの検討'
+    book_ja: '教育の起源を探る：進化と文化の視点から'
+    editors_ja: '安藤寿康（編）'
+    publisher_ja: 'ちとせプレス'
+    isbn: '9784908736292'
 
   - year: 2021
-    authors: "Takezawa, M. [竹澤正哲]"
-    title: "Social Norms [社会規範]"
-    book: "Social Psychology [社会心理学概論]"
-    editors: "Uchida, Y., & Kitayama, S. (Eds.) [内田由紀子・北山忍（編）]"
-    publisher: "Yuhikaku [有斐閣]"
-    role: lead
-
-  - year: 2020
-    authors: "Takezawa, M. [竹澤正哲]"
-    title: "Cultural Group Selection [文化的集団淘汰]"
-    book: "Seishin Dictionary of Psychology, New Edition [誠信心理学辞典[新版]]"
-    editors: "Shimizu, H. (Ed.) [下山晴彦（編）]"
-    publisher: "Seishin Shobo [誠信書房]"
-    role: lead
-
-  - year: 2019
-    authors: "Takezawa, M. [竹澤正哲]"
-    title: "Wisdom of Crowds [集合知]"
-    book: "Seishin Dictionary of Psychology, New Edition [誠信心理学辞典[新版]]"
-    editors: "Shimizu, H. (Ed.) [下山晴彦（編）]"
-    publisher: "Seishin Shobo [誠信書房]"
-    role: lead
-
-  - year: 2019
-    authors: "Takezawa, M. [竹澤正哲]"
-    title: "Cultural Evolution [文化進化]"
-    book: "Seishin Dictionary of Psychology, New Edition [誠信心理学辞典[新版]]"
-    editors: "Shimizu, H. (Ed.) [下山晴彦（編）]"
-    publisher: "Seishin Shobo [誠信書房]"
-    role: lead
-
-  - year: 2018
-    authors: "Nakawake, Y., & Takezawa, M. [中分遥・竹澤正哲]"
-    title: "Cooperation and Fairness [協力と公平性]"
-    book: "Development in Evolutionary Psychology [広がる！進化心理学]"
-    editors: "Sugiyama, L. S., & Kanazawa, S. (Eds.) [杉山幸丸・金澤正由樹（編）]"
-    publisher: "Baifukan [培風館]"
-    role: lead
+    authors_en: 'Takezawa, M.'
+    chapter_en: 'Resource exchange (Ch. 20)'
+    book_en: 'Encyclopedia of Human Behavior from Evolutionary Perspective'
+    editors_en: 'R. Oda, K. Hashiya, O. Yohsuke, & K. Hiraishi (Eds.)'
+    publisher_en: 'Asakura Publishing'
+    authors_ja: '竹澤正哲'
+    chapter_ja: '交換する（第20章）'
+    book_ja: '進化でわかる人間行動の事典'
+    editors_ja: '小田亮・橋彌和秀・大坪庸介・平石界（編）'
+    publisher_ja: '朝倉書店'
+    pages: '107-112'
+    isbn: '9784254523058'
 
   - year: 2017
-    authors: "Bowles, S., & Gintis, H."
-    title: "A Cooperative Species: Human Reciprocity and Its Evolution [協力する種]"
-    book: ""
-    editors: ""
-    publisher: "NTT Publishing [NTT出版]"
-    note: "Translated by Takezawa, M., Takahashi, N., Otsuki, H., Inaba, M., & Hatano, N. [竹澤正哲・高橋伸幸・大槻久・稲葉美里・波多野礼佳（訳）]"
-    role: translator
+    authors_en: 'Takezawa, M., Takahashi, N., Ohtsuki, H., Inaba, M., & Hatano, A.'
+    chapter_en: 'Translation Supervisor'
+    book_en: 'Japanese translation of "A cooperative species: Human Reciprocity and its Evolution"'
+    publisher_en: 'NTT Publishing'
+    authors_ja: '竹澤 正哲・高橋 伸幸・大槻 久・稲葉美里・波多野礼佳'
+    chapter_ja: '監訳'
+    book_ja: '協力する種:制度と心の共進化 (叢書《制度を考える》)'
+    publisher_ja: 'NTT出版'
+    isbn: '4757122896'
 
   - year: 2016
-    authors: "Takezawa, M. [竹澤正哲]"
-    title: "Commentary for Japanese Translation of Cultural Evolution by A. Mesoudi"
-    book: "Cultural Evolution [文化進化論]"
-    editors: "Mesoudi, A."
-    publisher: "NTT Publishing [NTT出版]"
-    role: lead
+    authors_en: 'Takezawa, M.'
+    chapter_en: 'Evolutionary Approach in Social Psychology (Ch. 15)'
+    book_en: 'Social Psychology'
+    editors_en: 'H. Kitamura & Y. Uchida (Eds.)'
+    publisher_en: 'Nakanishiya Publishing'
+    authors_ja: '竹澤正哲'
+    chapter_ja: '進化的アプローチ（第15章）'
+    book_ja: '社会心理学概論'
+    editors_ja: '北村 英哉・内田 由紀子（編）'
+    publisher_ja: 'ナカニシヤ出版'
+    pages: '269-289'
+    isbn: '4779510597'
 
   - year: 2016
-    authors: "Takezawa, M. [竹澤正哲]"
-    title: "Wisdom of Crowds [集合知]"
-    book: "Coexistence in Society (Iwanami Lectures: Cognitive Science of Communication, Vol. 4) [社会のなかの共存（岩波講座 コミュニケーションの認知科学 第4巻）]"
-    editors: "Hashiya, K. (Ed.) [橋彌和秀（編）]"
-    publisher: "Iwanami Shoten [岩波書店]"
-    role: lead
+    authors_en: 'Takezawa, M.'
+    chapter_en: 'Commentary for Japanese Translation'
+    book_en: 'Commentary for Japanese Translation of "Cultural Evolution: How Darwinian theory can explain human culture and synthesise the social sciences by Alex Mesoudi"'
+    publisher_en: 'NTT publications'
+    authors_ja: 'アレックス・メスーディ・竹澤 正哲・野中 香方子'
+    chapter_ja: '解説'
+    book_ja: '文化進化論:ダーウィン進化論は文化を説明できるか'
+    publisher_ja: 'エヌティティ出版'
+    isbn: '4757143303'
+
+  - year: 2014
+    authors_en: 'Takezawa, M.'
+    chapter_en: 'Biases in Decision Making'
+    book_en: 'Seishin Psychology Dictionary (New Edition)'
+    editors_en: 'H. Shimoyama (Ed.)'
+    publisher_en: 'Seisin Syobo'
+    authors_ja: '竹澤正哲'
+    chapter_ja: '意思決定のバイアス'
+    book_ja: '誠信心理学辞典[新版]'
+    editors_ja: '下山晴彦（編）'
+    publisher_ja: '誠信書房'
+    pages: '856-859'
+    isbn: '4414305071'
+
+  - year: 2014
+    authors_en: 'Takahashi, N., & Takezawa, M.'
+    chapter_en: 'Cooperation and Sanctions'
+    book_en: 'Coexistence in Societies (Vol. 4 of Science of Communications)'
+    editors_en: 'Y. Anzai, M. Imai, A. Iriki, S. Umeda, Y. Katayama, T. Kameda, & T. Yamagishi (Eds.)'
+    publisher_en: 'Iwanami Syoten'
+    authors_ja: '高橋伸幸・竹澤正哲'
+    chapter_ja: '協力と賞罰'
+    book_ja: '社会のなかの共存 (岩波講座 コミュニケーションの認知科学 第4巻)'
+    editors_ja: '安西 祐一郎・今井 むつみ・入來 篤史・梅田 聡・片山 容一・亀田 達也・開 一夫・山岸 俊男（編）'
+    publisher_ja: '岩波書店'
+    pages: '121-144'
+    isbn: '4000113747'
 
   - year: 2013
-    authors: "Takezawa, M. [竹澤正哲]"
-    title: "Behavioral Biology of Cooperation [協力の行動生物学]"
-    book: "Behavioral Biology Dictionary [行動生物学辞典]"
-    editors: "Hasegawa, T. (Ed.) [長谷川寿一（編）]"
-    publisher: "Tokyo University Press [東京大学出版会]"
-    role: lead
+    authors_en: 'Garcia-Retamero, Takezawa, M., Woike, M., J. K, & Gigerenzer, G.'
+    chapter_en: 'Social Learning: A Route to Good Cue Orders'
+    book_en: 'Simple Heuristics in a Social World'
+    editors_en: 'R. Hertwig, U. Hoffrage, & the ABC Research Group (Eds.)'
+    publisher_en: 'Oxford University Press'
+    authors_ja: 'Garcia-Retamero・R. Takezawa・M. Woike・J. K・Gigerenzer, G'
+    pages: '343-353'
+    doi: '10.1093/acprof:oso/9780195388435.003.0012'
+    isbn: '0195388437'
 
-  - year: 2012
-    authors: "Takezawa, M. [竹澤正哲]"
-    title: "Wisdom of Crowds [集合知]"
-    book: "Japanese Encyclopedia of Social Psychology [社会心理学事典]"
-    editors: "Japanese Society of Social Psychology (Ed.) [日本社会心理学会（編）]"
-    publisher: "Maruzen [丸善出版]"
-    role: lead
+  - year: 2013
+    authors_en: 'Keller, M. Gummerum, Canz, M., Gigerenzer, T., G, & Takezawa, M.'
+    chapter_en: 'The Is and Ought of sharing: The equality heuristic across the lifespan'
+    book_en: 'Simple Heuristics in a Social World'
+    editors_en: 'R. Hertwig, U. Hoffrage, & the ABC Research Group (Eds.)'
+    publisher_en: 'Oxford University Press Inc'
+    authors_ja: 'Keller, M. Gummerum・M. Canz・T. Gigerenzer・G・Takezawa, M'
+    pages: '171-195'
+    doi: '10.1093/acprof:oso/9780195388435.003.0006'
 
-  - year: 2012
-    authors: "Takezawa, M. [竹澤正哲]"
-    title: "Cultural Group Selection [文化的集団淘汰]"
-    book: "Japanese Encyclopedia of Social Psychology [社会心理学事典]"
-    editors: "Japanese Society of Social Psychology (Ed.) [日本社会心理学会（編）]"
-    publisher: "Maruzen [丸善出版]"
-    role: lead
+  - year: 2013
+    authors_en: 'Takezawa, M.'
+    chapter_en: 'Cognitive Biases'
+    book_en: 'Behavioral Biology Dictionary'
+    editors_en: 'K. Ueda, K. Okanoya, T. Kikusui, T. Sakagami, K. Tsuji, M. Tomonaga, S. Nakajima, T. Hasegawa, & T. Matsushima (Eds.)'
+    publisher_en: 'Tokyo Kagaku Doujin'
+    authors_ja: '竹澤 正哲'
+    chapter_ja: '認知バイアス'
+    book_ja: '行動生物学辞典'
+    editors_ja: '上田恵介・岡ノ谷一夫・菊水健史・坂上貴之・辻和希・友永雅己・中島定彦・長谷川寿一・松島俊也（編）'
+    publisher_ja: '東京科学同人'
+    pages: '411'
+    isbn: '9784807908370'
+
+  - year: 2010
+    authors_en: 'Takezawa, M.'
+    chapter_en: 'Cooperation, Games (2 articles in a book)'
+    book_en: 'Japanese Encyclopedia of Social Psychology'
+    editors_en: 'J. Ueda (Ed.)'
+    publisher_en: 'Maruzen'
+    authors_ja: '竹澤正哲'
+    chapter_ja: '協力、ゲーム（計2項目）'
+    book_ja: '社会心理学事典'
+    editors_ja: '日本社会心理学会（編）'
+    publisher_ja: '丸善'
+    isbn: '9784621081075'
 
   - year: 2009
-    authors: "Takezawa, M. [竹澤正哲]"
-    title: "Development of Evolutionary Games (Chapter 9) [進化ゲームとその展開（第9章）]"
-    book: "Development of Evolutionary Games [進化ゲームとその展開]"
-    editors: "Yamamori, T., & Terai, S. (Eds.) [山森哲雄・寺井聡（編）]"
-    publisher: "Baifukan [培風館]"
-    role: lead
+    authors_en: 'Kameda, T., & Takezawa, M.'
+    chapter_en: 'Are our minds fundamentally egalitarian? Adaptive bases of different socio-cultural models about distributive justice'
+    book_en: 'Evolution, Culture, and the Human Mind'
+    editors_en: 'M. Schaller, S. J. Heine, A. Norenzayan, T. Yamagishi, & T. Kameda (Eds.)'
+    publisher_en: 'Psychology Press'
+    authors_ja: 'Kameda, Tatsuya・Takezawa, Masanori'
+    doi: '10.4324/9780203848746'
+    isbn: '9780805859119'
+    reprint_note: 'Reprinted in: Heuristics: The Foundations of Adaptive Behavior (2011)'
+
+  - year: 2008
+    authors_en: 'Johnson, D. D. P., Price, M. E., & Takezawa, M.'
+    chapter_en: 'Renaissance of the Individual: Reciprocity, Positive Assortment, and the Puzzle of Human Cooperation'
+    book_en: 'Foundations of Evolutionary Psychology: Ideas, Issues, Applications and Findings'
+    editors_en: 'C. Crawford & D. Krebs (Eds.)'
+    authors_ja: 'Johnson・D. D. P.・Price, M. E.・Takezawa, M.'
+    pages: '331-352'
+    isbn: '9780805859577'
+
+  - year: 2003
+    authors_en: 'Martignon, L., Vitouch, O., Takezawa, M., & Forster, M.'
+    chapter_en: 'Naive and yet Enlightened: From Natural Frequenciesto Fast and Frugal Decision Trees'
+    book_en: 'Psychological perspectives on reasoning, judgment and decision making'
+    editors_en: 'L. Macchi & D. Hardman (Eds.)'
+    publisher_en: 'Wiley'
+    authors_ja: 'Martignon, Laura・Vitouch, Oliver・Takezawa, Masanori・Forster, Malcolm R.'
+    pages: '189-211'
+    doi: '10.1002/047001332X.ch10'
+    isbn: '9780471494577'
+    reprint_note: 'Reprinted in: Heuristics: The Foundations of Adaptive Behavior (2011)'
 
   - year: 2002
-    authors: "Takezawa, M. [竹澤正哲]"
-    title: "Reciprocal Altruism and Cooperation [互恵的利他主義と協力]"
-    book: "Development in Evolutionary Psychology [広がる！進化心理学]"
-    editors: "Sugiyama, L. S. (Ed.) [杉山幸丸（編）]"
-    publisher: "Baifukan [培風館]"
-    role: lead
+    authors_en: 'Takezawa, M., & Kameda, T.'
+    chapter_en: 'Ownership and sharing: Exploring social foundations of communal sharing norm by evolutionary game analysis'
+    book_en: 'Development of evolutionary games'
+    editors_en: 'Y. Sayeki & T. Kameda (Eds.)'
+    publisher_en: 'Kyoritsu Shuppan'
+    authors_ja: '竹澤正哲・亀田達也'
+    chapter_ja: '所有と分配－共同分配規範の社会的発生基盤に関する進化ゲーム分析'
+    book_ja: '進化ゲームとその展開'
+    editors_ja: '佐伯胖・亀田達哉（編）'
+    publisher_ja: '共立出版'
+    isbn: '9784320094390'
+
 ---
