@@ -34,10 +34,12 @@ const preprintGroups= groupByYear(preprints);
 const bookGroups   = groupByYear(books);
 const miscGroups   = groupByYear(misc);
 
-const cats = ['all','cooperation','culture','crowd','misc_tag'];
+// カテゴリをpapers.mdのcat_definitionsから自動生成
+const catDefs = papersData.cat_definitions || {};
+const cats = ['all', ...Object.keys(catDefs)];
 const catLabels: Record<string,string> = {
-  all:'All', cooperation:'Cooperation',
-  culture:'Cultural Evolution', crowd:'Wisdom of Crowds', misc_tag:'Misc.'
+  all: 'All',
+  ...catDefs,
 };
 
 function highlightMe(s: string) {
@@ -145,7 +147,7 @@ function highlightMeJa(s: string) {
         <button
           class={`filter-btn${cat === 'all' ? ' active' : ''}`}
           onclick={`filterPubs('${cat}',this)`}
-        >{catLabels[cat]}</button>
+        >{catLabels[cat] || cat}</button>
       ))}
     </div>
   </div>
@@ -154,7 +156,7 @@ function highlightMeJa(s: string) {
       <>
         <div class="year-heading">{year}</div>
         {items.map((p: any) => (
-          <div class="pub-item" data-cat={p.cat || ''}>
+          <div class="pub-item" data-cat={Array.isArray(p.cat) ? p.cat.join(',') : (p.cat || '')}>
             <div>
               <!-- EN -->
               <div class="pub-content-en">
@@ -345,7 +347,8 @@ function filterPubs(cat, btn) {
   btn.classList.add('active');
   const items = document.querySelectorAll('#tab-papers .pub-item');
   items.forEach(item => {
-    const show = cat === 'all' || item.dataset.cat === cat;
+    const itemCats = (item.dataset.cat || '').split(',').map(s => s.trim());
+    const show = cat === 'all' || itemCats.includes(cat);
     item.classList.toggle('hidden', !show);
   });
   const pubList = document.getElementById('pub-list');

@@ -2,6 +2,15 @@
 # publications/papers.md
 # Source: researchmap 2026-03-17
 
+# カテゴリ定義
+# ここにカテゴリを追加するだけで、Publicationsページのフィルターに自動反映されます
+# 各論文のcatフィールドには下記のkeyを指定してください（複数可: リスト形式）
+# 例: cat: [cooperation, culture]
+cat_definitions:
+  cooperation: "Cooperation"
+  culture: "Cultural Evolution"
+  crowd: "Wisdom of Crowds"
+
 papers:
   - year: 2025
     authors_en: 'Kido, Y., & Takezawa, M.'

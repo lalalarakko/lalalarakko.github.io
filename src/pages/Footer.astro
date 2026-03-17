@@ -1,0 +1,21 @@
+---
+import { load } from 'js-yaml';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+const raw = readFileSync(join(process.cwd(), 'src/content/site.md'), 'utf-8');
+const match = raw.match(/^---\n([\s\S]*?)\n---/);
+const site = match ? load(match[1]) as Record<string, any> : {};
+const year = site.copyright_year || new Date().getFullYear();
+---
+<footer>
+  <a class="footer-name" href="/">{site.name_en || 'Masanori Takezawa'}</a>
+  <ul class="footer-links">
+    <li><a href="/research/">Research</a></li>
+    <li><a href="/publications/">Publications</a></li>
+    <li><a href="/lab/">Lab</a></li>
+    <li><a href="/cv/">CV</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+  <span class="footer-copy">© {year} {site.name_en || 'Masanori Takezawa'}</span>
+</footer>
