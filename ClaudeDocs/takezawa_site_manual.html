@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>takezawa-site 開発マニュアル</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Serif+Display&display=swap');
+  :root {
+    --black: #0a0a0a; --white: #f5f4f0; --accent: #c0392b;
+    --gray-light: #e8e7e3; --gray-mid: #666; --gray-dark: #222;
+    --code-bg: #1e1e1e; --code-fg: #d4d4d4;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: var(--white); color: var(--black); font-size: 16px; line-height: 1.75; }
+  header { background: var(--black); color: var(--white); padding: 48px; border-bottom: 3px solid var(--accent); }
+  header h1 { font-family: var(--serif); font-size: 36px; font-weight: 400; margin-bottom: 8px; }
+  header p { color: #aaa; font-size: 14px; }
+  nav { position: sticky; top: 0; background: var(--white); border-bottom: 1px solid var(--black); padding: 0 48px; z-index: 100; display: flex; overflow-x: auto; }
+  nav a { display: block; padding: 14px 20px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; color: var(--gray-dark); white-space: nowrap; border-bottom: 2px solid transparent; transition: all .2s; }
+  nav a:hover { color: var(--black); border-bottom-color: var(--accent); }
+  .container { max-width: 860px; margin: 0 auto; padding: 64px 48px; }
+  .section { margin-bottom: 72px; }
+  .section-label { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 12px; }
+  h2 { font-family: var(--serif); font-size: 32px; font-weight: 400; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-light); }
+  h3 { font-size: 17px; font-weight: 500; margin: 36px 0 12px; }
+  p { margin-bottom: 16px; color: var(--gray-dark); }
+  .step { display: grid; grid-template-columns: 40px 1fr; gap: 0 20px; margin-bottom: 28px; align-items: start; }
+  .step-num { width: 40px; height: 40px; background: var(--black); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; flex-shrink: 0; margin-top: 2px; }
+  .step-content h4 { font-size: 15px; font-weight: 500; margin-bottom: 8px; color: var(--black); }
+  .step-content p { margin-bottom: 8px; }
+  pre { background: var(--code-bg); color: var(--code-fg); padding: 20px 24px; font-size: 13px; line-height: 1.7; overflow-x: auto; margin: 12px 0 16px; font-family: 'SF Mono', 'Fira Code', monospace; }
+  code { background: #e8e7e3; color: var(--black); padding: 2px 6px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', monospace; }
+  pre code { background: none; color: inherit; padding: 0; }
+  .callout { border-left: 3px solid var(--accent); padding: 16px 20px; margin: 20px 0; background: #fff; }
+  .callout.warn { border-left-color: #e67e22; }
+  .callout.ok { border-left-color: #27ae60; }
+  .callout p { margin: 0; font-size: 14px; }
+  .callout-title { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; margin-bottom: 6px; }
+  .callout-title.red { color: var(--accent); }
+  .callout-title.warn { color: #e67e22; }
+  .callout-title.ok { color: #27ae60; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th { text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--black); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--gray-mid); }
+  td { padding: 12px; border-bottom: 1px solid var(--gray-light); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  hr { border: none; border-top: 1px solid var(--gray-light); margin: 48px 0; }
+  @media (max-width: 680px) { header, .container { padding: 28px 20px; } nav { padding: 0 12px; } h2 { font-size: 26px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>takezawa-site 開発マニュアル</h1>
+  <p>lalalarakko.github.io — 環境構築・日常運用・Claudeへの依頼方法・トラブル対応</p>
+</header>
+
+<nav>
+  <a href="#setup">新Mac環境構築</a>
+  <a href="#localhost">ローカル確認</a>
+  <a href="#commit">修正・コミット</a>
+  <a href="#claude">Claudeへの依頼</a>
+  <a href="#conflict">コンフリクト対応</a>
+  <a href="#cheatsheet">コマンド早見表</a>
+</nav>
+
+<div class="container">
+
+  <!-- ══ Section 01 ══ -->
+  <section class="section" id="setup">
+    <p class="section-label">Section 01</p>
+    <h2>新しいMacの環境構築</h2>
+    <p>オフィスのMacなど、一度も作業したことのない新しいMacでの初回セットアップ手順です。</p>
+
+    <h3>Step 1 — Node.js をインストール</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>Node.jsのダウンロード</h4>
+        <p>ブラウザで <strong>https://nodejs.org</strong> を開き、<strong>LTS版</strong>をダウンロードしてインストールします。</p>
+        <pre><code>node -v
+# v20.x.x のような表示が出ればOK</code></pre>
+      </div>
+    </div>
+
+    <h3>Step 2 — Gitの設定</h3>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>ターミナルを開く（Spotlight: Command + Space → "Terminal"）</h4>
+        <pre><code>git config --global user.name "Masanori Takezawa"
+git config --global user.email "your@email.com"</code></pre>
+        <p>このMacで1度だけ実行すればOKです。</p>
+      </div>
+    </div>
+
+    <h3>Step 3 — GitHubのPersonal Access Tokenを確認</h3>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>トークンの準備（<code>ghp_</code>で始まる文字列）</h4>
+        <p>紛失した場合は再作成：GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token (classic)</p>
+        <p>Scope: <strong>repo</strong> と <strong>workflow</strong> にチェック。Expiration: No expiration。</p>
+      </div>
+    </div>
+
+    <h3>Step 4 — リポジトリをクローン</h3>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <pre><code>mkdir ~/GitProjects
+cd ~/GitProjects
+git clone https://github.com/lalalarakko/lalalarakko.github.io.git takezawa-site</code></pre>
+        <p>ユーザー名・パスワードを求められたら：Username: <code>lalalarakko</code> / Password: Personal Access Token</p>
+        <div class="callout warn">
+          <p class="callout-title warn">注意</p>
+          <p>パスワード欄は入力しても何も表示されません。正しく入力されているのでそのままEnterを押してください。</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Step 5 — パッケージをインストール</h3>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <pre><code>cd ~/GitProjects/takezawa-site
+npm install</code></pre>
+        <p>warningやvulnerabilityの警告は無視して問題ありません。</p>
+        <div class="callout ok">
+          <p class="callout-title ok">完了</p>
+          <p>この手順はこのMacで最初の1回だけ必要です。次回からは <code>git pull</code> するだけでOKです。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- ══ Section 02 ══ -->
+  <section class="section" id="localhost">
+    <p class="section-label">Section 02</p>
+    <h2>ローカルでの動作確認（localhost）</h2>
+
+    <h3>開発サーバーの起動</h3>
+    <pre><code>cd ~/GitProjects/takezawa-site
+npm run dev</code></pre>
+    <p>ブラウザで <strong>http://localhost:4321</strong> を開くとサイトが表示されます。</p>
+    <div class="callout">
+      <p class="callout-title red">ホットリロード</p>
+      <p><code>src/content/</code> 以下のMarkdownファイルを編集・保存すると、ブラウザが自動的に更新されます。</p>
+    </div>
+
+    <h3>開発サーバーの停止</h3>
+    <p>ターミナルで <strong>Control + C</strong> を押して停止します。</p>
+
+    <h3>よくあるエラー</h3>
+    <table>
+      <tr><th>エラー</th><th>対処</th></tr>
+      <tr><td><code>YAMLException</code></td><td>Markdownファイルの書き方が間違っています。文字列をシングルクォートで囲んでいるか確認してください。</td></tr>
+      <tr><td><code>Cannot find module</code></td><td><code>npm install</code> を実行してください。</td></tr>
+      <tr><td>ポート4321が使用中</td><td>Astroが自動的に別のポートを使います。ターミナルに表示されたURLを確認してください。</td></tr>
+    </table>
+  </section>
+
+  <hr>
+
+  <!-- ══ Section 03 ══ -->
+  <section class="section" id="commit">
+    <p class="section-label">Section 03</p>
+    <h2>ファイルの修正・コミット・公開</h2>
+
+    <h3>作業前：最新版を取得する（必須）</h3>
+    <pre><code>cd ~/GitProjects/takezawa-site
+git pull</code></pre>
+    <div class="callout warn">
+      <p class="callout-title warn">鉄則</p>
+      <p>git pull なしで作業を始めると、コンフリクトの原因になります。必ず最初に実行してください。</p>
+    </div>
+
+    <h3>通常の更新フロー</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content"><h4>最新を取得</h4><pre><code>cd ~/GitProjects/takezawa-site
+git pull</code></pre></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content"><h4>Markdownファイルを編集</h4><p><code>src/content/</code> 以下のファイルを編集・保存します。VS Codeがある場合：</p><pre><code>code ~/GitProjects/takezawa-site</code></pre></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content"><h4>ローカルで確認（任意）</h4><pre><code>npm run dev
+# ブラウザで http://localhost:4321 を確認
+# 確認後は Control + C で停止</code></pre></div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content"><h4>コミット＆プッシュ</h4><pre><code>git add .
+git commit -m "更新内容"
+git push</code></pre></div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content"><h4>デプロイ確認</h4><p>GitHub Actions（https://github.com/lalalarakko/lalalarakko.github.io/actions）で ✅ 緑になれば約1〜2分で公開されます。</p></div>
+    </div>
+
+    <h3>主なコンテンツ更新の例</h3>
+    <table>
+      <tr><th>やりたいこと</th><th>編集するファイル</th></tr>
+      <tr><td>論文を追加・修正</td><td><code>src/content/publications/papers.md</code></td></tr>
+      <tr><td>Lab Newsを追加</td><td><code>src/content/lab/news.md</code></td></tr>
+      <tr><td>メンバーを追加・削除</td><td><code>src/content/lab/members.md</code></td></tr>
+      <tr><td>学位論文を追加</td><td><code>src/content/lab/theses.md</code></td></tr>
+      <tr><td>トップページのNews更新</td><td><code>src/content/updates.md</code></td></tr>
+      <tr><td>CV（職歴・グラントなど）</td><td><code>src/content/cv/</code> 以下の各ファイル</td></tr>
+      <tr><td>フッターの年を変更</td><td><code>src/content/site.md</code> の <code>copyright_year</code></td></tr>
+    </table>
+  </section>
+
+  <hr>
+
+  <!-- ══ Section 04 ══ -->
+  <section class="section" id="claude">
+    <p class="section-label">Section 04</p>
+    <h2>Claudeへの修正依頼方法</h2>
+
+    <div class="callout">
+      <p class="callout-title red">原則</p>
+      <p>Claudeはmdファイルをスクラッチから生成・上書きしません。Claudeが担当するのは <code>.astro</code> ファイルと <code>global.css</code> のみです。</p>
+    </div>
+
+    <h3>astroファイルの修正を依頼する場合</h3>
+    <p>以下をすべてClaudeに添付して依頼します：</p>
+    <ol style="margin-left:20px;color:var(--gray-dark);line-height:2.2;">
+      <li>マスタープロンプト（<code>takezawa_site_master_prompt.txt</code>）</li>
+      <li>最新の <code>takezawa-site.zip</code>（下記コマンドで作成）</li>
+      <li>変更内容の説明</li>
+    </ol>
+
+    <h3>takezawa-site.zip の作成方法</h3>
+    <p>修正依頼前に、以下のコマンドで最新のサイトをzip圧縮してClaudeにアップロードします。定期的にアップロードすることで、Claudeが常に最新のファイルを参照できます。</p>
+    <pre><code>cd ~/GitProjects
+zip -r takezawa-site.zip takezawa-site \
+  --exclude "*/node_modules/*" \
+  --exclude "*/.git/*" \
+  --exclude "*/dist/*" \
+  --exclude "*/.astro/*"</code></pre>
+    <div class="callout ok">
+      <p class="callout-title ok">推奨</p>
+      <p>Claudeに修正を依頼するたびに最新のzipをアップロードしてください。これにより、Claudeが古いバージョンのファイルを上書きしてしまうリスクを防ぎます。</p>
+    </div>
+
+    <h3>Publications差分の確認を依頼する場合</h3>
+    <ol style="margin-left:20px;color:var(--gray-dark);line-height:2.2;">
+      <li>マスタープロンプト</li>
+      <li>publications_generation_prompt.txt</li>
+      <li>現在の最新mdファイル（papers.md等）← 必須</li>
+      <li>新しいJSONLファイル ← 必須</li>
+      <li>「差分のみを出力せよ」と指示</li>
+    </ol>
+    <div class="callout warn">
+      <p class="callout-title warn">重要</p>
+      <p>mdファイルとJSONLファイルの両方をアップロードしてください。JSONLのみの場合、Claudeはmdを生成しません。Claudeが出力するのは差分（<code>papers_updates.md</code>等）のみです。内容を確認してから手動で既存のmdに追記してください。</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- ══ Section 05 ══ -->
+  <section class="section" id="conflict">
+    <p class="section-label">Section 05</p>
+    <h2>コンフリクト（競合）への対応</h2>
+    <p>Mac Aで作業した後、git pullせずにMac Bで同じファイルを編集してしまった場合に発生します。</p>
+
+    <h3>コンフリクトが発生したとき</h3>
+    <pre><code>CONFLICT (content): Merge conflict in src/content/publications/papers.md
+Automatic merge failed; fix conflicts and then commit the result.</code></pre>
+
+    <h3>対処法A — 自分の変更を優先する（推奨）</h3>
+    <pre><code>git checkout --ours src/content/publications/papers.md
+git add src/content/publications/papers.md
+git commit -m "Resolve conflict: keep local version"
+git push</code></pre>
+
+    <h3>対処法B — GitHubの版を優先する</h3>
+    <pre><code>git checkout --theirs src/content/publications/papers.md
+git add src/content/publications/papers.md
+git commit -m "Resolve conflict: keep remote version"
+git push</code></pre>
+
+    <h3>対処法C — すべてをリセット</h3>
+    <pre><code># ⚠️ ローカルの未保存変更がすべて消えます
+git fetch origin
+git reset --hard origin/main</code></pre>
+
+    <h3>現在の状態を確認する</h3>
+    <pre><code>git status          # 変更されたファイルの一覧
+git diff            # 変更内容の詳細
+git log --oneline -10   # コミット履歴</code></pre>
+  </section>
+
+  <hr>
+
+  <!-- ══ Section 06 ══ -->
+  <section class="section" id="cheatsheet">
+    <p class="section-label">Section 06</p>
+    <h2>コマンド早見表</h2>
+
+    <h3>日常作業</h3>
+    <table>
+      <tr><th>やること</th><th>コマンド</th></tr>
+      <tr><td>プロジェクトに移動</td><td><code>cd ~/GitProjects/takezawa-site</code></td></tr>
+      <tr><td>最新版を取得（作業前に必ず）</td><td><code>git pull</code></td></tr>
+      <tr><td>開発サーバー起動</td><td><code>npm run dev</code></td></tr>
+      <tr><td>開発サーバー停止</td><td>Control + C</td></tr>
+      <tr><td>変更をすべてステージ</td><td><code>git add .</code></td></tr>
+      <tr><td>コミット</td><td><code>git commit -m "メッセージ"</code></td></tr>
+      <tr><td>GitHubに送信</td><td><code>git push</code></td></tr>
+    </table>
+
+    <h3>Claudeへの依頼用zipを作成する</h3>
+    <pre><code>cd ~/GitProjects
+zip -r takezawa-site.zip takezawa-site \
+  --exclude "*/node_modules/*" \
+  --exclude "*/.git/*" \
+  --exclude "*/dist/*" \
+  --exclude "*/.astro/*"</code></pre>
+
+    <h3>一連の流れ（コピペ用）</h3>
+    <pre><code># 作業開始時
+cd ~/GitProjects/takezawa-site
+git pull
+
+# （ファイルを編集）
+
+# ローカル確認（任意）
+npm run dev
+
+# 公開
+git add .
+git commit -m "更新内容を書く"
+git push</code></pre>
+
+    <h3>新しいMacのセットアップ（初回のみ）</h3>
+    <pre><code>git config --global user.name "Masanori Takezawa"
+git config --global user.email "your@email.com"
+mkdir ~/GitProjects && cd ~/GitProjects
+git clone https://github.com/lalalarakko/lalalarakko.github.io.git takezawa-site
+cd takezawa-site
+npm install</code></pre>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,153 @@
+# Publications更新プロンプト
+# takezawa-site / researchmap JSON → Markdown差分出力
+# 最終更新: 2026-03-17
+
+---
+
+## 【最重要】作業の原則
+
+### Claudeはmdファイルをスクラッチから生成しない
+
+- **必ず最新のmdファイルとJSONLファイルの両方をアップロードすること**
+- JSONLファイルのみアップロードされた場合、Claudeはmdを生成しない
+- Claudeは既存のmdとJSONLを比較し、**差分（追加・変更分）のみ**を出力する
+- 出力ファイル名は `papers_updates.md` のように `_updates` を付ける
+- 先生が内容を確認してから、手動で既存のmdに追記・修正する
+- 既存のmdを丸ごと置き換えない
+
+### 差分の定義
+- **新規追加**: JSONLに存在するが現在のmdに存在しないエントリ
+- **変更**: JSONLと現在のmdで書誌情報（巻号・ページ等）が異なるエントリ
+- **同一**: 現在のmdとJSONLで内容が同一 → 出力しない
+
+---
+
+## 対象ファイルとレコードタイプの対応
+
+出力ファイル              | JSONLのtype
+--------------------------|----------------------------------------------------
+papers_updates.md         | published_papers（差分のみ）
+preprints_updates.md      | miscのうちプレプリント（差分のみ）
+misc_updates.md           | miscのうちプレプリント以外（差分のみ）
+books_updates.md          | books_etc（差分のみ、Heuristics 2011リプリント章は除外）
+
+---
+
+## フィールド構造（papers）
+
+```yaml
+# 【新規追加】または【変更: 変更内容の説明】のエントリのみ出力する
+
+  - year: (publication_dateの年)
+    authors_en: (正規化済み英語著者名)
+    title_en: (英語タイトル)
+    journal_en: (雑誌名, vol(num), start–end)
+    authors_ja: (日本語著者名。日本語論文のみ。・で区切る)
+    title_ja: (日本語タイトル。日本語論文のみ)
+    journal_ja: (日本語雑誌名, vol(num), start–end。日本語論文のみ)
+    doi: (あれば)
+    cat: (cooperation / culture / crowd / 空欄)
+    role: (last / corresponding / contributor)
+    badge_corresponding: true  # lastかつcorrespondingの場合のみ
+    badge_invited: true        # invitedの場合のみ
+```
+
+## フィールド構造（books）
+
+```yaml
+  - year: (publication_dateの年)
+    authors_en: (正規化済み英語著者名)
+    chapter_en: (英語章タイトル)
+    book_en: (英語書籍タイトル)
+    editors_en: (APA形式編者)
+    publisher_en: (英語出版社)
+    authors_ja: (日本語著者名。日本語著者がいる場合のみ。英語名は入れない)
+    chapter_ja: (日本語章タイトル。あれば)
+    book_ja: (日本語書籍タイトル。あれば)
+    editors_ja: (日本語編者。あれば)
+    publisher_ja: (日本語出版社。あれば)
+    pages: (rep_page)
+    doi: (あれば)
+    isbn: (あれば)
+    reprint_note: (リプリントの場合のみ)
+```
+
+---
+
+## 表記方針
+
+### 著者名の正規化（Surname, F. 形式）
+- すべての著者名を Surname, F. 形式に統一する
+- Takezawaの全変形を Takezawa, M. に統一する：
+  Masanori Takezawa / M Takezawa / M. Takezawa / TAKWZAWA Masanori /
+  Takezawa Masanori / Takezawa, M / Takezawa, M. / Takezawa, Masanori / R. Takezawa
+- 他の著者：Firstname Surname → Surname, F. / Surname, Firstname → Surname, F.
+- 日本語著者名は authors_ja フィールドに保持する（・で区切る）
+- 英語著者しかいない場合はauthors_jaフィールドを設けない
+- 2名：A., & B. / 3名以上：A., B., & C.
+
+### 雑誌情報
+- 雑誌名はTitle Caseに統一
+- 例外: PLOS ONE → PLOS ONE / PLOS Computational Biology → PLOS Computational Biology
+- ページ番号: starting_page–ending_page（en-dash）
+- 年のみ（月不要）
+
+### catの自動分類
+- cooperation: cooperat / altruism / group selection / prisoner / reciproc / norm / prosoc
+- culture: cultural evolution / transmission / iterated / cumulative / word-order
+- crowd: wisdom / crowd / collective / group decision / aggregat / majority / epistemic
+- 該当なし: 空欄
+
+---
+
+## プレプリント判定条件
+
+以下のいずれかに該当 → preprints_updates.md に分類：
+- publisherに "open science" を含む
+- DOIに osf.io / 31234 / 31219 / 31235 を含む
+
+重要な例外：publication_name（雑誌名）とvolume（巻号）が両方存在する場合は、
+DOIがプレプリントサーバー形式であっても正式掲載論文として扱い misc_updates.md に分類する。
+
+除外対象（どのファイルにも含めない）：
+- Kido & Takezawa (2024-08-17) のプレプリント
+  タイトル：empirical evidence for the spread of cooperation
+  理由：論文として公刊済み（display: closed）
+
+---
+
+## 編者のAPA形式（books）
+
+- descriptionフィールドからEDITORS_EN / EDITORS_JAを抽出する
+- セミコロン区切りで分割し、各編者を F. Surname 形式に正規化する
+- 1名：J. Ando (Ed.) / 2名：R. Oda & Y. Ohtsubo (Eds.)
+- editors_jaフィールドには日本語編者名のみ記載する
+
+## Heuristics 2011の特別処理
+- Heuristics: The Foundations of Adaptive Behavior（2011）収録の2章は除外
+- 元の章エントリ（2003・2009）にreprint_noteを追加する
+
+---
+
+## YAMLの文字列処理
+
+- すべての文字列値をシングルクォートで囲む
+- 文字列内のシングルクォートは '' （2つ連続）でエスケープする
+
+---
+
+## ソート順
+
+全ファイルとも publication_date の降順（新しいものが上）。
+
+---
+
+## 使い方
+
+1. このファイルをClaudeに添付する
+2. 現在の最新mdファイル（papers.md等）をClaudeに添付する ← 必須
+3. researchmapからエクスポートしたJSONLファイルを添付する ← 必須
+4. 「このプロンプトに従って差分を出力せよ」と指示する
+5. Claudeは papers_updates.md 等（差分のみ）を出力する
+6. 先生が内容を確認し、手動で既存のmdに追記・修正する
+7. 既存のmdを丸ごと置き換えない

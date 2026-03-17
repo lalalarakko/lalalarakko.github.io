@@ -1,0 +1,410 @@
+# takezawa-site 構築・修正マスタープロンプト
+# Masanori Takezawa (竹澤正哲) — 学術ウェブサイト
+# https://lalalarakko.github.io
+# 最終更新: 2026-03-17
+
+このファイルを読み込んだClaudeは、以下の方針に従ってサイトの修正・更新を行うこと。
+作業前にこのファイルを必ず熟読し、すべての方針を遵守すること。
+
+---
+
+## 0. 【最重要】作業の絶対ルール
+
+### mdファイルについて
+- **Claudeはmdファイルをスクラッチから生成しない**
+- **先生が管理するmdファイルを丸ごと上書きしない**
+- **先生から明示的に指示されていないmdファイルを変更しない**
+- **JSONに存在しないデータをmdに書き込まない（ハルシネーション厳禁）**
+
+### astroファイル・cssについて
+- Claudeが担当するのは `.astro` ファイルと `global.css` のみ
+- 修正依頼時は必ず現在のファイルをアップロードしてもらい、そのファイルを修正して返す
+- スクラッチから書き直さない
+
+### publications更新の正しい手順
+1. 先生が **現在のmdファイル**（papers.md等）と**新しいJSONLファイル**の両方をアップロードする
+2. JSONLのみアップロードされた場合、Claudeはmdを生成しない
+3. ClaudeはJSONLと現在のmdを比較し、**差分（追加・変更分）のみ**を特定する
+4. 差分を `papers_updates.md` 等の別ファイルとして出力する
+5. 先生が内容を確認してから、手動で既存のmdに追記・修正する
+
+### Claudeへの作業依頼時に必要なもの
+- このマスタープロンプト
+- 修正対象の現在の `.astro` ファイル（またはtakezawa-site.zip）
+- 変更内容の説明
+
+---
+
+## 1. プロジェクト概要
+
+### サイト情報
+- URL: https://lalalarakko.github.io
+- GitHub: https://github.com/lalalarakko/lalalarakko.github.io
+- ローカルパス: ~/GitProjects/takezawa-site/
+- フレームワーク: Astro + GitHub Pages
+- デプロイ: git push → GitHub Actions 自動デプロイ（約1〜2分）
+
+### サイトオーナー
+- 氏名: 竹澤正哲（Masanori Takezawa）
+- 所属: 北海道大学 大学院文学研究院 行動科学研究室 教授（副学部長 2025年4月〜）
+- 研究: 文化-遺伝子共進化アプローチ、協力の進化、集合知、累積的文化進化
+- ResearchMap: https://researchmap.jp/lalalarakko
+- Google Scholar: https://scholar.google.co.jp/citations?user=xbH6eocAAAAJ&hl=en
+- ORCID: 0000-0003-4103-0591
+
+### 対象読者
+英語圏研究者を主要読者とする。ただし日本語文献については日本語表記も保持する。
+
+---
+
+## 2. ディレクトリ構造
+
+```
+takezawa-site/
+├── .github/workflows/deploy.yml
+├── src/
+│   ├── layouts/BaseLayout.astro
+│   ├── components/
+│   │   ├── Nav.astro
+│   │   └── Footer.astro        # copyright_yearはsite.mdから読み込む
+│   ├── pages/
+│   │   ├── index.astro
+│   │   ├── research.astro
+│   │   ├── publications.astro
+│   │   ├── lab.astro
+│   │   ├── cv.astro
+│   │   └── contact.astro
+│   ├── styles/global.css
+│   └── content/                # ← 先生が管理（Claude上書き禁止）
+│       ├── site.md
+│       ├── updates.md
+│       ├── contact.md
+│       ├── research/
+│       │   ├── perspective.md
+│       │   └── themes.md
+│       ├── publications/
+│       │   ├── papers.md
+│       │   ├── preprints.md
+│       │   ├── books.md
+│       │   └── misc.md
+│       ├── lab/
+│       │   ├── members.md
+│       │   ├── alumni.md
+│       │   ├── theses.md
+│       │   └── news.md
+│       └── cv/
+│           ├── positions.md
+│           ├── education.md
+│           ├── grants.md
+│           ├── awards.md
+│           ├── service.md
+│           ├── membership.md
+│           ├── reviewing.md
+│           └── teaching.md
+├── package.json
+├── astro.config.mjs
+└── tsconfig.json
+```
+
+---
+
+## 3. デザインシステム
+
+### カラーパレット
+```css
+--black:      #0a0a0a
+--white:      #f5f4f0
+--accent:     #c0392b
+--gray-light: #e8e7e3
+--gray-mid:   #666
+--gray-dark:  #222
+```
+
+### フォント
+```css
+--serif: 'DM Serif Display', Georgia, serif
+--sans:  'DM Sans', sans-serif
+--jp:    'Noto Sans JP', sans-serif
+```
+
+### フォントサイズ原則
+- 本文・説明文・著者名・雑誌名等: 最低15px
+- タイトル・見出し: 本文より必ず大きく（16px以上）
+- 例外（小さくてよい）: ナビボタン・バッジ・ラベル・EN/JAトグル・DOI
+
+### レイアウト原則
+- ナビゲーション: 固定64px、1pxボーダー
+- 影なし（box-shadow禁止）
+- ボーダーは1px solid のみ
+- 余白: padding 48px（モバイルは20px）
+- レスポンシブブレークポイント: 900px / 680px
+
+---
+
+## 4. 各ページの構成
+
+### 全ページ共通：コンテンツ読み込みパターン
+```typescript
+import { load } from 'js-yaml';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
+function parseFrontmatter(raw: string) {
+  const match = raw.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return {};
+  return load(match[1]) as Record<string, any>;
+}
+```
+
+### index.astro
+読み込むmd: site.md / updates.md / research/themes.md
+
+site.mdの主要フィールド:
+```yaml
+name_en / name_jp / tagline / title_en / department_en / school_en / university_en
+affiliated_centers / keywords / hero_title / hero_desc
+links: {researchmap, google_scholar, orcid}
+copyright_year: "2026"
+```
+
+updates.mdの構造:
+```yaml
+updates:
+  - date: "Mar 2026"
+    tag: "Paper"   # Paper / Award / Position / Service / Grant
+    text: "..."
+```
+
+### research.astro
+読み込むmd: research/perspective.md / research/themes.md
+EN/JAページトグル実装済み
+
+themes.mdの構造:
+```yaml
+themes:
+  - id: 1
+    title_en: "..."
+    title_ja: "..."
+    lead_en: "..."
+    detail_en: "..."
+    text_ja: "..."
+```
+
+### publications.astro
+読み込むmd: publications/papers.md / preprints.md / books.md / misc.md
+EN/JAページトグル実装済み
+タブ構成: Papers / Preprints / Books & Chapters / Misc. & Reviews
+
+papers.mdのフィールド構造:
+```yaml
+cat_definitions:
+  cooperation: "Cooperation"
+  culture: "Cultural Evolution"
+  crowd: "Wisdom of Crowds"
+  # ここに追加するだけでフィルターボタンに自動反映
+
+papers:
+  - year: 2025
+    authors_en: "Kido, Y., & Takezawa, M."
+    title_en: "..."
+    journal_en: "Scientific Reports, 15, 22289"
+    authors_ja: "貴堂雄太・竹澤正哲"    # 日本語論文のみ
+    title_ja: "..."                      # 日本語論文のみ
+    journal_ja: "..."                    # 日本語論文のみ
+    doi: "10.xxxx/..."
+    cat: cooperation   # または [cooperation, culture] など複数可
+    role: last
+    badge_corresponding: true   # lastかつcorrespondingの場合のみ
+    badge_invited: true         # 招待論文の場合のみ
+```
+
+books.mdのフィールド構造:
+```yaml
+books:
+  - year: 2023
+    authors_en: "Takezawa, M."
+    chapter_en: "..."
+    book_en: "..."
+    editors_en: "R. Oda & Y. Ohtsubo (Eds.)"
+    publisher_en: "Asakura Publishers"
+    authors_ja: "竹澤正哲"        # 日本語著者がいる場合のみ
+    chapter_ja: "..."             # 日本語タイトルがある場合のみ
+    book_ja: "..."
+    editors_ja: "小田亮・大坪庸介（編）"
+    publisher_ja: "朝倉出版"
+    pages: "38-50"
+    isbn: "9784254523065"
+    reprint_note: "..."
+```
+
+日本語書誌情報の句読点: `，` と `．` を使用（`、` `。` は禁止）
+
+「In Japanese」バッジ:
+- ENモード時、title_ja（papers）またはchapter_ja（books）が存在するエントリに表示
+
+### lab.astro
+読み込むmd: lab/members.md / alumni.md / theses.md / news.md
+タブ構成: Current Members / Alumni / Theses / Lab News
+
+members.mdの構造:
+```yaml
+doctoral:
+  - name_en: "Kaito Takenishi"
+    name_jp: "竹西 海人"
+    year: "D1"
+    researchmap: "https://..."   # 任意
+    website: "https://..."       # 任意
+masters:
+  - name_en: "..."
+    name_jp: "..."
+    year: "M2"
+undergrad_b4:
+  - name_jp: "岩渕佑生"
+undergrad_b3:
+  - name_jp: "小島優芽"
+```
+
+### cv.astro
+読み込むmd: cv/ 以下8ファイル
+サイドバーナビ付き（スクロール追従）
+
+cv/membership.md → フィールド名: `memberships`（複数形）
+cv/reviewing.md → フィールド名: `agencies` と `journals`（2つに分離）
+
+### contact.astro
+読み込むmd: contact.md
+
+contact.mdの構造:
+```yaml
+intro: "I welcome inquiries about..."
+email: "m.takezawa [at] let.hokudai.ac.jp"
+address_en: |
+  Masanori Takezawa
+  ...
+address_jp: |
+  〒060-0810
+  ...
+profiles:
+  - service: "ResearchMap"
+    url: "https://..."
+    description: "..."
+    id: "..."   # リンクテキスト（省略可→"View Profile"）
+```
+
+---
+
+## 5. Astro実装の重要ルール
+
+### scriptタグ
+- すべての`<script>`タグに`is:inline`属性が必須
+- TypeScriptの型注釈をscriptタグ内に書いてはならない
+
+### set:htmlのCSSスコープ問題
+- `set:html`で動的生成した要素にはscopedなCSSが当たらない
+- 必ず`:global()`を使う:
+```css
+:global(.theme-detail p) { font-size: 15px; }
+```
+
+### EN/JAトグル
+```css
+.pub-content-ja { display: none; }
+.lang-ja .pub-content-en { display: none; }
+.lang-ja .pub-content-ja { display: block; }
+```
+
+---
+
+## 6. 日常更新（先生が直接編集）
+
+### 論文を追加する
+`src/content/publications/papers.md` の先頭（papers:の直後）に追加
+
+### カテゴリを追加する
+`papers.md` の `cat_definitions` に1行追加するだけでフィルターに反映
+
+### フッターの年を変更する
+`src/content/site.md` の `copyright_year` を変更
+
+### git pushで公開
+```bash
+cd ~/GitProjects/takezawa-site
+git add .
+git commit -m "更新内容"
+git push
+```
+
+---
+
+## 7. 複数Mac間の同期
+
+作業前に必ず:
+```bash
+cd ~/GitProjects/takezawa-site
+git pull
+```
+
+新しいMacのセットアップ（初回のみ）:
+```bash
+git config --global user.name "Masanori Takezawa"
+git config --global user.email "GitHubのメールアドレス"
+mkdir ~/GitProjects && cd ~/GitProjects
+git clone https://github.com/lalalarakko/lalalarakko.github.io.git takezawa-site
+cd takezawa-site && npm install
+```
+
+---
+
+## 8. GitHub Actions設定
+
+```yaml
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+GitHub Settings → Pages → Source を GitHub Actions に設定。
+デフォルトブランチは main（masterではない）。
+
+---
+
+## 9. トラブルシューティング
+
+### JavaScriptが動かない
+→ `<script>` タグに `is:inline` が付いているか確認
+
+### YAMLエラー
+→ 文字列値をシングルクォートで囲む
+→ 文字列内のシングルクォートは '' でエスケープ
+
+### git cloneで古いサイトが取得される
+→ GitHub Settings → Default branch → main に設定
+→ masterブランチは削除済み
