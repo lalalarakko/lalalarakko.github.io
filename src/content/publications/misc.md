@@ -23,46 +23,6 @@ misc:
     doi: '10.24602/sjpr.62.3_197'
     badge_invited: true
 
-  - year: 2013
-    authors_en: ''
-    title_en: 'Two Strategies in Mindreading : Examination of the Similarity Contingency Model with Reaction Time'
-    journal_en: 'Jcss Japanese Congnitive Science Society, 330–333'
-    authors_ja: '石井 辰典・竹澤 正哲'
-    title_ja: 'マインドリーディングにおける2 つの推測方略 : 反応時間を用いた方略使い分け仮説の検討'
-    journal_ja: 'JCSS Japanese Congnitive Science Society, 330–333'
-
-  - year: 2013
-    authors_en: 'Izawa, F., & Takezawa, M.'
-    title_en: 'The Influence of Optimism on the Accuracy of Contingency Judgment : An Examination from the Viewpoint of Depressive Realism'
-    journal_en: 'Psychological Report of Sophia University, 37, 49–61'
-    authors_ja: '伊澤 冬子・竹澤 正哲'
-    title_ja: '楽観性が随伴性認知の正確さに与える影響 : 抑うつリアリズムの観点から'
-    journal_ja: '上智大学心理学年報, 37, 49–61'
-
-  - year: 2012
-    authors_en: 'Kawano, A., Takezawa, M., & Oka, T.'
-    title_en: 'Paradoxical Effect of Suppressing Positive vs. Negative Stereotype'
-    journal_en: 'Psychological Report of Sophia University, 36, 1–7'
-    authors_ja: '河野 周・竹澤 正哲・岡 隆'
-    title_ja: 'アンビバレント・ステレオタイプの抑制における逆説的効果について'
-    journal_ja: '上智大学心理学年報, 36, 1–7'
-
-  - year: 2011
-    authors_en: 'Ishii, T., & Takezawa, M.'
-    title_en: 'Development of the Meaning of Significant other Scale'
-    journal_en: 'Psychological Report of Sophia University, 35, 51–59'
-    authors_ja: '石井 辰典・竹澤 正哲'
-    title_ja: '重要他者の意味尺度の作成'
-    journal_ja: '上智大学心理学年報, 35, 51–59'
-
-  - year: 2011
-    authors_en: 'Izawa, F., Aketa, Y., & Takezawa, M.'
-    title_en: 'Relationships between Optimism, Estimation of Event Occurrence, and Mental Health'
-    journal_en: 'Psychological Report of Sophia University, 35, 71–80'
-    authors_ja: '伊澤 冬子・明田 芳久・竹澤 正哲'
-    title_ja: '楽観性とイベント生起確率推定の精神的健康との関係'
-    journal_ja: '上智大学心理学年報, 35, 71–80'
-
   - year: 2009
     authors_en: 'Akihiro, T., Takezawa, M., Kuninori, N., Yugo, H., Shohei, H., & Hidehito, H.'
     title_en: 'Reports of the 31st Annual Conference of the Cognitive Science Society and Cognitive Science in the Netherlands'

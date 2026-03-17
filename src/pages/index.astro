@@ -30,7 +30,7 @@ const themes = themesData.themes || [];
 .hero-name-jp{font-family:var(--jp);font-size:18px;font-weight:400;color:var(--gray-dark);margin-bottom:40px;letter-spacing:.12em;}
 .hero-affil{font-size:15px;color:var(--gray-dark);line-height:1.85;font-weight:400;border-left:2px solid var(--accent);padding-left:16px;}
 .hero-affil strong{font-weight:500;color:var(--black);display:block;}
-.hero-centers{display:block;margin-top:10px;font-size:12px;color:var(--gray-mid);line-height:1.7;}
+.hero-centers{display:block;margin-top:10px;font-size:15px;color:var(--gray-dark);line-height:1.7;}
 .hero-bottom{display:flex;gap:16px;flex-wrap:wrap;margin-top:48px;}
 .hero-link{font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--black);border:1px solid var(--black);padding:10px 18px;transition:all .2s;}
 .hero-link:hover{background:var(--black);color:var(--white);}
@@ -51,8 +51,8 @@ const themes = themesData.themes || [];
 .research-card:hover::before{transform:scaleX(1);}
 .research-card:hover{background:#f0ede8;}
 .research-card-num{font-family:var(--serif);font-size:64px;color:#c8c5bf;line-height:1;margin-bottom:20px;font-style:italic;}
-.research-card-title{font-size:16px;font-weight:500;line-height:1.35;margin-bottom:14px;}
-.research-card-desc{font-size:14px;color:var(--gray-dark);font-weight:400;line-height:1.8;}
+.research-card-title{font-size:17px;font-weight:500;line-height:1.35;margin-bottom:14px;}
+.research-card-desc{font-size:15px;color:var(--gray-dark);font-weight:400;line-height:1.8;}
 .research-more{display:inline-flex;align-items:center;gap:10px;margin-top:36px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--black);font-weight:500;}
 .research-more::after{content:'→';transition:transform .2s;display:inline-block;}
 .research-more:hover::after{transform:translateX(6px);}
@@ -89,7 +89,7 @@ const themes = themesData.themes || [];
           ))}
         </span>
       </div>
-      <p style="font-size:14px;color:var(--gray-dark);font-weight:400;margin-top:14px;font-style:italic;">{site.keywords}</p>
+      <p style="font-size:15px;color:var(--gray-dark);font-weight:400;margin-top:14px;">{site.keywords}</p>
       <div class="hero-bottom">
         <a class="hero-link hero-link-rm" href={site.links.researchmap} target="_blank">
           <span class="rm-label">日本語プロフィール</span>

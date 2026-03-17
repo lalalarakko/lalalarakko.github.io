@@ -1,48 +1,42 @@
 ---
-# ============================================================
-# cv/positions.md — Academic Positions
-# ============================================================
+# cv/positions.md
+# Source: researchmap 2026-03-17
 
 positions:
-  - period: "Apr 2025 – Present"
-    title: "Vice Dean"
-    place: "Graduate School of Humanities and Human Sciences, Hokkaido University"
+  - period: 'Apr 2022 – Present'
+    title: 'Professor'
+    place: 'Graduate School of Humanities and Human Sciences, Hokkaido University'
 
-  - period: "Apr 2022 – Present"
-    title: "Professor"
-    place: "Department of Behavioral Science, Graduate School of Humanities and Human Sciences, Hokkaido University"
-    note: "Concurrent: Center for Experimental Research in Social Sciences (CERSS); Core member, Center for Human Nature, Artificial Intelligence and Neuroscience (CHAIN)"
+  - period: 'Mar 2019 – Feb 2020'
+    title: 'Guest Research Scientist'
+    place: 'Department of Human Behavior, Ecology, and Culture, Max Planck Institute for Evolutionary Anthropology'
 
-  - period: "Mar 2019 – Feb 2020"
-    title: "Visiting Researcher (Guest Research Scientist)"
-    place: "Department of Human Behavior, Ecology, and Culture, Max Planck Institute for Evolutionary Anthropology, Leipzig, Germany"
+  - period: 'Nov 2012 – Mar 2022'
+    title: 'Associate Professor'
+    place: 'Department of Behavioral Science, Hokkaido University'
 
-  - period: "Nov 2012 – Mar 2022"
-    title: "Associate Professor"
-    place: "Department of Behavioral Science, Graduate School of Humanities and Human Sciences, Hokkaido University"
-    note: "Dept. reorganised Apr 2019: Graduate School of Humanities → Graduate School of Humanities and Human Sciences"
+  - period: '2010 – 2012'
+    title: 'Associate Professor'
+    place: 'Department of Psychology, Faculty of Human Sciences, Sophia University'
 
-  - period: "Apr 2010 – Oct 2012"
-    title: "Associate Professor"
-    place: "Department of Psychology, Faculty of Human Sciences, Sophia University, Tokyo"
+  - period: '2006 – 2010'
+    title: 'Assistant Professor'
+    place: 'Department of Social Psychology, Faculty of Social and Behavioural Science, TIlburg University'
 
-  - period: "Aug 2006 – Mar 2010"
-    title: "Assistant Professor"
-    place: "Department of Social Psychology, Faculty of Social and Behavioural Sciences, Tilburg University, Netherlands"
+  - period: '2005 – 2006'
+    title: 'Research Scientist'
+    place: 'Center for Adaptive Behaviour and Cognition, Max Planck Institute for Human Development'
 
-  - period: "Sept 2005 – Jul 2006"
-    title: "Research Scientist"
-    place: "Center for Adaptive Behaviour and Cognition (ABC), Max Planck Institute for Human Development, Berlin, Germany"
+  - period: '2002 – 2004'
+    title: 'Post-doc Research Fellow (PD)'
+    place: 'Japanese Society for the Promotion of Science'
 
-  - period: "Sept 2000 – Aug 2005"
-    title: "Postdoctoral Research Fellow"
-    place: "Center for Adaptive Behaviour and Cognition (ABC), Max Planck Institute for Human Development, Berlin, Germany"
+  - period: '2000 – 2005'
+    title: 'Post-doc Research Fellow'
+    place: 'Center for Adaptive Behaviour and Cognition, Max Planck Institute for Human Development'
 
-  - period: "Apr 2002 – Aug 2005"
-    title: "JSPS Research Fellow (PD)"
-    place: "Japan Society for the Promotion of Science (JSPS)"
+  - period: '1999 – 2001'
+    title: 'Pre-doctoral Research Fellow (DC2)'
+    place: 'Japanese Society for the Promotion of Science'
 
-  - period: "Jan 1999 – Mar 2001"
-    title: "JSPS Research Fellow (DC2)"
-    place: "Japan Society for the Promotion of Science (JSPS)"
 ---

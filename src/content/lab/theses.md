@@ -104,15 +104,15 @@ masters_theses:
 
   - year: 2014
     author_jp: "須山 巨基"
-    title: "累積的文化進化における文化アトラクターの実験的検討"
+    title: "The Emergence of Technological Structure: The Effects of Learnability and Functionality in the Evolution of Technology"
 
   - year: 2014
     author_jp: "加村 圭史朗"
-    title: "協力行動の文化的集団淘汰：実験室実験による検討"
+    title: "恩送りにおける信念と実在—実験的検討検討"
 
   - year: 2013
     author_jp: "三浦 亜利紗"
-    title: "社会的学習と文化進化：モデルとその実証的検討"
+    title: "他者の裏切りを恐れる心： 信頼行動の感情基盤の検討"
 ba_theses:
   - year: 2025
     author_jp: '平澤 若菜'

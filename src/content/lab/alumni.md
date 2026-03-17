@@ -8,7 +8,7 @@ phd:
     name_en: "Yuta Kido"
     name_jp: "貴堂 雄太"
     institution: "Hokkaido University"
-    degree: "PhD in Literature"
+    degree: "PhD in Human Sciences"
     position_title: "JSPS Postdoctoral Fellow (PD)"
     position_org: "University of Tokyo"
     researchmap: "https://researchmap.jp/yutakido"

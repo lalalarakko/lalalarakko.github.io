@@ -10,15 +10,13 @@ cat_definitions:
   cooperation: "Cooperation"
   culture: "Cultural Evolution"
   crowd: "Wisdom of Crowds"
-  misc: "Miscellenious"
+  misc: "Misc."
 
 papers:
   - year: 2025
     authors_en: 'Kido, Y., & Takezawa, M.'
     title_en: 'Empirical evidence for the spread of Cooperation through copying successful groups'
     journal_en: 'Scientific Reports, 15, 22289'
-    authors_ja: 'Yuta Kido・Masanori Takezawa'
-    journal_ja: 'Scientific Reports, 15, 22289'
     doi: '10.1038/s41598-025-07863-0'
     cat: cooperation
     role: last
@@ -28,8 +26,6 @@ papers:
     authors_en: 'Sano, C., & Takezawa, M.'
     title_en: 'Examining the Possibility of Maladaptive Cultural Evolution through Oblique Transmission'
     journal_en: 'Letters on Evolutionary Behavioral Science, 16(1), 8–13'
-    authors_ja: 'Chinatsu Sano・Masanori Takezawa'
-    journal_ja: 'Letters on Evolutionary Behavioral Science, 16(1), 8–13'
     doi: '10.5178/lebs.2025.124'
     cat: culture
     role: last
@@ -62,8 +58,6 @@ papers:
     authors_en: 'Nakata, S., & Takezawa, M.'
     title_en: 'Hierarchical structures emerge from the cultural transmission: an iterated learning experiment using a non-linguistic task'
     journal_en: 'Frontiers in Artificial Intelligence, 6, 1221329'
-    authors_ja: 'Seiya Nakata・Masanori Takezawa'
-    journal_ja: 'Frontiers in Artificial Intelligence, 6, 1221329'
     doi: '10.3389/frai.2023.1221329'
     cat: culture
     role: last
@@ -73,8 +67,6 @@ papers:
     authors_en: 'Nakata, S., & Takezawa, M.'
     title_en: 'Conditions under which faithful cultural transmission through teaching promotes cumulative cultural evolution'
     journal_en: 'Scientific Reports, 13, 20986'
-    authors_ja: 'Seiya Nakata・Masanori Takezawa'
-    journal_ja: 'Scientific Reports, 13, 20986'
     doi: '10.1038/s41598-023-47018-7'
     cat: culture
     role: last
@@ -84,8 +76,6 @@ papers:
     authors_en: 'Jackson, J., Halberstadt, J., Takezawa, M., Liew, K., Smith, K., Apicella, C., & Gray, K.'
     title_en: 'Generalized morality culturally evolves as an adaptive heuristic in large social networks.'
     journal_en: 'Journal of Personality and Social Psychology, 125, 1207–1238'
-    authors_ja: 'Joshua Conrad Jackson・Jamin Halberstad・Masanori Takezawa・Kongmeng Liew・Kristopher Smith・Coren Apicella・Kurt Gray'
-    journal_ja: 'Journal of Personality and Social Psychology, 125, 1207–1238'
     doi: '10.1037/pspa0000358'
     role: contributor
 
@@ -93,8 +83,6 @@ papers:
     authors_en: 'Nakata, S., Ohira, A., & Takezawa, M.'
     title_en: 'Evolution of the Word Order Rules Through Communication and Cultural Transmission: An Iterated Learning Experiment'
     journal_en: 'Proceedings of the Joint Conference on Language Evolution (jcole), 542–550'
-    authors_ja: 'Seiya Nakata・Akane Ohira・Masanori Takezawa'
-    journal_ja: 'Proceedings of the Joint Conference on Language Evolution (JCoLE), 542–550'
     doi: '10.17617/2.3398549'
     cat: culture
     role: last
@@ -103,8 +91,6 @@ papers:
     authors_en: 'Nakata, S., & Takezawa, M.'
     title_en: 'Roles of cultural transmission in the emergence of hierarchical structures: Laboratory studies using the iterated learning paradigm'
     journal_en: 'Proceedings of the Twenty-fifth International Symposium on Artificial Life and Robotics, 1002–1006'
-    authors_ja: 'Seiya Nakata・Masanori Takezawa'
-    journal_ja: 'Proceedings of the Twenty-Fifth International Symposium on Artificial Life and Robotics, 1002–1006'
     cat: culture
     role: last
 
@@ -153,8 +139,6 @@ papers:
     authors_en: 'Krockow, E.M., Takezawa, M., Pulford, B.D., Colman, A.M., Smithers, S., Kita, T., & Nakawake, Y.'
     title_en: 'Commitment-enhancing tools in centipede games: Evidencing european–Japanese differences in trust and cooperation'
     journal_en: 'Judgment and Decision Making, 13(1), 61–72'
-    authors_ja: 'Krockow, E. M・Takezawa, M・Pulford, B. D・Colman, A. M・Smithers, S・Kita, T・Nakawake, Y'
-    journal_ja: 'Judgment and Decision Making, 13(1), 61–72'
     doi: '10.1017/S1930297500008822'
     cat: cooperation
     role: contributor
@@ -246,8 +230,6 @@ papers:
     authors_en: 'Takezawa, M., & Price, M.'
     title_en: 'Revisiting "The Evolution of Reciprocity in Sizable Groups": Continuous reciprocity in the repeated n-person prisoner&apos;s dilemma'
     journal_en: 'Journal of Theoretical Biology, 264(2), 188–196'
-    authors_ja: 'Masanori Takezawa・Michael E. Price'
-    journal_ja: 'Journal of Theoretical Biology, 264(2), 188–196'
     doi: '10.1016/j.jtbi.2010.01.028'
     cat: cooperation
     role: corresponding
@@ -270,16 +252,12 @@ papers:
     authors_en: 'Garcia-Retamero, R., Takezawa, M., & Gigerenzer, G.'
     title_en: 'Influence of group learning in search processes.'
     journal_en: 'Psicothema, 21(3), 369–375'
-    authors_ja: 'Garcia-Retamero, R.・Takezawa, M.・Gigerenzer, G.'
-    journal_ja: 'Psicothema, 21(3), 369–375'
     role: contributor
 
   - year: 2009
     authors_en: 'Gummerum, M., Takezawa, M., & Keller, M.'
     title_en: 'The influence of social category and reciprocity on adults'' and children''s altruistic behaviour.'
     journal_en: 'Evolutionary Psychology, 7(2), 295–316'
-    authors_ja: 'Gummerum, M・Takezawa, M・Keller, M'
-    journal_ja: 'Evolutionary Psychology, 7(2), 295–316'
     doi: '10.1177/147470490900700212'
     cat: cooperation
     role: contributor
@@ -288,8 +266,6 @@ papers:
     authors_en: 'Leman, P., Keller, M., Takezawa, M., & Gummerum, M.'
     title_en: 'Children''s and Adolescents'' Decisions about Sharing Money with Others'
     journal_en: 'Social Development, 18(3), 711–727'
-    authors_ja: 'Patrick J. Leman・Monika Keller・Masanori Takezawa・Michaela Gummerum'
-    journal_ja: 'Social Development, 18(3), 711–727'
     doi: '10.1111/j.1467-9507.2008.00486.x'
     role: contributor
 
@@ -310,8 +286,6 @@ papers:
     authors_en: 'Gummerum, M., Keller, M., Takezawa, M., & Mata, J.'
     title_en: 'To give or not to give: Children''s and adolescents'' sharing and moral negotiations in economic decision situations'
     journal_en: 'Child Development, 79(3), 562–576'
-    authors_ja: 'Michaela Gummerum・Monika Keller・Masanori Takezawa・Jutta Mata'
-    journal_ja: 'Child Development, 79(3), 562–576'
     doi: '10.1111/j.1467-8624.2008.01143.x'
     role: contributor
 
@@ -323,11 +297,9 @@ papers:
     role: contributor
 
   - year: 2007
-    authors_en: 'Barre, H. Clark, Keller, M., Takezawa, M., & Wichary, S.'
+    authors_en: 'Barret, H. Clark, Keller, M., Takezawa, M., & Wichary, S.'
     title_en: 'Relationships and emotions in children''s understanding of social contract violations'
     journal_en: 'Journal of Evolutionary Psychology, 5(1), 213–234'
-    authors_ja: 'Barre, H. Clark・Keller, Monika・Takezawa, Masanori・Wichary, Szymon'
-    journal_ja: 'Journal of Evolutionary Psychology, 5(1), 213–234'
     doi: '10.1556/jep.2007.1022'
     role: contributor
 
@@ -343,8 +315,6 @@ papers:
     authors_en: 'Garcia-Retamero, R., Takezawa, M., & Gigerenzer, G.'
     title_en: 'How to learn good cue orders: When social learning benefits simple heuristics'
     journal_en: 'Proceedings of the 28th Annual Conference of the Cognitive Science Society, 1352–1357'
-    authors_ja: 'R. Garcia-Retamero・M. Takezawa・G. Gigerenzer'
-    journal_ja: 'Proceedings of the 28th Annual Conference of the Cognitive Science Society, 1352–1357'
     role: contributor
 
   - year: 2005

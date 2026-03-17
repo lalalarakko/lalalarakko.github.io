@@ -1,18 +1,20 @@
 ---
-# ============================================================
-# cv/education.md — Education
-# ============================================================
+# cv/education.md
+# Source: researchmap 2026-03-17
 
 education:
-  - period: "Apr 1997 – Mar 2001"
+  - period: "1997 – 2001"
     degree: "Ph.D. in Behavioral Science"
+    institution: "Hokkaido University"
     place: "Graduate School of Letters, Hokkaido University"
 
-  - period: "Apr 1995 – Mar 1997"
+  - period: "1995 – 1997"
     degree: "M.A. in Behavioral Science"
+    institution: "Hokkaido University"
     place: "Graduate School of Letters, Hokkaido University"
 
-  - period: "Apr 1991 – Mar 1995"
+  - period: "1991 – 1995"
     degree: "B.A. in International Relations"
+    institution: "University of Shizuoka"
     place: "Faculty of International Relations, University of Shizuoka"
 ---

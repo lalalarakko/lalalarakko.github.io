@@ -25,11 +25,11 @@ const themes = themesData.themes || [];
 .perspective{border-bottom:1px solid var(--black);}
 .perspective-inner{max-width:1200px;margin:0 auto;padding:72px 48px;}
 .perspective-label{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:28px;}
-.perspective-title{font-family:var(--serif);font-size:clamp(22px,2.8vw,34px);font-weight:400;line-height:1.2;margin-bottom:48px;max-width:820px;}
+.perspective-title{font-family:var(--serif);font-size:clamp(24px,2.8vw,36px);font-weight:400;line-height:1.2;margin-bottom:48px;max-width:820px;}
 .perspective-body{max-width:780px;}
 .va-block{margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--gray-light);}
 .va-block:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0;}
-.va-heading{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:14px;}
+.va-heading{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:14px;}
 .va-text{font-size:15px;line-height:1.9;color:var(--gray-dark);font-weight:400;}
 .va-text p{margin-bottom:1.2em;} .va-text p:last-child{margin-bottom:0;}
 .va-text strong{font-weight:500;color:var(--black);} .va-text em{font-style:italic;}
@@ -38,7 +38,7 @@ const themes = themesData.themes || [];
 .va-directions li{counter-increment:dir;padding:12px 0;border-bottom:1px solid var(--gray-light);font-size:15px;line-height:1.75;color:var(--gray-dark);display:flex;gap:16px;}
 .va-directions li:last-child{border-bottom:none;}
 .va-directions li::before{content:counter(dir);font-family:var(--serif);font-size:22px;color:#c8c5bf;line-height:1;flex-shrink:0;margin-top:2px;}
-.ja-text{font-family:var(--jp);font-size:14px;line-height:2.1;color:var(--gray-dark);}
+.ja-text{font-family:var(--jp);font-size:15px;line-height:2.1;color:var(--gray-dark);}
 .ja-text p{margin-bottom:1.2em;} .ja-text p:last-child{margin-bottom:0;}
 .ja-text strong{font-weight:400;color:var(--black);}
 .themes{border-bottom:1px solid var(--black);}
@@ -51,9 +51,9 @@ const themes = themesData.themes || [];
 .theme-item:hover::before{transform:scaleY(1);}
 .theme-item:last-child{border-bottom:none;padding-bottom:0;}
 .theme-num{font-family:var(--serif);font-size:52px;color:#c8c5bf;line-height:1;font-style:italic;margin-top:-8px;}
-.theme-title{font-family:var(--serif);font-size:clamp(20px,2.2vw,28px);font-weight:400;line-height:1.2;margin-bottom:16px;}
-.theme-title-ja{font-family:var(--jp);font-size:clamp(18px,2vw,24px);font-weight:400;line-height:1.4;margin-bottom:16px;}
-.theme-lead{font-size:15px !important;line-height:1.9;color:var(--gray-dark);font-weight:400;max-width:720px;margin-bottom:0;}
+.theme-title{font-family:var(--serif);font-size:clamp(22px,2.2vw,30px);font-weight:400;line-height:1.2;margin-bottom:16px;}
+.theme-title-ja{font-family:var(--jp);font-size:clamp(20px,2vw,26px);font-weight:400;line-height:1.4;margin-bottom:16px;}
+.theme-lead{font-size:15px;line-height:1.9;color:var(--gray-dark);font-weight:400;max-width:720px;margin-bottom:0;}
 .theme-readmore{margin-top:20px;border-top:1px solid var(--gray-light);}
 .theme-toggle{background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-dark);padding:12px 0;display:flex;align-items:center;gap:8px;transition:color .2s;}
 .theme-toggle:hover{color:var(--black);}
@@ -61,8 +61,8 @@ const themes = themesData.themes || [];
 .theme-toggle.open .theme-toggle-icon{transform:rotate(45deg);}
 .theme-detail{display:none;padding:20px 0 8px;}
 .theme-detail.open{display:block;}
-.theme-detail p{font-size:15px;line-height:1.9;color:var(--gray-dark);font-weight:400;margin-bottom:1.4em;max-width:720px;}
-.theme-detail p:last-child{margin-bottom:0;}
+:global(.theme-detail p){font-size:15px;line-height:1.9;color:var(--gray-dark);font-weight:400;margin-bottom:1.4em;max-width:720px;}
+:global(.theme-detail p:last-child){margin-bottom:0;}
 @media(max-width:900px){
   .page-lang-toggle{margin:24px 20px 0;}
   .perspective-inner,.themes-inner{padding:48px 20px;}
