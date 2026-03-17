@@ -13,6 +13,6 @@ education:
     place: "Graduate School of Letters, Hokkaido University"
 
   - period: "Apr 1991 – Mar 1995"
-    degree: "B.A. in Behavioral Science"
-    place: "Faculty of Letters, Hokkaido University"
+    degree: "B.A. in International Relations"
+    place: "Faculty of International Relations, University of Shizuoka"
 ---

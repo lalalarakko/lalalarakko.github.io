@@ -42,10 +42,10 @@ const newsItems = newsData.news || [];
 ---
 <BaseLayout title="Lab — Masanori Takezawa" activePage="lab">
 <style>
-.page-top{margin-top:var(--nav-h);}
-.page-header{border-bottom:1px solid var(--black);padding:40px 48px 36px;}
+.page-top{margin-top:var(--nav-h);padding:64px 48px 0;}
+.page-header{border-bottom:1px solid var(--black);padding:0 0 28px;}
 .page-header-label{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:12px;}
-.page-header-title{font-family:var(--serif);font-size:clamp(40px,5vw,72px);font-weight:400;line-height:1.05;letter-spacing:-.01em;margin-bottom:16px;}
+.page-header-title{margin-bottom:16px;}
 .page-header-desc{font-size:15px;color:var(--gray-dark);font-weight:400;max-width:640px;line-height:1.8;}
 .section-tabs{display:flex;border-bottom:1px solid var(--black);position:sticky;top:var(--nav-h);background:var(--white);z-index:50;}
 .section-tab{padding:20px 32px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:none;background:none;font-family:var(--sans);color:var(--gray-dark);border-bottom:3px solid transparent;margin-bottom:-1px;transition:all .2s;}
@@ -54,7 +54,7 @@ const newsItems = newsData.news || [];
 .tab-panel{display:none;}.tab-panel.active{display:block;}
 
 /* Members */
-.members-section{padding:56px 48px;border-bottom:1px solid var(--black);}
+.members-section{padding:40px 48px;border-bottom:1px solid var(--black);}
 .members-section:last-child{border-bottom:none;}
 .members-section-label{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:24px;}
 .members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;}
@@ -138,7 +138,7 @@ const newsItems = newsData.news || [];
 .news-body a:hover{text-decoration:underline;}
 
 @media(max-width:900px){
-  .page-header{padding:48px 20px 32px;}
+  .page-top{padding:48px 20px 0;}.page-header{padding:0 0 24px;}
   .members-section,.alumni-section,.ma-alumni-section,.thesis-section,.news-section{padding-left:20px;padding-right:20px;}
   .section-tab{padding:16px 14px;font-size:13px;}
   .alumni-table thead{display:none;}

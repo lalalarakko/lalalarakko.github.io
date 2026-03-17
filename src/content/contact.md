@@ -3,6 +3,8 @@
 # contact.md — Contact information
 # ============================================================
 
+intro: "I welcome inquiries about research collaboration, graduate admission to the lab, and media or public engagement."
+
 email: "m.takezawa [at] let.hokudai.ac.jp"
 
 address_en: |

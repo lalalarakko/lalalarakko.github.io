@@ -15,11 +15,6 @@ news:
     text: "**齋藤悠輔**が、日本人間行動進化学会第18回大会において**若手発表賞**を受賞。"
     url: "https://www.let.hokudai.ac.jp/news/27866"
 
-  - date: "2025年8月"
-    tag: grant
-    text: "**竹西海人(M2)**、**齋藤悠輔(M1)**、**平澤若菜(B4)**が、日本財団HUMAIプログラム第１期メンバーに採択。"
-    url: "https://zen.ac.jp/news/yq9xkp10m"
-
   - date: "2025年4月"
     tag: jsps
     text: "**貴堂雄太**が、日本学術振興会**特別研究員PD**に採用（受け入れ教員：大坪庸介、東京大学）。"
