@@ -1,6 +1,7 @@
 ---
-# cv/grants.md
-# Source: researchmap 2026-03-17
+# ============================================================
+# cv/grants.md — Grants
+# ============================================================
 
 pi_grants:
   - period: '2023 – 2023'
@@ -69,13 +70,13 @@ coi_grants:
   - period: 'Jun 2017 – Mar 2022'
     title: 'Constructive Understanding of the Origin and Evolution of Language'
     meta: 'Japan Society for the Promotion of Science — Grants-in-Aid for Scientific Research Grant-in-Aid for Scientific Research on Innovative Areas (Research in a proposed research area) (#17H06383)'
-    pi: '橋本 敬'
+    pi: 'Takashi Hashimoto'
     amount: '¥244,140K'
 
   - period: 'May 2016 – Mar 2021'
     title: 'Understanding cognitive, neural and ecological bases of human collective behavior'
     meta: 'Japan Society for the Promotion of Science — Grants-in-Aid for Scientific Research Grant-in-Aid for Scientific Research (S) (#16H06324)'
-    pi: '亀田 達也'
+    pi: 'Tatsuya Kameda'
     amount: '¥182,650K'
 
 ---

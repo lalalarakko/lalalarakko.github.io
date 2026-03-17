@@ -3,35 +3,35 @@
 # Source: researchmap 2026-03-17
 
 editorial:
-  - period: '2025-04 – Present'
+  - period: 'April 2025 – Present'
     role: 'Director'
     org: 'Japanese Society of Social Psychology'
 
-  - period: '2022-01 – Present'
+  - period: 'January 2022 – Present'
     role: 'President'
     org: 'Human Behavior and Evolution Society of Japan'
 
-  - period: '2022-01 – 2025-04'
+  - period: 'January 2022 – April 2025'
     role: 'Editorial Board Member'
     org: 'Perspectives on Psychological Science'
 
-  - period: '2021-11 – 2025-10'
-    role: 'Editorial board member of the Japanse Journal of Psychology'
+  - period: 'November 2021 – October 2025'
+    role: 'Editorial Board Member of the Japanese Journal of Psychology'
     org: 'Japanese Psychological Association'
 
-  - period: '2021 – 2021'
-    role: 'Chair of organizing committee'
+  - period: '2021'
+    role: 'Chair of Organizing Committee'
     org: 'Cultural Evolution Society Conference 2021 Sapporo'
 
   - period: '2018 – 2022'
     role: 'Executive Committee'
     org: 'Cultural Evolution Society'
 
-  - period: '2016-06 – 2019-04'
-    role: 'Editor in chief'
+  - period: 'June 2016 – April 2019'
+    role: 'Editor-in-Chief'
     org: 'Letters on Evolutionary Behavioral Science'
 
-  - period: '2016-01 – 2021-12'
+  - period: 'January 2016 – December 2021'
     role: 'Vice President'
     org: 'Human Behavior and Evolution Society in Japan'
 
@@ -47,8 +47,8 @@ editorial:
     role: 'Director'
     org: 'Japanese Society of Social Psychology'
 
-  - period: '2011-07 – 2011-07'
-    role: 'New investigator competition committee'
+  - period: 'July 2011'
+    role: 'New Investigator Competition Committee'
     org: 'The 23rd Annual Conference of Human Behavior and Evolution Society'
 
   - period: '2010 – Present'
@@ -60,6 +60,10 @@ editorial:
     org: 'Human Behavior and Evolution Society in Japan'
 
   - period: '2006 – 2010'
-    role: 'Editorial member'
+    role: 'Editorial Member'
     org: 'Japanese Cognitive Science Society'
+
+  - period: '2004'
+    role: 'Program Reviewer'
+    org: 'The 16th Annual Meeting for Human Behaviour and Evolution Society'
 ---

@@ -1,6 +1,7 @@
 ---
-# cv/membership.md
-# Source: researchmap 2026-03-17
+# ============================================================
+# cv/membership.md — Professional Membership
+# ============================================================
 
 memberships:
   - "Cultural Evolution Society"
