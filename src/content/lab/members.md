@@ -17,27 +17,27 @@ masters:
     researchmap: "https://researchmap.jp/yusuke__saito"
     website: "https://usk-website.pages.dev/"
 
-  - name_en: "Zen Nakazawa"
-    name_jp: "中澤 禅"
+  - name_en: "Kanayo Higashi"
+    name_jp: "東 叶世"
     year: "M1"
 
   - name_en: "Wakana Hirasawa"
     name_jp: "平澤 若菜"
     year: "M1"
 
-  - name_en: "Kanayo Higashi"
-    name_jp: "東 叶世"
+  - name_en: "Zen Nakazawa"
+    name_jp: "中澤 禅"
     year: "M1"
 
 undergrad_b4:
   - name_jp: "岩渕佑生"
-  - name_jp: "山口歩夢"
-  - name_jp: "南間桃花"
   - name_jp: "中込正信"
+  - name_jp: "南間桃花"
+  - name_jp: "山口歩夢"
   - name_jp: "横山穂実"
 
 undergrad_b3:
   - name_jp: "小島優芽"
-  - name_jp: "鹿ノ内陽介"
   - name_jp: "森爽歌"
+  - name_jp: "鹿ノ内陽介"
 ---

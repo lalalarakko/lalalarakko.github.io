@@ -10,6 +10,7 @@ cat_definitions:
   cooperation: "Cooperation"
   culture: "Cultural Evolution"
   crowd: "Wisdom of Crowds"
+  misc: "Miscellenious"
 
 papers:
   - year: 2025
