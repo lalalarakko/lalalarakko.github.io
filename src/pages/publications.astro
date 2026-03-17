@@ -167,7 +167,7 @@ function highlightMeJa(s: string) {
               <!-- JA -->
               <div class="pub-content-ja">
                 <p class="pub-title ja-title">{p.title_ja || p.title_en}</p>
-                <p class="pub-authors" set:html={highlightMe(p.authors_en)}></p>
+                <p class="pub-authors" set:html={p.authors_ja ? highlightMeJa(p.authors_ja) : highlightMe(p.authors_en)}></p>
                 <p class="pub-journal">{p.journal_ja || p.journal_en}</p>
               </div>
               {p.doi && (
@@ -254,10 +254,10 @@ function highlightMeJa(s: string) {
                 <div class="book-detail ja-text">
                   <p>{b.authors_ja || b.authors_en}</p>
                   {(b.chapter_ja || b.chapter_en) && (b.book_ja || b.book_en) && (
-                    <p>{b.editors_ja ? `${b.editors_ja}` : ''}{b.editors_ja ? '、' : ''}<em>{b.book_ja || b.book_en}</em>{b.pages ? `（pp. ${b.pages}）` : ''}。{b.publisher_ja || b.publisher_en}。</p>
+                    <p>{b.editors_ja ? `${b.editors_ja}，` : ''}<em>{b.book_ja || b.book_en}</em>{b.pages ? `（pp. ${b.pages}）` : ''}．{b.publisher_ja || b.publisher_en || ''}</p>
                   )}
                   {!(b.chapter_ja || b.chapter_en) && (b.publisher_ja || b.publisher_en) && (
-                    <p>{b.publisher_ja || b.publisher_en}。</p>
+                    <p>{b.publisher_ja || b.publisher_en}</p>
                   )}
                   {b.doi && <p><a class="pub-doi" href={`https://doi.org/${b.doi}`} target="_blank">DOI: {b.doi}</a></p>}
                   {b.isbn && !b.doi && <p style="font-size:12px;color:var(--gray-mid);">ISBN: {b.isbn}</p>}

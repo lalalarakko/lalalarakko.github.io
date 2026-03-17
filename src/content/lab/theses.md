@@ -113,6 +113,7 @@ masters_theses:
   - year: 2013
     author_jp: "三浦 亜利紗"
     title: "他者の裏切りを恐れる心： 信頼行動の感情基盤の検討"
+    
 ba_theses:
   - year: 2025
     author_jp: '平澤 若菜'
