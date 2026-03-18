@@ -38,9 +38,24 @@ function groupByYear(items: any[]) {
   return Object.keys(d).map(Number).sort((a,b) => b-a).map(y => ({ year: y, items: d[y] }));
 }
 
+// Group alumni/theses by institution
+function groupByInstitution(items: any[]) {
+  const d: Record<string, any[]> = {};
+  for (const item of items) {
+    const key = item.institution || 'Hokkaido University';
+    if (!d[key]) d[key] = [];
+    d[key].push(item);
+  }
+  return Object.entries(d).map(([institution, items]) => ({ institution, items }));
+}
+
+const maAlumniByInst    = groupByInstitution(maAlumni);
+const mastersThesesByInst = groupByInstitution(mastersTheses);
+const baThesesByInst      = groupByInstitution(baTheses);
+
 const newsItems = newsData.news || [];
 ---
-<BaseLayout title="Lab — Masanori Takezawa" activePage="lab">
+<BaseLayout title="Lab — Masanori Takezawa" activePage="lab" noindex={true}>
 <style>
 .page-top{margin-top:var(--nav-h);padding:64px 48px 0;}
 .page-header{border-bottom:1px solid var(--black);padding:0 0 28px;}
@@ -106,6 +121,13 @@ const newsItems = newsData.news || [];
 .thesis-subpanel{display:none;}.thesis-subpanel.active{display:block;}
 .thesis-year-heading{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--black);font-weight:500;padding:20px 0 12px;border-top:1px solid var(--black);margin-top:28px;}
 .thesis-year-heading.first{margin-top:0;border-top:2px solid var(--black);}
+.thesis-inst-heading{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:500;padding:28px 0 12px;border-top:2px solid var(--black);margin-top:32px;}
+.thesis-inst-heading.first{margin-top:0;}
+.thesis-inst-heading ~ .thesis-year-heading{border-top:1px solid var(--gray-light);margin-top:16px;color:var(--gray-dark);}
+.ma-inst-block{margin-bottom:40px;}
+.ma-inst-block:last-child{margin-bottom:0;}
+.ma-inst-heading{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:500;padding-bottom:12px;border-bottom:1px solid var(--black);margin-bottom:0;margin-top:32px;padding-top:28px;border-top:2px solid var(--black);}
+.ma-inst-heading.first{margin-top:0;padding-top:0;border-top:none;}
 .thesis-item{display:grid;grid-template-columns:44px 1fr;gap:10px 18px;padding:12px 0;border-bottom:1px solid var(--gray-light);align-items:start;}
 .thesis-item:last-child{border-bottom:none;}
 .thesis-deg{font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:3px 6px;border:1px solid;white-space:nowrap;margin-top:2px;}
@@ -277,24 +299,29 @@ const newsItems = newsData.news || [];
 
   <div class="ma-alumni-section">
     <p class="ma-alumni-section-label">Master's Alumni</p>
-    <table class="ma-table">
-      <thead>
-        <tr>
-          <th style="width:64px;">Year</th>
-          <th style="width:200px;">Name</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {maAlumni.map((a: any) => (
-          <tr>
-            <td class="ma-yr">{a.year}</td>
-            <td class="ma-name-en">{a.name_en}</td>
-            <td class="ma-name-jp">{a.name_jp}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    {maAlumniByInst.map(({ institution, items }, gi) => (
+      <div class="ma-inst-block">
+        <p class={`ma-inst-heading${gi === 0 ? ' first' : ''}`}>{institution}</p>
+        <table class="ma-table">
+          <thead>
+            <tr>
+              <th style="width:64px;">Year</th>
+              <th style="width:200px;">Name</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((a: any) => (
+              <tr>
+                <td class="ma-yr">{a.year}</td>
+                <td class="ma-name-en">{a.name_en}</td>
+                <td class="ma-name-jp">{a.name_jp}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ))}
   </div>
 </div><!-- /alumni -->
 
@@ -318,7 +345,7 @@ const newsItems = newsData.news || [];
               <span class="thesis-deg phd">PhD</span>
               <div>
                 <p class="thesis-title">{t.title}</p>
-                <p class="thesis-author">{t.author_jp}</p>
+                <p class="thesis-author">{t.author_en || t.author_jp}</p>
                 <p class="thesis-note">{t.institution} · {t.degree}{t.note ? ` [${t.note}]` : ''}</p>
               </div>
             </div>
@@ -329,17 +356,22 @@ const newsItems = newsData.news || [];
 
     <!-- MA -->
     <div id="subtab-ma" class="thesis-subpanel">
-      {groupByYear(mastersTheses).map(({ year, items }, gi) => (
+      {mastersThesesByInst.map(({ institution, items }, gi) => (
         <>
-          <div class={`thesis-year-heading${gi === 0 ? ' first' : ''}`}>{year}</div>
-          {items.map((t: any) => (
-            <div class="thesis-item">
-              <span class="thesis-deg ma">M.A.</span>
-              <div>
-                <p class="thesis-title">{t.title}</p>
-                <p class="thesis-author">{t.author_jp}</p>
-              </div>
-            </div>
+          <div class={`thesis-inst-heading${gi === 0 ? ' first' : ''}`}>{institution}</div>
+          {groupByYear(items).map(({ year, items: yItems }, yi) => (
+            <>
+              <div class={`thesis-year-heading${gi === 0 && yi === 0 ? '' : ''}`}>{year}</div>
+              {yItems.map((t: any) => (
+                <div class="thesis-item">
+                  <span class="thesis-deg ma">M.A.</span>
+                  <div>
+                    <p class="thesis-title">{t.title}</p>
+                    <p class="thesis-author">{t.author_en || t.author_jp}</p>
+                  </div>
+                </div>
+              ))}
+            </>
           ))}
         </>
       ))}
@@ -347,17 +379,22 @@ const newsItems = newsData.news || [];
 
     <!-- BA -->
     <div id="subtab-ba" class="thesis-subpanel">
-      {groupByYear(baTheses).map(({ year, items }, gi) => (
+      {baThesesByInst.map(({ institution, items }, gi) => (
         <>
-          <div class={`thesis-year-heading${gi === 0 ? ' first' : ''}`}>{year}</div>
-          {items.map((t: any) => (
-            <div class="thesis-item">
-              <span class="thesis-deg ba">B.A.</span>
-              <div>
-                <p class="thesis-title">{t.title}</p>
-                <p class="thesis-author">{t.author_jp}</p>
-              </div>
-            </div>
+          <div class={`thesis-inst-heading${gi === 0 ? ' first' : ''}`}>{institution}</div>
+          {groupByYear(items).map(({ year, items: yItems }) => (
+            <>
+              <div class="thesis-year-heading">{year}</div>
+              {yItems.map((t: any) => (
+                <div class="thesis-item">
+                  <span class="thesis-deg ba">B.A.</span>
+                  <div>
+                    <p class="thesis-title">{t.title}</p>
+                    <p class="thesis-author">{t.author_en || t.author_jp}</p>
+                  </div>
+                </div>
+              ))}
+            </>
           ))}
         </>
       ))}

@@ -84,60 +84,81 @@ masters:
   - year: 2025
     name_en: "Hinako Sasagawa"
     name_jp: "笹川 陽奈子"
+    institution: "Hokkaido University"
 
   - year: 2025
     name_en: "Kaito Takenishi"
     name_jp: "竹西 海人"
+    institution: "Hokkaido University"
 
   - year: 2024
     name_en: "Chinatsu Sano"
     name_jp: "佐野 千夏"
+    institution: "Hokkaido University"
 
   - year: 2022
     name_en: "Sae Abe"
     name_jp: "阿部 紗采"
+    institution: "Hokkaido University"
 
   - year: 2022
     name_en: "Hiroyuki Yoshitomi"
     name_jp: "𠮷富 広之"
+    institution: "Hokkaido University"
 
   - year: 2021
     name_en: "Yuta Kido"
     name_jp: "貴堂 雄太"
+    institution: "Hokkaido University"
 
   - year: 2021
     name_en: "Shun Watanabe"
     name_jp: "渡辺 舜"
+    institution: "Hokkaido University"
 
   - year: 2020
     name_en: "Taiju Yukihira"
     name_jp: "行平 大樹"
+    institution: "Hokkaido University"
 
   - year: 2019
     name_en: "Shogo Homma"
     name_jp: "本間 祥吾"
+    institution: "Hokkaido University"
 
   - year: 2019
     name_en: "Seiya Nakata"
     name_jp: "中田 星矢"
+    institution: "Hokkaido University"
 
   - year: 2017
     name_en: "Toshimasa Kita"
     name_jp: "喜多 敏正"
+    institution: "Hokkaido University"
 
   - year: 2016
     name_en: "Kei Oie"
     name_jp: "大家 慧"
+    institution: "Hokkaido University"
 
   - year: 2014
     name_en: "Masaki Suyama"
     name_jp: "須山 巨基"
+    institution: "Hokkaido University"
 
   - year: 2014
     name_en: "Keishiro Kamura"
     name_jp: "加村 圭史朗"
+    institution: "Hokkaido University"
 
   - year: 2013
     name_en: "Arisa Miura"
     name_jp: "三浦 亜利紗"
+    institution: "Hokkaido University"
+
+
+
+
+
+
 ---
