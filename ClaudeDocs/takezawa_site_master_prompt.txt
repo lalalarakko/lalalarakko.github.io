@@ -18,9 +18,16 @@
 
 ### astroファイル・cssについて
 - Claudeが担当するのは `.astro` ファイルと `global.css` のみ
-- 修正依頼時は必ず現在のファイルをアップロードしてもらい、そのファイルを修正して返す
+- 修正依頼時は必ず現在のファイルを参照してから修正する（後述のワークフロー参照）
 - スクラッチから書き直さない
 - **ファイルを渡す際は必ず保存先パス（例: `src/layouts/BaseLayout.astro`）と、新規作成／既存ファイルを上書きの別を明示すること**
+
+### 作業前の承認ステップ（必須）
+1. Claudeは変更内容をテキストで先に説明する
+2. 先生が「進めてください」と承認する
+3. 承認後にファイルを修正・出力する
+
+この承認ステップを省略してファイルを無断修正・上書きしてはならない。
 
 ### publications更新の正しい手順
 1. 先生が **現在のmdファイル**（papers.md等）と**新しいJSONLファイル**の両方をアップロードする
@@ -31,7 +38,7 @@
 
 ### Claudeへの作業依頼時に必要なもの
 - このマスタープロンプト
-- 修正対象の現在の `.astro` ファイル（またはtakezawa-site.zip）
+- 修正対象ファイルのGitHub raw URL（後述）または takezawa-site.zip
 - 変更内容の説明
 
 ---
@@ -102,6 +109,9 @@ takezawa-site/
 │           ├── membership.md
 │           ├── reviewing.md
 │           └── teaching.md
+├── public/
+│   └── images/
+│       └── profile.jpg         # contact.astroで使用する顔写真
 ├── package.json
 ├── astro.config.mjs
 └── tsconfig.json
@@ -109,7 +119,56 @@ takezawa-site/
 
 ---
 
-## 3. デザインシステム
+## 3. Claudeへのファイル渡し方（推奨ワークフロー）
+
+### 推奨：GitHub raw URLで個別ファイルを渡す
+
+リポジトリは公開されているため、Claudeがweb_fetchで直接取得できる。
+毎回zipを作成・アップロードする手間がなく、コンテキストも最小化される。
+
+チャットに以下のURLを貼るだけでよい：
+
+```
+# astroファイル
+https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/pages/lab.astro
+https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/pages/contact.astro
+https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/pages/index.astro
+https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/pages/publications.astro
+https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/pages/research.astro
+https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/pages/cv.astro
+https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/layouts/BaseLayout.astro
+https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/styles/global.css
+
+# contentファイル（差分確認時など）
+https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/content/lab/alumni.md
+https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/content/lab/theses.md
+https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/content/publications/papers.md
+```
+
+### 標準ワークフロー
+
+1. 先生がチャットにマスタープロンプト＋raw URLを貼る
+2. ClaudeがURLをfetchして現状を把握し、変更計画をテキストで先に説明する
+3. 先生が「進めてください」と承認する
+4. Claudeが修正ファイルを出力（保存先パスを明示）
+5. 先生がローカルに保存 → ローカル確認 → git push
+
+### 代替：zipをアップロードする（従来方式）
+
+複数ファイルをまとめて渡したい場合や、公開前の変更が含まれる場合に使用。
+
+```bash
+cd ~/GitProjects
+zip -r takezawa-site.zip takezawa-site \
+  --exclude "*/node_modules/*" \
+  --exclude "*/.git/*" \
+  --exclude "*/dist/*" \
+  --exclude "*/.astro/*"
+```
+
+---
+
+## 4. デザインシステム
 
 ### カラーパレット
 ```css
@@ -142,7 +201,7 @@ takezawa-site/
 
 ---
 
-## 4. 各ページの構成
+## 5. 各ページの構成
 
 ### 全ページ共通：コンテンツ読み込みパターン
 ```typescript
@@ -202,21 +261,20 @@ cat_definitions:
   cooperation: "Cooperation"
   culture: "Cultural Evolution"
   crowd: "Wisdom of Crowds"
-  # ここに追加するだけでフィルターボタンに自動反映
 
 papers:
   - year: 2025
     authors_en: "Kido, Y., & Takezawa, M."
     title_en: "..."
     journal_en: "Scientific Reports, 15, 22289"
-    authors_ja: "貴堂雄太・竹澤正哲"    # 日本語論文のみ
-    title_ja: "..."                      # 日本語論文のみ
-    journal_ja: "..."                    # 日本語論文のみ
+    authors_ja: "貴堂雄太・竹澤正哲"
+    title_ja: "..."
+    journal_ja: "..."
     doi: "10.xxxx/..."
-    cat: cooperation   # または [cooperation, culture] など複数可
+    cat: cooperation
     role: last
-    badge_corresponding: true   # lastかつcorrespondingの場合のみ
-    badge_invited: true         # 招待論文の場合のみ
+    badge_corresponding: true
+    badge_invited: true
 ```
 
 books.mdのフィールド構造:
@@ -228,8 +286,8 @@ books:
     book_en: "..."
     editors_en: "R. Oda & Y. Ohtsubo (Eds.)"
     publisher_en: "Asakura Publishers"
-    authors_ja: "竹澤正哲"        # 日本語著者がいる場合のみ
-    chapter_ja: "..."             # 日本語タイトルがある場合のみ
+    authors_ja: "竹澤正哲"
+    chapter_ja: "..."
     book_ja: "..."
     editors_ja: "小田亮・大坪庸介（編）"
     publisher_ja: "朝倉出版"
@@ -247,9 +305,9 @@ books:
 読み込むmd: lab/members.md / alumni.md / theses.md / news.md
 タブ構成: Current Members / Alumni / Theses / Lab News
 
-**【重要】lab.astroは検索エンジンにインデックスされないよう `noindex={true}` を設定済み。**
-卒業生の名前が検索結果に出ることを防ぐため、BaseLayout.astroに `noindex` プロップを追加し、
-lab.astroのみ `<BaseLayout noindex={true}>` として呼び出している。
+【重要】lab.astroは検索エンジンにインデックスされないよう noindex={true} を設定済み。
+卒業生の名前が検索結果に出ることを防ぐため、BaseLayout.astroに noindex プロップを追加し、
+lab.astroのみ <BaseLayout noindex={true}> として呼び出している。
 
 members.mdの構造:
 ```yaml
@@ -257,8 +315,8 @@ doctoral:
   - name_en: "Kaito Takenishi"
     name_jp: "竹西 海人"
     year: "D1"
-    researchmap: "https://..."   # 任意
-    website: "https://..."       # 任意
+    researchmap: "https://..."
+    website: "https://..."
 masters:
   - name_en: "..."
     name_jp: "..."
@@ -269,35 +327,28 @@ undergrad_b3:
   - name_jp: "小島優芽"
 ```
 
-alumni.mdの構造:
+alumni.mdの masters セクション（institution フィールドが必須）:
 ```yaml
-phd:
-  # 変更なし（institutionフィールドは従来から存在）
-
 masters:
   - year: 2025
     name_en: "Hinako Sasagawa"
     name_jp: "笹川 陽奈子"
-    institution: "Hokkaido University"   # ← 必須（大学別グループ表示のため）
-  # Sophia University の修了生も同様に追記
+    institution: "Hokkaido University"
   - year: 20XX
     name_en: "..."
     name_jp: "..."
     institution: "Sophia University"
 ```
 
-theses.mdの構造:
+theses.mdの構造（institution フィールドが必須）:
 ```yaml
-dissertations:
-  # 変更なし
-
 masters_theses:
   - year: 2025
-    author_jp: "笹川 陽奈子"             # 日本人学生はauthor_jp
+    author_jp: "笹川 陽奈子"
     title: "..."
-    institution: "Hokkaido University"   # ← 必須（大学別グループ表示のため）
+    institution: "Hokkaido University"
   - year: 20XX
-    author_en: "First Last"              # 外国人学生はauthor_en
+    author_en: "First Last"        # 外国人学生はauthor_en
     title: "..."
     institution: "Tilburg University"
 
@@ -305,27 +356,18 @@ ba_theses:
   - year: 2025
     author_jp: "平澤 若菜"
     title: "..."
-    institution: "Hokkaido University"   # ← 必須
-  # Sophia / Tilburg の卒論も同様に institution を付与
+    institution: "Hokkaido University"
 ```
 
-**著者名フィールドの優先順位:** `author_en` が存在すればそちらを表示、なければ `author_jp` を表示。
-外国人学生には `author_en` を使うこと。
+著者名フィールドの優先順位: author_en が存在すればそちらを表示、なければ author_jp。
+外国人学生には author_en を使うこと。
 
 Alumni・Thesesの表示レイアウト（Option A）:
-- 大学別にブロックを分けて表示
-- 各ブロックの見出し（institution名）→ その大学の一覧
-- Thesesはさらに年別でグループ化（institution → year の2段構造）
-
-### cv.astro
-読み込むmd: cv/ 以下8ファイル
-サイドバーナビ付き（スクロール追従）
-
-cv/membership.md → フィールド名: `memberships`（複数形）
-cv/reviewing.md → フィールド名: `agencies` と `journals`（2つに分離）
+- 大学別にブロックを分けて表示（institution → year の2段構造）
 
 ### contact.astro
 読み込むmd: contact.md
+顔写真（/images/profile.jpg）を左カラムに表示。
 
 contact.mdの構造:
 ```yaml
@@ -341,53 +383,44 @@ profiles:
   - service: "ResearchMap"
     url: "https://..."
     description: "..."
-    id: "..."   # リンクテキスト（省略可→"View Profile"）
+    id: "..."
 ```
+
+### cv.astro
+読み込むmd: cv/ 以下8ファイル
+サイドバーナビ付き（スクロール追従）
+
+cv/membership.md → フィールド名: memberships（複数形）
+cv/reviewing.md → フィールド名: agencies と journals（2つに分離）
 
 ---
 
-## 5. Astro実装の重要ルール
+## 6. Astro実装の重要ルール
 
 ### scriptタグ
-- すべての`<script>`タグに`is:inline`属性が必須
+- すべての<script>タグに is:inline 属性が必須
 - TypeScriptの型注釈をscriptタグ内に書いてはならない
 
 ### set:htmlのCSSスコープ問題
-- `set:html`で動的生成した要素にはscopedなCSSが当たらない
-- 必ず`:global()`を使う:
-```css
-:global(.theme-detail p) { font-size: 15px; }
-```
-
-### EN/JAトグル
-```css
-.pub-content-ja { display: none; }
-.lang-ja .pub-content-en { display: none; }
-.lang-ja .pub-content-ja { display: block; }
-```
+- set:html で動的生成した要素にはscopedなCSSが当たらない
+- 必ず :global() を使う
 
 ### noindexプロップ（BaseLayout.astro）
 ```typescript
 interface Props { title: string; activePage?: string; noindex?: boolean; }
 const { title, activePage = '', noindex = false } = Astro.props;
 ```
-```html
-{noindex && <meta name="robots" content="noindex, nofollow" />}
-```
-現在 `noindex={true}` を指定しているページ: **lab.astro のみ**
+現在 noindex={true} を指定しているページ: lab.astro のみ
 
 ---
 
-## 6. 日常更新（先生が直接編集）
+## 7. 日常更新（先生が直接編集）
 
 ### 論文を追加する
-`src/content/publications/papers.md` の先頭（papers:の直後）に追加
-
-### カテゴリを追加する
-`papers.md` の `cat_definitions` に1行追加するだけでフィルターに反映
+src/content/publications/papers.md の先頭（papers:の直後）に追加
 
 ### フッターの年を変更する
-`src/content/site.md` の `copyright_year` を変更
+src/content/site.md の copyright_year を変更
 
 ### git pushで公開
 ```bash
@@ -399,7 +432,7 @@ git push
 
 ---
 
-## 7. 複数Mac間の同期
+## 8. 複数Mac間の同期
 
 作業前に必ず:
 ```bash
@@ -418,7 +451,7 @@ cd takezawa-site && npm install
 
 ---
 
-## 8. GitHub Actions設定
+## 9. GitHub Actions設定
 
 ```yaml
 name: Deploy to GitHub Pages
@@ -459,10 +492,10 @@ GitHub Settings → Pages → Source を GitHub Actions に設定。
 
 ---
 
-## 9. トラブルシューティング
+## 10. トラブルシューティング
 
 ### JavaScriptが動かない
-→ `<script>` タグに `is:inline` が付いているか確認
+→ <script> タグに is:inline が付いているか確認
 
 ### YAMLエラー
 → 文字列値をシングルクォートで囲む

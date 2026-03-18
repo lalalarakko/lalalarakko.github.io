@@ -91,7 +91,7 @@
       <div class="step-content">
         <h4>ターミナルを開く（Spotlight: Command + Space → "Terminal"）</h4>
         <pre><code>git config --global user.name "Masanori Takezawa"
-git config --global user.email "your@email.com"</code></pre>
+git config --global user.email "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0d7462787f4d68606c6461236e6260">[email&#160;protected]</a>"</code></pre>
         <p>このMacで1度だけ実行すればOKです。</p>
       </div>
     </div>
@@ -231,26 +231,60 @@ git push</code></pre></div>
       <p>Claudeはmdファイルをスクラッチから生成・上書きしません。Claudeが担当するのは <code>.astro</code> ファイルと <code>global.css</code> のみです。</p>
     </div>
 
-    <h3>astroファイルの修正を依頼する場合</h3>
-    <p>以下をすべてClaudeに添付して依頼します：</p>
-    <ol style="margin-left:20px;color:var(--gray-dark);line-height:2.2;">
-      <li>マスタープロンプト（<code>takezawa_site_master_prompt.txt</code>）</li>
-      <li>最新の <code>takezawa-site.zip</code>（下記コマンドで作成）</li>
-      <li>変更内容の説明</li>
-    </ol>
+    <h3>推奨ワークフロー：GitHub raw URLで依頼する</h3>
+    <p>修正したいファイルのraw URLをチャットに貼り付けると、ClaudeがそのURLからファイルを取得します。zipの作成・アップロードは不要です。URLは下の早見表からコピーしてください。</p>
 
-    <h3>takezawa-site.zip の作成方法</h3>
-    <p>修正依頼前に、以下のコマンドで最新のサイトをzip圧縮してClaudeにアップロードします。定期的にアップロードすることで、Claudeが常に最新のファイルを参照できます。</p>
+    <div class="callout warn">
+      <p class="callout-title warn">注意</p>
+      <p>ClaudeはURLをチャットに貼り付けて初めて取得できます。「ベースURLを伝えるだけ」では取得できません。必ず修正対象ファイルの完全なURLを貼り付けてください。</p>
+    </div>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>マスタープロンプト＋対象ファイルのraw URLを貼る</h4>
+        <p>修正したいファイルのraw URLをチャットに貼り付けます（早見表のURLを使用）。</p>
+        <pre><code>例：「このファイルを修正してください：
+https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/pages/lab.astro」</code></pre>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>Claudeが変更計画をテキストで説明する</h4>
+        <p>Claudeはファイルを取得して現状を把握し、何を変更するかを先にテキストで説明します。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>「進めてください」と承認する</h4>
+        <p>内容を確認してから承認します。このステップで意図しない変更を防げます。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>Claudeが修正ファイルを出力する</h4>
+        <p>保存先パス（例: <code>src/pages/lab.astro</code>・既存ファイルを上書き）が明示されます。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h4>ローカルに保存 → 確認 → git push</h4>
+        <p>ローカルで動作確認してから公開します。</p>
+      </div>
+    </div>
+
+    <h3>代替方式：zipをアップロードする</h3>
+    <p>複数ファイルをまとめて渡したい場合や、まだgit pushしていない変更が含まれる場合に使用します。</p>
     <pre><code>cd ~/GitProjects
 zip -r takezawa-site.zip takezawa-site \
   --exclude "*/node_modules/*" \
   --exclude "*/.git/*" \
   --exclude "*/dist/*" \
   --exclude "*/.astro/*"</code></pre>
-    <div class="callout ok">
-      <p class="callout-title ok">推奨</p>
-      <p>Claudeに修正を依頼するたびに最新のzipをアップロードしてください。これにより、Claudeが古いバージョンのファイルを上書きしてしまうリスクを防ぎます。</p>
-    </div>
 
     <h3>Publications差分の確認を依頼する場合</h3>
     <ol style="margin-left:20px;color:var(--gray-dark);line-height:2.2;">
@@ -320,7 +354,21 @@ git log --oneline -10   # コミット履歴</code></pre>
       <tr><td>GitHubに送信</td><td><code>git push</code></td></tr>
     </table>
 
-    <h3>Claudeへの依頼用zipを作成する</h3>
+    <h3>Claudeへのファイル指定（コピー用）</h3>
+    <p>下のURLをそのままチャットに貼り付けると、ClaudeがそのファイルをGitHubから取得します。</p>
+    <table>
+      <tr><th>ファイル</th><th>チャットに貼り付けるURL</th></tr>
+      <tr><td>lab.astro</td><td><code>https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/pages/lab.astro</code></td></tr>
+      <tr><td>contact.astro</td><td><code>https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/pages/contact.astro</code></td></tr>
+      <tr><td>publications.astro</td><td><code>https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/pages/publications.astro</code></td></tr>
+      <tr><td>index.astro</td><td><code>https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/pages/index.astro</code></td></tr>
+      <tr><td>research.astro</td><td><code>https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/pages/research.astro</code></td></tr>
+      <tr><td>cv.astro</td><td><code>https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/pages/cv.astro</code></td></tr>
+      <tr><td>BaseLayout.astro</td><td><code>https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/layouts/BaseLayout.astro</code></td></tr>
+      <tr><td>global.css</td><td><code>https://raw.githubusercontent.com/lalalarakko/lalalarakko.github.io/main/src/styles/global.css</code></td></tr>
+    </table>
+
+    <h3>Claudeへの依頼用zipを作成する（代替方式）</h3>
     <pre><code>cd ~/GitProjects
 zip -r takezawa-site.zip takezawa-site \
   --exclude "*/node_modules/*" \
@@ -345,13 +393,4 @@ git push</code></pre>
 
     <h3>新しいMacのセットアップ（初回のみ）</h3>
     <pre><code>git config --global user.name "Masanori Takezawa"
-git config --global user.email "your@email.com"
-mkdir ~/GitProjects && cd ~/GitProjects
-git clone https://github.com/lalalarakko/lalalarakko.github.io.git takezawa-site
-cd takezawa-site
-npm install</code></pre>
-  </section>
-
-</div>
-</body>
-</html>
+git config --global user.email "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dfa6b0aaad9fbab2beb6b3f1bc
