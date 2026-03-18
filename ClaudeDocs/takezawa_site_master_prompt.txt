@@ -1,7 +1,7 @@
 # takezawa-site 構築・修正マスタープロンプト
 # Masanori Takezawa (竹澤正哲) — 学術ウェブサイト
 # https://lalalarakko.github.io
-# 最終更新: 2026-03-17
+# 最終更新: 2026-03-19
 
 このファイルを読み込んだClaudeは、以下の方針に従ってサイトの修正・更新を行うこと。
 作業前にこのファイルを必ず熟読し、すべての方針を遵守すること。
@@ -20,6 +20,7 @@
 - Claudeが担当するのは `.astro` ファイルと `global.css` のみ
 - 修正依頼時は必ず現在のファイルをアップロードしてもらい、そのファイルを修正して返す
 - スクラッチから書き直さない
+- **ファイルを渡す際は必ず保存先パス（例: `src/layouts/BaseLayout.astro`）と、新規作成／既存ファイルを上書きの別を明示すること**
 
 ### publications更新の正しい手順
 1. 先生が **現在のmdファイル**（papers.md等）と**新しいJSONLファイル**の両方をアップロードする
@@ -135,7 +136,7 @@ takezawa-site/
 ### レイアウト原則
 - ナビゲーション: 固定64px、1pxボーダー
 - 影なし（box-shadow禁止）
-- ボーダーは1px solid のみ
+- ボーダーは1px solid のみ（区切り線の強調に限り2px solid を許容）
 - 余白: padding 48px（モバイルは20px）
 - レスポンシブブレークポイント: 900px / 680px
 
@@ -246,6 +247,10 @@ books:
 読み込むmd: lab/members.md / alumni.md / theses.md / news.md
 タブ構成: Current Members / Alumni / Theses / Lab News
 
+**【重要】lab.astroは検索エンジンにインデックスされないよう `noindex={true}` を設定済み。**
+卒業生の名前が検索結果に出ることを防ぐため、BaseLayout.astroに `noindex` プロップを追加し、
+lab.astroのみ `<BaseLayout noindex={true}>` として呼び出している。
+
 members.mdの構造:
 ```yaml
 doctoral:
@@ -263,6 +268,54 @@ undergrad_b4:
 undergrad_b3:
   - name_jp: "小島優芽"
 ```
+
+alumni.mdの構造:
+```yaml
+phd:
+  # 変更なし（institutionフィールドは従来から存在）
+
+masters:
+  - year: 2025
+    name_en: "Hinako Sasagawa"
+    name_jp: "笹川 陽奈子"
+    institution: "Hokkaido University"   # ← 必須（大学別グループ表示のため）
+  # Sophia University の修了生も同様に追記
+  - year: 20XX
+    name_en: "..."
+    name_jp: "..."
+    institution: "Sophia University"
+```
+
+theses.mdの構造:
+```yaml
+dissertations:
+  # 変更なし
+
+masters_theses:
+  - year: 2025
+    author_jp: "笹川 陽奈子"             # 日本人学生はauthor_jp
+    title: "..."
+    institution: "Hokkaido University"   # ← 必須（大学別グループ表示のため）
+  - year: 20XX
+    author_en: "First Last"              # 外国人学生はauthor_en
+    title: "..."
+    institution: "Tilburg University"
+
+ba_theses:
+  - year: 2025
+    author_jp: "平澤 若菜"
+    title: "..."
+    institution: "Hokkaido University"   # ← 必須
+  # Sophia / Tilburg の卒論も同様に institution を付与
+```
+
+**著者名フィールドの優先順位:** `author_en` が存在すればそちらを表示、なければ `author_jp` を表示。
+外国人学生には `author_en` を使うこと。
+
+Alumni・Thesesの表示レイアウト（Option A）:
+- 大学別にブロックを分けて表示
+- 各ブロックの見出し（institution名）→ その大学の一覧
+- Thesesはさらに年別でグループ化（institution → year の2段構造）
 
 ### cv.astro
 読み込むmd: cv/ 以下8ファイル
@@ -312,6 +365,16 @@ profiles:
 .lang-ja .pub-content-en { display: none; }
 .lang-ja .pub-content-ja { display: block; }
 ```
+
+### noindexプロップ（BaseLayout.astro）
+```typescript
+interface Props { title: string; activePage?: string; noindex?: boolean; }
+const { title, activePage = '', noindex = false } = Astro.props;
+```
+```html
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+```
+現在 `noindex={true}` を指定しているページ: **lab.astro のみ**
 
 ---
 

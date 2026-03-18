@@ -22,7 +22,9 @@ const addressJpLines = (contact.address_jp || '').trim().split('\n');
 .page-header-title{margin-bottom:0;}
 
 .contact-body{display:grid;grid-template-columns:1fr 1fr;margin-top:0;}
-.contact-left{padding:48px 48px 64px;border-right:1px solid var(--black);}
+.contact-left{border-right:1px solid var(--black);display:flex;flex-direction:column;}
+.contact-photo{width:100%;aspect-ratio:960/920;object-fit:cover;object-position:center top;display:block;border-bottom:1px solid var(--black);}
+.contact-intro{padding:40px 48px 64px;font-size:15px;color:var(--gray-dark);line-height:1.85;}
 .contact-right{padding:48px 48px 64px;}
 .contact-block{margin-bottom:40px;}
 .contact-block:last-child{margin-bottom:0;}
@@ -47,7 +49,9 @@ const addressJpLines = (contact.address_jp || '').trim().split('\n');
 @media(max-width:900px){
   .page-top{padding:48px 20px 24px;border-bottom:1px solid var(--black);}
   .contact-body{grid-template-columns:1fr;}
-  .contact-left{border-right:none;padding:36px 20px 32px;border-bottom:1px solid var(--black);}
+  .contact-left{border-right:none;border-bottom:1px solid var(--black);}
+  .contact-photo{aspect-ratio:4/3;object-position:center 20%;}
+  .contact-intro{padding:28px 20px 36px;}
   .contact-right{padding:36px 20px 48px;}
   .profiles-section{padding:40px 20px;}
   .profiles-grid{grid-template-columns:1fr;}
@@ -61,7 +65,8 @@ const addressJpLines = (contact.address_jp || '').trim().split('\n');
 
 <div class="contact-body">
   <div class="contact-left">
-    <p style="font-size:15px;color:var(--gray-dark);line-height:1.85;max-width:400px;">{contact.intro || 'I welcome inquiries about research collaboration, graduate admission to the lab, and media or public engagement.'}</p>
+    <img src="/images/profile.jpg" alt="Masanori Takezawa" class="contact-photo" />
+    <p class="contact-intro">{contact.intro || 'I welcome inquiries about research collaboration, graduate admission to the lab, and media or public engagement.'}</p>
   </div>
   <div class="contact-right">
     <div class="contact-block">
