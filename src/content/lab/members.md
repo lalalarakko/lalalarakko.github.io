@@ -20,6 +20,7 @@ masters:
   - name_en: "Kanayo Higashi"
     name_jp: "東 叶世"
     year: "M1"
+    website: "https://kanayo-higashi.github.io/Kanayo_HP/"
 
   - name_en: "Wakana Hirasawa"
     name_jp: "平澤 若菜"
