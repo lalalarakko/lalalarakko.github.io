@@ -78,7 +78,7 @@ phd:
     institution: "Sophia University"
     degree: "PhD in Psychology"
     position_title: "Associate Professor"
-    position_org: "Ohtsuma Women's University"
+    position_org: "Otsuma Women's University"
     website: "https://www.grad.otsuma.ac.jp/faculty-member/master/psychology/"
 
 masters:
