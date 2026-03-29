@@ -68,7 +68,7 @@ phd:
     institution: "Sophia University"
     degree: "PhD in Psychology"
     position_title: "Associate Professor"
-    position_org: "Dept. of Psychology, Nihon Joshi University"
+    position_org: "Dept. of Psychology, Japan Women's University"
     researchmap: "https://researchmap.jp/t.ishii1108"
     website: "https://novemberrain1108.wordpress.com/profile/"
 
@@ -77,8 +77,9 @@ phd:
     name_jp: "伊澤 冬子"
     institution: "Sophia University"
     degree: "PhD in Psychology"
-    position_title: "—"
-    position_org: ""
+    position_title: "Associate Professor"
+    position_org: "Ohtsuma Women's University"
+    website: "https://www.grad.otsuma.ac.jp/faculty-member/master/psychology/"
 
 masters:
   - year: 2025
