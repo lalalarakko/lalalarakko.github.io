@@ -8,7 +8,7 @@ doctoral:
     name_jp: "竹西 海人"
     year: "D1"
     researchmap: "https://researchmap.jp/pocha_ama"
-    website: "https://sites.google.com/view/kaitotakenishi"
+    website: "https://pocha-ama.github.io/"
 
 masters:
   - name_en: "Yusuke Saito"
