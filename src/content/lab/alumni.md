@@ -37,8 +37,8 @@ phd:
     name_jp: "中田 星矢"
     institution: "Hokkaido University"
     degree: "PhD in Human Sciences"
-    position_title: "Project Researcher"
-    position_org: "IRCN, University of Tokyo"
+    position_title: "Special Postdoctoral Researcher"
+    position_org: "Center for Brain Sciences, RIKEN"
     researchmap: "https://researchmap.jp/seiyanakata"
     website: "https://sites.google.com/view/seiyanakata/"
 
