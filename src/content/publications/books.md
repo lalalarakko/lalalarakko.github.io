@@ -142,7 +142,7 @@ books:
     isbn: '9784807908370'
 
   - year: 2011
-    authors_en: 'Rocio Garcia-Retamero, Masanori Takezawa, & Gerd Gigerenzer'
+    authors_en: 'Garcia-Retamero, R., Takezawa, M., & Gigerenzer, G.'
     chapter_en: 'Does Imitation Benefit Cue Order Learning?'
     book_en: 'Heuristics: The Foundations of Adaptive Behavior'
     editors_en: 'Gerd Gigerenzer, Ralph Hertwig, & Thorsten Pachur (Eds.)'
@@ -152,7 +152,7 @@ books:
     isbn: '9780199744282'
 
   - year: 2011
-    authors_en: 'Laura Martignon, Oliver Vitouch, Masanori Takezawa, & Malcolm R. Forster'
+    authors_en: 'Martignon, L., Vitouch, O., Takezawa, M., & Forster, M. R.'
     chapter_en: 'Naive and yet Enlightened: From Natural Frequencies to Fast and Frugal Decision Trees'
     book_en: 'Heuristics: The Foundations of Adaptive Behavior'
     editors_en: 'Gerd Gigerenzer, Ralph Hertwig, & Thorsten Pachur (Eds.)'
@@ -194,7 +194,7 @@ books:
     isbn: '9780805859577'
 
   - year: 2003
-    authors_en: 'Martignon, L., Vitouch, O., Takezawa, M., & Forster, M.'
+    authors_en: 'Martignon, L., Vitouch, O., Takezawa, M., & Forster, M. R.'
     chapter_en: 'Naive and yet Enlightened: From Natural Frequencies to Fast and Frugal Decision Trees'
     book_en: 'Psychological perspectives on reasoning, judgment and decision making'
     editors_en: 'L. Macchi & D. Hardman (Eds.)'

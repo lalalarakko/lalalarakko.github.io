@@ -127,7 +127,7 @@ papers:
     role: last
 
   - year: 2018
-    authors_en: 'TAKEZAWA Masanori'
+    authors_en: 'Takezawa, M.'
     title_en: 'On the necessity of rigorous modeling in psychology'
     journal_en: 'Japanese Psychological Review, 61(1), 42–54'
     authors_ja: '竹澤 正哲'
