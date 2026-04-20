@@ -13,6 +13,14 @@ const { title, activePage = '', noindex = false } = Astro.props;
   <title>{title}</title>
   {noindex && <meta name="robots" content="noindex, nofollow" />}
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TK4ZP1RJQY"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TK4ZP1RJQY');
+  </script>
 </head>
 <body>
   <Nav activePage={activePage} />
