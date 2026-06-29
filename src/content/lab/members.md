@@ -20,6 +20,7 @@ masters:
   - name_en: "Kanayo Higashi"
     name_jp: "東 叶世"
     year: "M1"
+    researchmap: "https://researchmap.jp/apple_ringo"
     website: "https://kanayo-higashi.github.io/Kanayo_HP/"
 
   - name_en: "Wakana Hirasawa"
