@@ -4,7 +4,7 @@
 # ============================================================
 
 positions:
-  - period: "Apr 2025 – Present"
+  - period: "Apr 2026 – Present"
     title: "Vice Dean"
     place: "Graduate School of Humanities and Human Sciences, Hokkaido University"
 
